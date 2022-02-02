@@ -82,6 +82,11 @@ flutter:
     - assets/images/splash_logo.png
     - assets/images/onboarding_bg.png
     - assets/images/logo_name.png
+    - assets/images/login_bg.png
+    - assets/images/google_ic.png
+    - assets/images/apple_ic.png
+
+
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
 

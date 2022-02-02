@@ -43,7 +43,7 @@ class BaseButton extends StatelessWidget {
             )]:null
         ),
       child: InkWell(
-        onTapCancel: onItemClickListener,
+        onTap: onItemClickListener,
         child: Center(child: Text(title,textAlign: TextAlign.center,style: textStyle??S.h4(color:Colors.white),),),),
     );
   }

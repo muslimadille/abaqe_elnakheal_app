@@ -2,6 +2,14 @@
   "onborading_text": "بيلسيلتلوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم",
   "login_title": "Sign in",
   "register_title":"New account",
-  "skip_title": "Skip"
+  "skip_title": "Skip",
+  "welcome_text":"Welcome, we are glad to have you back",
+  "or_text": "Or you can login using",
+  "email": "E-mail",
+  "password": "Password",
+  "forget_password": "_forget your password?"
+
+
+
 
 }

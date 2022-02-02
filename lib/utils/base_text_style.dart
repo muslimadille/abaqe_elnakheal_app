@@ -14,6 +14,7 @@ class S {
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
+          fontWeight: FontWeight.bold,
           fontSize: D.h1);
 
   static h2({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
