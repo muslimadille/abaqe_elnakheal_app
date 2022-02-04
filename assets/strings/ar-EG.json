@@ -7,7 +7,11 @@
   "or_text": "أو يمكنك الدخول بإستخدام",
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
-  "forget_password": "_نسيت كلمة المرور؟"
+  "forget_password": "_نسيت كلمة المرور؟",
+  "have_account_title": "لديك حساب",
+  "first_name": "الإسم الأول",
+  "last_name": "الإسم الأخير",
+  "phone_num": "رقم الهاتف"
 
 
 }

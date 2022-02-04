@@ -1,5 +1,5 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
-import 'package:abaqe_elnakheal_app/modules/registeration/registeration_screen.dart';
+import 'package:abaqe_elnakheal_app/modules/login_screen/login_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
@@ -11,17 +11,22 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterationScreen extends StatefulWidget {
+  const RegisterationScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterationScreenState createState() => _RegisterationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterationScreenState extends State<RegisterationScreen> {
   final _loginFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _fristNmaeController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
+
+
 
 
   @override
@@ -39,18 +44,17 @@ class _LoginScreenState extends State<LoginScreen> {
             Expanded(child: SingleChildScrollView(child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: D.default_70,),
+                SizedBox(height: D.default_60,),
                 _titleText(),
                 _introText(),
-                SizedBox(height: D.default_50,),
+                SizedBox(height: D.default_40,),
                 _socialLogin(),
                 _deviderPart(),
                 SizedBox(height: D.default_20,),
                 _loginForm(),
-                _forgetPassword(),
-                SizedBox(height: D.default_50,),
+                SizedBox(height: D.default_40,),
                 _loginButton(),
-                _registerButton(),
+                _havAccountButton(),
                 _skip(),
                 SizedBox(height: D.default_60,)
               ],),))
@@ -64,22 +68,22 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-      IconButton(onPressed:(){
-        Navigator.of(context).pop();
-      }, icon: Icon(Icons.arrow_back_ios,color: C.GREY_1,size: D.default_30,))
-    ],),);
+          IconButton(onPressed:(){
+            Navigator.of(context).pop();
+          }, icon: Icon(Icons.arrow_back_ios,color: C.GREY_1,size: D.default_30,))
+        ],),);
   }
   Widget _introText(){
     return Container(
       width: double.infinity,
-      child: Text(tr("welcome_text"),style: S.h3(color:C.GREY_3),textAlign: TextAlign.center,),);
+      child: Text(tr("registeration_text"),style: S.h3(color:C.GREY_3),textAlign: TextAlign.center,),);
 
   }
   Widget _titleText(){
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: D.default_10,bottom:D.default_10),
-      child: Text(tr("login_title"),style: S.h1(color:Colors.black),textAlign: TextAlign.center,),);
+      child: Text(tr("register_title"),style: S.h1(color:Colors.black),textAlign: TextAlign.center,),);
 
   }
   Widget _socialLogin(){
@@ -92,17 +96,17 @@ class _LoginScreenState extends State<LoginScreen> {
           InkWell(
             onTap: (){},
             child: TransitionImage(
-            Res.GOOGLE_IC,
-            width: D.default_50,
-            height: D.default_50,
-          ),),
-         InkWell(
-           onTap:(){},
-           child:TransitionImage(
-           Res.APPLE_IC,
-           width: D.default_50,
-           height: D.default_50,
-         ),),
+              Res.GOOGLE_IC,
+              width: D.default_50,
+              height: D.default_50,
+            ),),
+          InkWell(
+            onTap:(){},
+            child:TransitionImage(
+              Res.APPLE_IC,
+              width: D.default_50,
+              height: D.default_50,
+            ),),
 
 
 
@@ -119,12 +123,12 @@ class _LoginScreenState extends State<LoginScreen> {
       margin: EdgeInsets.all(D.default_5),
     );
   }
-  Widget _registerButton(){
+  Widget _havAccountButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigate(context, RegisterationScreen());
+        MyUtils.navigateReplaceCurrent(context, LoginScreen());
       },
-      title: tr("register_title"),
+      title: tr("have_account_title"),
       color: C.GREY_4,
       textStyle: S.h3(color: C.GREY_1),
       enableShadow: false,
@@ -155,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: D.default_100,
           color: C.GREY_4,),),
         Container(
-        margin:EdgeInsets.all(D.default_10),
+          margin:EdgeInsets.all(D.default_10),
           child: Text(tr("or_text"),style: S.h3(color: C.GREY_2),),),
         Expanded(child: Container(height: D.default_1,width: D.default_100,color: C.GREY_4,))
 
@@ -164,31 +168,41 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   Widget _loginForm(){
     return Container(child:
-      Form(
-        key: _loginFormGlobalKey,
-        child: Column(
-          children: [
-            BaseTextFiled(
-              controller: _emailController,
-              hint: tr("email"),
-            ),
-            SizedBox(height: D.default_15,),
-            BaseTextFiled(
-              controller: _passwordController,
-              hint: tr("password"),
-              isPassword: true,
-            ),
-          ],
-        ),
-      ),);
-  }
-  Widget _forgetPassword(){
-    return Container(
-      padding: EdgeInsets.only(top: D.default_15,bottom: D.default_15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+    Form(
+      key: _loginFormGlobalKey,
+      child: Column(
         children: [
-      Text(tr("forget_password"),style: S.h3(color: C.GREY_1),)
-      ],));
+          BaseTextFiled(
+            controller: _emailController,
+            hint: tr("email"),
+          ),
+          SizedBox(height: D.default_15,),
+          Row(children: [
+            Expanded(child: BaseTextFiled(
+              controller: _fristNmaeController,
+              hint: tr("first_name"),
+            )),
+            SizedBox(width: D.default_10,),
+            Expanded(child: BaseTextFiled(
+              controller: _lastNameController,
+              hint: tr("last_name"),
+            )),
+          ],),
+          SizedBox(height: D.default_15,),
+          BaseTextFiled(
+            controller: _phoneNumberController,
+            hint: tr("phone_num"),
+            isPassword: false,
+            inputType: TextInputType.phone,
+          ),
+          SizedBox(height: D.default_15,),
+          BaseTextFiled(
+            controller: _passwordController,
+            hint: tr("password"),
+            isPassword: true,
+          ),
+        ],
+      ),
+    ),);
   }
 }

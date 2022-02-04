@@ -59,7 +59,7 @@ class _BaseTextFiledState extends State<BaseTextFiled> with InputValidationMixin
                   });
                 },
                 icon: Icon(
-                  (passwordobsecure ?? false)
+                  (passwordobsecure )
                       ? Icons.visibility_off
                       : Icons.visibility,
                   color: C.GREY_4,
