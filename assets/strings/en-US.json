@@ -11,7 +11,21 @@
   "have_account_title": "you have an account",
   "first_name": "First name",
   "last_name": "Last name",
-  "phone_num": "Phone number"
+  "phone_num": "Phone number",
+  "change_password": "Reset Password",
+  "code_sent_massage": "The code has been sent to your email ",
+  "code_will_send_massage": "The code will be sent to your email ",
+  "change": "Change",
+  "send_email_screen_title": "For the safety of your account, we must verify your identity. Enter the email with which you registered the account",
+  "send": "Send",
+  "cancel": "Cancel",
+  "resent_code_in":"Resend code in  "
+
+
+
+
+
+
 
 
 

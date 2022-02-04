@@ -1,4 +1,5 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:abaqe_elnakheal_app/modules/otp/send_email_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/registeration/registeration_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
@@ -183,12 +184,16 @@ class _LoginScreenState extends State<LoginScreen> {
       ),);
   }
   Widget _forgetPassword(){
-    return Container(
-      padding: EdgeInsets.only(top: D.default_15,bottom: D.default_15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-      Text(tr("forget_password"),style: S.h3(color: C.GREY_1),)
-      ],));
+    return InkWell(
+      onTap: (){
+        MyUtils.navigate(context, SendOtpEmailScreen());
+      },
+      child: Container(
+        padding: EdgeInsets.only(top: D.default_15,bottom: D.default_15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(tr("forget_password"),style: S.h3(color: C.GREY_1),)
+          ],)),);
   }
 }
