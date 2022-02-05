@@ -19,14 +19,17 @@
   "send_email_screen_title": "For the safety of your account, we must verify your identity. Enter the email with which you registered the account",
   "send": "Send",
   "cancel": "Cancel",
-  "resent_code_in":"Resend code in  "
-
-
-
-
-
-
-
+  "resent_code_in":"Resend code in  ",
+  "home_title": "You can choose from many of our selected products",
+  "wellcome": "Welcome",
+  "home": "Home",
+  "products": "Products",
+  "my_orders": "My orders",
+  "notifications": "Notifications",
+  "more": "More",
+  "search_for_product": "Search for a commodity",
+  "today_offer": "Today's Offers",
+  "shop_now": "Shop now"
 
 
 

@@ -1,4 +1,5 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:abaqe_elnakheal_app/modules/main_tabs_screen/main_tabs_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/otp/send_email_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/registeration/registeration_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
@@ -135,7 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   Widget _skip(){
     return BaseButton(
-      onItemClickListener: (){},
+      onItemClickListener: (){
+        MyUtils.navigate(context, MainTabsScreen());
+      },
       title: tr("skip_title"),
       textStyle: S.h2(color: C.BLUE_1,underline: true),
       margin: EdgeInsets.all(0),
