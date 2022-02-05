@@ -14,7 +14,7 @@ class AdsWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: D.default_180,
-      margin: EdgeInsets.all(D.default_30),
+      margin: EdgeInsets.only(left:D.default_30,right:D.default_30,bottom:D.default_30),
 
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(D.default_10),
