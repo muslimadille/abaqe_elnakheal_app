@@ -9,13 +9,14 @@ class HomeCategoriesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 3*D.default_300,
       padding: EdgeInsets.all(D.default_10),
       child: ListView.builder(
-          itemBuilder: (context,index){
-      return HomeCategoriesListItem();
-    },
-      itemCount: 3,
-        scrollDirection: Axis.vertical,
-      ),);
+          itemBuilder: (context, index) {
+            return HomeCategoriesListItem();
+          },
+          itemCount: 3,
+          physics: const NeverScrollableScrollPhysics()),
+    );
   }
 }

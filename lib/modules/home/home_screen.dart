@@ -23,7 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(child: BaseScreen(body: Container(
       child: Column(children: [
         _header(),
-        Expanded(child: HomeCategoriesListWidget(),)
+        Expanded(child: SingleChildScrollView(child:
+        Column(children: const [
+          AdsWidget(),
+          HomeCategoriesListWidget(),
+        ],),))
 
       ],),
     )));
@@ -41,8 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
         Text(tr("home_title"),style: S.h3(color: C.GREY_3),),
           SizedBox(height: D.default_20,),
           HomeSearchWidget(),
-          SizedBox(height: D.default_20,),
-          AdsWidget(),
         ],),
     );
   }
