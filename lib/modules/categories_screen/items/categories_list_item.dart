@@ -49,5 +49,4 @@ class _CategoryListItemState extends State<CategoryListItem> {
       Text("بذور",style: S.h4(color: C.GREY_1),)
     ],),) ;
   }
-
 }

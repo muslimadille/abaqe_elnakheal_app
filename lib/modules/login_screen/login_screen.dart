@@ -13,6 +13,8 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import 'item/back_btn_widget.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
           margin: EdgeInsets.only(left: D.default_40,right: D.default_40),
           width: double.infinity,
           child: Column(children: [
-            _backBtn(),
+            _backBtn(context),
             Expanded(child: SingleChildScrollView(child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -60,15 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     ),));
   }
-  Widget _backBtn(){
+  Widget _backBtn(BuildContext ctx){
     return Container(
       padding: EdgeInsets.only(top:D.default_10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-      IconButton(onPressed:(){
-        Navigator.of(context).pop();
-      }, icon: Icon(Icons.arrow_back_ios,color: C.GREY_1,size: D.default_30,))
+          BackBottonWidget(ctx)
     ],),);
   }
   Widget _introText(){
