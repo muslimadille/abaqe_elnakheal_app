@@ -6,6 +6,7 @@ import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../home/items/home_search_widget.dart';
 import 'items/products_list_widget.dart';
 
 class ProductsListScreen extends StatelessWidget {
@@ -17,6 +18,8 @@ class ProductsListScreen extends StatelessWidget {
     Container(
       child: Column(children:  [
         _header(context),
+        _search(),
+        SizedBox(height: D.default_10,),
         const Expanded(child: ProductsListWidget(),)
       ],),
     ),));
@@ -34,6 +37,13 @@ class ProductsListScreen extends StatelessWidget {
           const CardIconWidget(),
 
         ],),);
+
+  }
+  Widget _search(){
+    return Container(
+      margin: EdgeInsets.only(left:D.default_30,right: D.default_30),
+      child: HomeSearchWidget(),
+    );
 
   }
 }

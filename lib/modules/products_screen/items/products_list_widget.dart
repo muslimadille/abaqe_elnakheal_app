@@ -15,7 +15,7 @@ class ProductsListWidget extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: D.default_10,
               mainAxisSpacing: D.default_10,
-              childAspectRatio: D.default_1,
+              childAspectRatio: D.default_1*0.8,
             ),
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
