@@ -9,6 +9,7 @@ class C{
   static const Color GREY_3=Color(0xff7E7E7E);
   static const Color GREY_4=Color(0xffCCCCCC);
   static const Color GREY_5=Color(0xFFF5F5F5);
+  static const Color BLUE_3=Color(0xFF358EC4);
 
 
 

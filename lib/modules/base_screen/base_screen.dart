@@ -37,6 +37,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
     return Scaffold(
       key: _scaffoldKey,
       body: widget.body,
+      resizeToAvoidBottomInset: false,
     );
   }
 

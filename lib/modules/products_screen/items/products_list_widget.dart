@@ -1,6 +1,9 @@
 import 'package:abaqe_elnakheal_app/modules/products_screen/items/product_list_item.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../product_details_screen.dart';
 
 class ProductsListWidget extends StatelessWidget {
   const ProductsListWidget({Key? key}) : super(key: key);
@@ -20,7 +23,9 @@ class ProductsListWidget extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                 return ProductsListItem(
-                    index,(){});
+                    index,(){
+                      MyUtils.navigate(context, ProductDetailsScreen());
+                });
               },
               childCount: 5,
               semanticIndexOffset: 1,

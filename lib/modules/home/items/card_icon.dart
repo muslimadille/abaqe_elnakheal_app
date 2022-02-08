@@ -6,7 +6,9 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
 
 class CardIconWidget extends StatelessWidget {
-  const CardIconWidget({Key? key}) : super(key: key);
+  bool isDarkBG;
+
+   CardIconWidget({this.isDarkBG=false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class CardIconWidget extends StatelessWidget {
         alignment:AlignmentDirectional.topStart ,
         children: [
           TransitionImage(
-            Res.CARD_IC,
+            isDarkBG?"assets/images/card_ic_white.png":Res.CARD_IC,
             width: D.default_30,
             height: D.default_30,
           ),
@@ -27,12 +29,12 @@ class CardIconWidget extends StatelessWidget {
             padding: EdgeInsets.all(D.default_2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_100),
-              color: C.BLUE_1,
+              color: isDarkBG?Colors.white:C.BLUE_1,
             ),
             child: Center(
               child: Text(
                 "1",
-                style: S.h6(color: Colors.white),
+                style: S.h6(color: isDarkBG?C.BLUE_1:Colors.white),
               ),
             ),
           ),right: -D.default_5,top:-D.default_5 ,)

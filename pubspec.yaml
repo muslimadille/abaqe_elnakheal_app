@@ -48,6 +48,9 @@ dependencies:
   url_launcher: ^6.0.18
   google_fonts: ^2.2.0
   fvm: ^2.2.6
+  dots_indicator: ^2.0.0
+  flutter_rating_bar: ^4.0.0
+
 
 
 

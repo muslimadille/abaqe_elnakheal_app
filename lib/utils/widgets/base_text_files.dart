@@ -67,7 +67,7 @@ class _BaseTextFiledState extends State<BaseTextFiled> with InputValidationMixin
               ):null
           ),
           keyboardType: widget.inputType??TextInputType.text,
-          obscureText: false,
+          obscureText: widget.isPassword&&passwordobsecure,
           cursorColor: C.GREY_2,
           autofocus: false,
         ));

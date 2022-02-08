@@ -33,8 +33,8 @@ class ProductsListScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           BackBottonWidget(ctx),
-          Expanded(child: Text("بذور",style: S.h3(color: C.GREY_1),textAlign: TextAlign.center,)),
-          const CardIconWidget(),
+          Expanded(child: Text("بذور",style: S.h1(color: C.GREY_1),textAlign: TextAlign.center,)),
+          CardIconWidget(),
 
         ],),);
 
