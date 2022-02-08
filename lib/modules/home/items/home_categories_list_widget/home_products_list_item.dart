@@ -5,38 +5,44 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../utils/myUtils.dart';
+import '../../../products_screen/product_details_screen.dart';
+
 class HomeProductsListItem extends StatelessWidget {
   const HomeProductsListItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(D.default_10),
-      width: D.default_150,
-      height: D.default_200,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_10),
-          color: Colors.white,
-          boxShadow:[BoxShadow(
-              color: C.BLUE_1.withOpacity(0.3),
-              offset:Offset(1,1),
-              blurRadius:5,
-              spreadRadius: 1
-          )]
-      ),
-      child: Stack(
-        children: [
+    return InkWell(
+      onTap: (){MyUtils.navigate(context, ProductDetailsScreen());},
+      child: Container(
+        margin: EdgeInsets.all(D.default_10),
+        width: D.default_150,
+        height: D.default_200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_10),
+            color: Colors.white,
+            boxShadow:[BoxShadow(
+                color: C.BLUE_1.withOpacity(0.3),
+                offset:Offset(1,1),
+                blurRadius:5,
+                spreadRadius: 1
+            )]
+        ),
+        child: Stack(
+          children: [
 
-          Container(
-            margin: EdgeInsets.all(D.default_10),
-            child:Column(children: [
-              _image(),
-              _description(),
-              _coast()
+            Container(
+              margin: EdgeInsets.all(D.default_10),
+              child:Column(children: [
+                _image(),
+                _description(),
+                _coast()
 
-            ],),
-          ),_discoundWidget(),
-        ],
+              ],),
+            ),_discoundWidget(),
+          ],
+        ),
       ),
     );
   }

@@ -10,6 +10,8 @@ import '../base_screen/base_screen.dart';
 import '../home/items/card_icon.dart';
 import '../login_screen/item/back_btn_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -46,6 +48,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   TextEditingController? _textController=TextEditingController();
   bool _showCounter=false;
   int _currentSliderPager=0;
+  @override
+  void initState() {
+    super.initState();
+    _textController!.text="0";
+  }
   @override
   Widget build(BuildContext context) {
     return BaseScreen(body: SafeArea(child: Stack(
@@ -169,26 +176,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     ],),);
   }
   Widget _ratingPart(){
-    return Container(
+    return InkWell(
+      onTap: (){
+        _showBottomSheet(Container());
+      },
+      child: Container(
       margin: EdgeInsets.only(top: D.default_10),
       child: Row(
-      children: [
-        RatingBarIndicator(
-          rating: 4.50,
-          itemBuilder: (context, index) => Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
-          itemCount: 5,
-          itemSize: D.default_25,
-          direction: Axis.horizontal,
-          unratedColor: C.GREY_4,
+        children: [
+          RatingBarIndicator(
+            rating: 4.50,
+            itemBuilder: (context, index) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            itemCount: 5,
+            itemSize: D.default_25,
+            direction: Axis.horizontal,
+            unratedColor: C.GREY_4,
 
-        ),
-        SizedBox(width: D.default_10,),
-        Text("(23 تقييم)",style: S.h3(color: Colors.amber,))
-      ],
-    ),);
+          ),
+          SizedBox(width: D.default_10,),
+          Text("(23 تقييم)",style: S.h3(color: Colors.amber,))
+        ],
+      ),),);
   }
   Widget _condetions(){
     return Container(
@@ -238,6 +249,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Row(children: [
         Expanded(child: TextFormField(
           controller: _textController,
+          onChanged: (value){
+            setState(() {
+              if(value.isEmpty){
+                _textController!.text="1";
+              }else{
+                _textController!.text=value;
+              }
+            });
+          },
           style: S.h2(color: C.GREY_1),
           decoration: InputDecoration(
             labelText: "الكمية",
@@ -251,8 +271,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           keyboardType:TextInputType.number,
           cursorColor: Colors.white,
           autofocus: false,
-        ),)
+        ),),
+        Container(
+          width: D.default_40,
+          child: Text("كيلو",style: S.h3(color:C.BLUE_1),),)
       ],),
+    );
+  }
+  void _showBottomSheet(Widget body){
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => SingleChildScrollView(
+        controller: ModalScrollController.of(context),
+        child: Container(width: double.infinity,height: D.default_300,color: Colors.white,),
+      ),
     );
   }
 }

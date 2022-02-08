@@ -114,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _loginButton(){
     return BaseButton(
-      onItemClickListener: (){},
+      onItemClickListener: (){
+        MyUtils.navigate(context, MainTabsScreen());
+      },
       title: tr("login_title"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),

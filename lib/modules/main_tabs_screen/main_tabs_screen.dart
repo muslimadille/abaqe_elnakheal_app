@@ -72,7 +72,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
       // Default is true.
       hideNavigationBarWhenKeyboardShows: true,
       // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      popAllScreensOnTapOfSelectedTab: true,
+      popAllScreensOnTapOfSelectedTab: false,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.

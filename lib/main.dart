@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     context.setLocale(Locale('ar', 'EG'));
+     EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
     UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     return utilsProviderModel.currentLocalName.isNotEmpty?MaterialApp(
