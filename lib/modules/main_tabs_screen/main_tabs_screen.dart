@@ -36,20 +36,6 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
         body: Column(
       children: [
         Expanded(child: _tabs()),
-        Container(
-          color: C.BLUE_1,
-          width: double.infinity,
-          height: D.default_20,
-          child: Center(
-            child: Container(
-                width: D.default_150,
-                height: D.default_5,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(D.default_20),
-                  color: Colors.white,
-                )),
-          ),
-        )
       ],
     ));
   }
@@ -66,7 +52,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
       // Default is Colors.white.
       handleAndroidBackButtonPress: true,
       // Default is true.
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true,
       // Default is true.

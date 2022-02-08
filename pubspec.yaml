@@ -51,6 +51,7 @@ dependencies:
   dots_indicator: ^2.0.0
   flutter_rating_bar: ^4.0.0
   modal_bottom_sheet: ^2.0.0
+  lottie: ^1.2.1
 
 
 
@@ -86,10 +87,14 @@ flutter:
     - assets/images/
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
+    - assets/lottie/
   fonts:
     - family: MyFlutterApp
       fonts:
         - asset: assets/fonts/bottom_bar_icons.ttf
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/cairo_font.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

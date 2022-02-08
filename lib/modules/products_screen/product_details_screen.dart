@@ -48,32 +48,37 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   TextEditingController? _textController=TextEditingController();
   bool _showCounter=false;
   int _currentSliderPager=0;
+  double _btnWidth=D.default_300*1.3;
+  double _counterOpacity=1;
+  String btnTitle=tr("add_to_crd");
+
   @override
   void initState() {
     super.initState();
-    _textController!.text="0";
+    _textController!.text="1";
   }
   @override
   Widget build(BuildContext context) {
     return BaseScreen(body: SafeArea(child: Stack(
       clipBehavior: Clip.none,
-      alignment:AlignmentDirectional.center,
+      alignment:AlignmentDirectional.topCenter,
       children: [
         Positioned(
-          child: TransitionImage("assets/images/product_details_bg.png",fit: BoxFit.cover,
-            width:MediaQuery.of(context).size.width,height: MediaQuery.of(context).size.height,),
+          child: TransitionImage("assets/images/product_details_bgn.png",fit: BoxFit.fitWidth,
+            width:MediaQuery.of(context).size.width),
         ),
         Container(
           margin: EdgeInsets.only(left: D.default_30,right: D.default_30),
           width: double.infinity,
           child: Column(children: [
             _header(context),
+            _ratePriceHeader(),
+            _imageSlider(),
+            SizedBox(height: D.default_20,),
             Expanded(child: SingleChildScrollView(child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _ratePriceHeader(),
-                _imageSlider(),
-                SizedBox(height: D.default_20,),
+
                 Container(width: double.infinity,child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,29 +228,44 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
   Widget _AddPart(){
     return Container(
-      width: double.infinity,
-      child: Row(
+      width: D.default_300*1.5,
+      height: D.default_60,
+      child: Stack(
+        alignment:AlignmentDirectional.centerStart ,
         children: [
-          _showCounter?Expanded(child:_counter() ,):Container(),
-          SizedBox(width: D.default_10,),
-          Expanded(child: BaseButton(onItemClickListener: () {
-            setState(() {
-              _showCounter? _showCounter=false:_showCounter=true;
-            });
-          }, title:tr("add_to_crd"),height: D.default_60,enableShadow: false,),),
+          Positioned(child: _counter(),right: 0,),
+          Positioned(child: AnimatedContainer(
+            width: _btnWidth,
+            duration: Duration(milliseconds: 300),
+            child: BaseButton(onItemClickListener: () {
+              setState(() {
+                _showCounter? _showCounter=false:_showCounter=true;
+                if(_showCounter){
+                  _btnWidth=D.default_180*1.05;
+                  _counterOpacity=1;
+                   btnTitle=tr("added_to_crd");
+
+                }else{
+                  _btnWidth=D.default_300*1.3;
+                  _counterOpacity=0;
+                  btnTitle=tr("add_to_crd");
+                }
+              });
+            }, title:btnTitle,height: D.default_60,enableShadow: false,margin: EdgeInsets.zero,),),left: 0,),
 
         ],
       )
     );
   }
   Widget _counter(){
-    return Container(
-        height: D.default_60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_10),
-          color: Colors.white,
-          border: Border.all(width: D.default_1,color: C.BLUE_1),
-        ),
+    return AnimatedOpacity(opacity: _counterOpacity, duration: Duration(milliseconds: 400),child: Container(
+      height: D.default_60,
+      width: D.default_180*1.05,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_10),
+        color: Colors.white,
+        border: Border.all(width: D.default_1,color: C.BLUE_1),
+      ),
       child: Row(children: [
         Expanded(child: TextFormField(
           controller: _textController,
@@ -276,7 +296,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           width: D.default_40,
           child: Text("كيلو",style: S.h3(color:C.BLUE_1),),)
       ],),
-    );
+    ),);
   }
   void _showBottomSheet(Widget body){
     showMaterialModalBottomSheet(

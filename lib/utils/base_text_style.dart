@@ -8,7 +8,8 @@ class S {
 
 
   static h1({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -18,7 +19,8 @@ class S {
           fontSize: D.h1);
 
   static h2({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -27,7 +29,8 @@ class S {
           fontSize: D.h2);
 
   static h3({Color? color, bool underline = false,TextDecoration? decoration, Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -36,7 +39,8 @@ class S {
           fontSize: D.h3);
 
   static h4({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -45,7 +49,8 @@ class S {
           fontSize: D.h4);
 
   static h5({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -54,7 +59,8 @@ class S {
           fontSize: D.h5);
 
   static h6({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
-      GoogleFonts.cairo(
+      TextStyle(
+          fontFamily: "Cairo",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
