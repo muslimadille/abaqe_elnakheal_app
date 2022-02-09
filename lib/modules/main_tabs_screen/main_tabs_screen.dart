@@ -44,7 +44,8 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
     return PersistentTabView(
       context,
       controller: _controller,
-      padding: NavBarPadding.all(D.default_10),
+      padding: NavBarPadding.all(D.default_18),
+        navBarHeight: D.default_90,
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
@@ -58,7 +59,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
       // Default is true.
       hideNavigationBarWhenKeyboardShows: true,
       // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      popAllScreensOnTapOfSelectedTab: false,
+      popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
         // Navigation Bar's items animation properties.

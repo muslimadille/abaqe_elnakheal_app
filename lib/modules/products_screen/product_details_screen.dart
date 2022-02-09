@@ -1,3 +1,4 @@
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import '../home/items/card_icon.dart';
 import '../login_screen/item/back_btn_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
+import 'items/product_rates_screen.dart';
 
 
 
@@ -183,7 +186,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget _ratingPart(){
     return InkWell(
       onTap: (){
-        _showBottomSheet(Container());
+        MyUtils.showBottomSheet(context,ProductRatesScreen(),D.default_300*2);
       },
       child: Container(
       margin: EdgeInsets.only(top: D.default_10),
@@ -298,13 +301,5 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ],),
     ),);
   }
-  void _showBottomSheet(Widget body){
-    showMaterialModalBottomSheet(
-      context: context,
-      builder: (context) => SingleChildScrollView(
-        controller: ModalScrollController.of(context),
-        child: Container(width: double.infinity,height: D.default_300,color: Colors.white,),
-      ),
-    );
-  }
+
 }
