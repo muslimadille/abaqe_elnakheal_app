@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../utils/baseDimentions.dart';
+import '../../utils/widgets/no_data_widget.dart';
+import 'order_list_item.dart';
 
 class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({Key? key}) : super(key: key);
@@ -14,23 +16,31 @@ class MyOrdersScreen extends StatefulWidget {
 }
 
 class _MyOrdersScreenState extends State<MyOrdersScreen> {
+  bool _showList=false;
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-      Center(child: Lottie.asset(
-    'assets/lottie/dron.json',
-        width: D.default_200,
-        height: D.default_300,
-        alignment: Alignment.center
-    )),
-        SizedBox(height: D.default_20,),
-        Text("لايوجد طلبات جارية",style: S.h1(color: C.GREY_1),),
-        Text("ابدأ بالطلب الآن",style: S.h3(color: C.GREY_4),),
-
-
-      ],));
+    return BaseScreen(
+        body: InkWell(
+          onTap: (){
+            setState(() {
+              _showList=true;
+            });
+          },
+      child: _showList?_myOrdersList():NoDataWidget(image:"assets/lottie/dron.json",title:"لايوجد طلبات جارية",subTitle:"ابدأ الطلب الآن"),
+    ));
+  }
+  Widget _myOrdersList(){
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: ListView.separated(
+        itemBuilder: (context,index){
+          return OrderListItem();
+        },
+        separatorBuilder: (context,index){
+          return Container(
+            height: D.default_10,
+          );
+        }, itemCount: 3),);
   }
 }

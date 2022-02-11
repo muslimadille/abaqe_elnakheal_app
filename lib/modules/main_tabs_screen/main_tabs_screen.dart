@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+import '../my_orders_screen/my_orders_tabs_screen.dart';
 import 'bottom_bar_icons.dart';
 
 class MainTabsScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
       // Default is true.
       resizeToAvoidBottomInset: true,
       // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-      stateManagement: true,
+      stateManagement: false,
       // Default is true.
       hideNavigationBarWhenKeyboardShows: true,
       // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
@@ -81,7 +82,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
     return [
       const HomeScreen(),
       const CategoriesScreen(),
-      const MyOrdersScreen(),
+      const MyOrdersTabsScreen(),
       const NotificationsScreen(),
       const MoreScreen()
     ];
