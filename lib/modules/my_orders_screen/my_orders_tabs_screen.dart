@@ -8,6 +8,7 @@ import '../../utils/widgets/tabs_widget.dart';
 import '../home/items/card_icon.dart';
 import '../login_screen/item/back_btn_widget.dart';
 import 'my_orders_screen.dart';
+import 'my_previous_orders_screen.dart';
 
 class MyOrdersTabsScreen extends StatefulWidget {
   const MyOrdersTabsScreen({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class _MyOrdersTabsScreenState extends State<MyOrdersTabsScreen> with SingleTick
   }
   List<Widget>pages=[
     MyOrdersScreen(),
-    MyOrdersScreen()
+    MyPreviousOrdersScreen()
   ];
   List<String> tabsTexts=[
     "الطلبات الجارية",
