@@ -41,12 +41,26 @@ class _CategoryListItemState extends State<CategoryListItem> {
             borderRadius: BorderRadius.circular(D.default_10),
           ),
           child: TransitionImage(
-            "assets/images/banner_demo_img.png",
+            categorie[widget.index].img,
             fit: BoxFit.cover,
             height:D.default_100,
             radius: D.default_10,
           )),
-      Text("بذور",style: S.h4(color: C.GREY_1),)
+      Text(categorie[widget.index].title,style: S.h4(color: C.GREY_1),)
     ],),) ;
   }
+  List<Category> categorie=[
+    Category("assets/images/bzor.png","اسمدة"),
+    Category("assets/images/bzor2.png","بذور"),
+    Category("assets/images/bzor3.png","مبيدات حشرية"),
+    Category("assets/images/bzor.png","مبيدات اخري"),
+    Category("assets/images/bzor2.png","ادوات"),
+  ];
 }
+class Category{
+  String img="";
+  String title="";
+  Category(this.img,this.title);
+
+}
+

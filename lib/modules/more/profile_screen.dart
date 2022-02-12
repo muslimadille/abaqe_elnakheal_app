@@ -55,9 +55,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       child:
       Row(children: [
-        Text("الاسم",style: S.h4(color: C.GREY_2),),
-        Expanded(child: Center(
-          child: Text("عبد السلام محمد احمد",style: S.h4(color: C.GREY_2),),)),
+        Container(
+            width: D.default_120,
+            child: Text("الاسم",style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("عبد السلام محمد احمد",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
@@ -68,9 +69,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       child:
       Row(children: [
-        Text("رقم التليفون",style: S.h4(color: C.GREY_2),),
-        Expanded(child: Center(
-          child: Text("+20 1056749852",style: S.h4(color: C.GREY_2),),)),
+        Container(
+            width: D.default_120,
+            child: Text("رقم التليفون",style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("+20 1056749852",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
@@ -81,9 +83,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       child:
       Row(children: [
-        Text("رقم الهوية",style: S.h4(color: C.GREY_2),),
-        Expanded(child: Center(
-          child: Text("26547412139856",style: S.h4(color: C.GREY_2),),)),
+        Container(
+            width: D.default_120,
+            child: Text("رقم الهوية",style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("26547412139856",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
@@ -94,9 +97,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       child:
       Row(children: [
-        Text("المحافظة",style: S.h4(color: C.GREY_2),),
-        Expanded(child: Center(
-          child: Text("القاهرة",style: S.h4(color: C.GREY_2),),)),
+        Container(
+            width: D.default_120,
+            child: Text("المحافظة",style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("القاهرة",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
@@ -107,9 +111,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       child:
       Row(children: [
-        Text("الحي",style: S.h4(color: C.GREY_2),),
-        Expanded(child: Center(
-          child: Text("مدينة نصر",style: S.h4(color: C.GREY_2),),)),
+        Container(
+          width: D.default_120,
+            child: Text("الحي",style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("مدينة نصر",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);

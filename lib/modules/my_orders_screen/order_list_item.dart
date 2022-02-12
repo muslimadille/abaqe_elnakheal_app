@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../../utils/baseDimentions.dart';
 import 'my_order_details_screen.dart';
+import 'order_traking_screen.dart';
 
 class OrderListItem extends StatelessWidget {
   const OrderListItem({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class OrderListItem extends StatelessWidget {
     return Container(
       child: InkWell(
         onTap: (){
-          MyUtils.navigate(context, MyOrderDetails());
+          MyUtils.navigate(context, const OrderTrakingScreen());
         },
         child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,8 +45,8 @@ class OrderListItem extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(top:D.default_5,bottom: D.default_5,left:D.default_10,right:D.default_10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(D.default_20)),
-                color: Colors.blue.withOpacity(0.5),
+                borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+                color: C.BLUE_2.withOpacity(0.5),
               ),
               child: Text("قيد التوصيل",style: S.h5(color: C.BLUE_1),),
             )
