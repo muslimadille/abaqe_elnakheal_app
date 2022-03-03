@@ -10,7 +10,8 @@ class BaseTextFiled extends StatefulWidget {
   String? hint;
   TextInputType?inputType;
   bool isPassword;
-   BaseTextFiled({required this.controller,this.hint, this.inputType,this.isPassword=false});
+  FormFieldValidator<String>? validator;
+   BaseTextFiled({required this.controller,this.hint, this.inputType,this.isPassword=false,this.validator});
 
   @override
   _BaseTextFiledState createState() => _BaseTextFiledState();
@@ -25,7 +26,7 @@ class _BaseTextFiledState extends State<BaseTextFiled> with InputValidationMixin
         width: double.infinity,
         child: TextFormField(
           controller: widget.controller,
-          validator: (name) {
+          validator: widget.validator??(name) {
             if (isFieldNotEmpty(name!)) {
               return null;
             } else {

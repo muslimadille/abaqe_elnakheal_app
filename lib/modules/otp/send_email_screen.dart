@@ -82,7 +82,7 @@ class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> {
   Widget _sendButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigate(context, OtpScreen());
+        MyUtils.navigate(context, OtpScreen("SendOtpEmailScreen","SendOtpEmailScreen"));
       },
       title: tr("send"),
       color: C.BLUE_1,

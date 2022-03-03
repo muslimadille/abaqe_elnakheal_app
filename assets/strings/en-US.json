@@ -33,7 +33,13 @@
   "add_to_crd": "Add to cart",
   "registeration_text":"Enter the following data to join Apak Elnakheal",
   "added_to_crd": "Added",
-  "my_orders_subtitle": "You can browse all your requests from here"
+  "my_orders_subtitle": "You can browse all your requests from here",
+  "enter_email": "Enter the email",
+  "enter_first_name":"Enter the first name",
+  "enter_last_name": "Enter the last name",
+  "enter_phone": "Enter a 9-digit phone number without 0",
+  "enter_password": "Enter the password",
+  "loading": "Loading...."
 
 
 

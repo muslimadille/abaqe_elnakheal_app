@@ -1,5 +1,7 @@
 
 
+import 'models/user_data.dart';
+
 class MyResponse<T> extends Object {
   final TAG = "MyResponse";
 
@@ -58,12 +60,13 @@ class MyResponse<T> extends Object {
 
   _parseSingle(json) {
     switch (T) {
-      /*case ServiceProviderModel:
-        _data = ServiceProviderModel.fromJson(json) as T;
-        break;
       case UserData:
         _data = UserData.fromJson(json) as T;
         break;
+      /*case ServiceProviderModel:
+        _data = ServiceProviderModel.fromJson(json) as T;
+        break;
+
       case AnimalPagerListModel:
         _data = AnimalPagerListModel.fromJson(json) as T;
         break;*/
@@ -73,6 +76,15 @@ class MyResponse<T> extends Object {
   }
 
   bool _parseList(json) {
+    if ("$T".contains("List<UserData>")) {
+      _data = (json as List)
+          .map((item) => UserData.fromJson(item))
+          .toList() as T;
+
+    } else {
+      _data = null;
+      return false;
+    }
     /*if ("$T".contains("List<CategoriesDataModel>")) {
       _data = (json as List)
           .map((item) => CategoriesDataModel.fromJson(item))

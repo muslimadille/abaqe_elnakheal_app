@@ -1,5 +1,6 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/login_screen/login_screen.dart';
+import 'package:abaqe_elnakheal_app/providers/registeration_provider.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
@@ -10,7 +11,10 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../utils/input_validation_mixin.dart';
+import '../../utils/widgets/loading_widget.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
 
 class RegisterationScreen extends StatefulWidget {
@@ -20,19 +24,28 @@ class RegisterationScreen extends StatefulWidget {
   _RegisterationScreenState createState() => _RegisterationScreenState();
 }
 
-class _RegisterationScreenState extends State<RegisterationScreen> {
-  final _loginFormGlobalKey = GlobalKey<FormState>();
+class _RegisterationScreenState extends State<RegisterationScreen> with InputValidationMixin{
+  final _registerFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _fristNmaeController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
 
+  RegisterProvider? registerProvider;
+
+@override
+  void initState() {
+    super.initState();
+    registerProvider = Provider.of<RegisterProvider>(context, listen: false);
+
+}
 
 
 
   @override
   Widget build(BuildContext context) {
+    registerProvider = Provider.of<RegisterProvider>(context, listen: true);
     return BaseScreen(body: SafeArea(child: Stack(
       alignment:AlignmentDirectional.center,
       children: [
@@ -60,7 +73,8 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                 _skip(),
                 SizedBox(height: D.default_60,)
               ],),))
-          ],),)
+          ],),),
+        registerProvider!.isLoading?LoadingProgress():Container()
       ],
     ),));
   }
@@ -118,7 +132,9 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
 
   Widget _loginButton(){
     return BaseButton(
-      onItemClickListener: (){},
+      onItemClickListener: (){
+        _onRegisterClicked();
+      },
       title: tr("login_title"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
@@ -173,23 +189,47 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   Widget _loginForm(){
     return Container(child:
     Form(
-      key: _loginFormGlobalKey,
+      key: _registerFormGlobalKey,
       child: Column(
         children: [
           BaseTextFiled(
             controller: _emailController,
             hint: tr("email"),
+            validator: (name) {
+              if (isFieldNotEmpty(name!)) {
+                return null;
+              } else {
+                return tr("enter_email");
+              }
+            },
           ),
           SizedBox(height: D.default_15,),
-          Row(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Expanded(child: BaseTextFiled(
               controller: _fristNmaeController,
               hint: tr("first_name"),
+                validator: (name) {
+                  if (isFieldNotEmpty(name!)) {
+                    return null;
+                  } else {
+                    return tr("enter_first_name");
+                  }
+                }
             )),
             SizedBox(width: D.default_10,),
             Expanded(child: BaseTextFiled(
               controller: _lastNameController,
               hint: tr("last_name"),
+                validator: (name) {
+                  if (isFieldNotEmpty(name!)) {
+                    return null;
+                  } else {
+                    return tr("enter_last_name");
+                  }
+                }
             )),
           ],),
           SizedBox(height: D.default_15,),
@@ -198,15 +238,44 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
             hint: tr("phone_num"),
             isPassword: false,
             inputType: TextInputType.phone,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_phone");
+                }
+              }
           ),
           SizedBox(height: D.default_15,),
           BaseTextFiled(
             controller: _passwordController,
             hint: tr("password"),
             isPassword: true,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_password");
+                }
+              }
           ),
         ],
       ),
     ),);
   }
+  _onRegisterClicked() {
+    if (_registerFormGlobalKey.currentState!.validate()) {
+      _registerFormGlobalKey.currentState!.save();
+
+      //call register api
+      registerProvider!.register(
+          context,
+          _fristNmaeController.text,
+          _lastNameController.text,
+          _emailController.text,
+          _phoneNumberController.text,
+          _passwordController.text);
+    }
+  }
+
 }

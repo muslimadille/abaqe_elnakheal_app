@@ -5,6 +5,10 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../utils/constants.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,6 +18,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  SharedPreferences? prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPref(context);
+  }
   @override
   Widget build(BuildContext context) {
     _timerNavigation();
@@ -38,5 +49,11 @@ class _SplashScreenState extends State<SplashScreen> {
       MyUtils.navigateReplaceCurrent(context, OnBoardingScreen());
     });
     
+  }
+  void _initPref(BuildContext ctx)async{
+    prefs =  await SharedPreferences.getInstance();
+    Constants.prefs=prefs;
+
+
   }
 }
