@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:abaqe_elnakheal_app/modules/splash_screen/spalsh_screen.dart';
 import 'package:abaqe_elnakheal_app/providers/common_provider_model.dart';
+import 'package:abaqe_elnakheal_app/providers/login_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/registeration_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/utils_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -19,6 +20,8 @@ void main() async{
       ChangeNotifierProvider<CommonProviderModel>(create: (ctx) => CommonProviderModel(),),
       ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
       ChangeNotifierProvider<RegisterProvider>(create: (ctx) => RegisterProvider(),),
+      ChangeNotifierProvider<LoginProvider>(create: (ctx) => LoginProvider(),),
+
     ],
     child:EasyLocalization(
         supportedLocales: const [Locale('en', 'US'), Locale('ar', 'EG')],

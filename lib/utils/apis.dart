@@ -15,6 +15,8 @@ class Apis{
   static String BASE_URL="https://abak.basit-it.com/api/v1";
   static String REGISTER_API="${BASE_URL}/register";
   static String HOME_API="${BASE_URL}/home-page";
+  static String LOGIN_API="${BASE_URL}/login";
+
 
 
 

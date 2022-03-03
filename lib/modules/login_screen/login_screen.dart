@@ -12,7 +12,11 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/login_provider.dart';
+import '../../utils/input_validation_mixin.dart';
+import '../../utils/widgets/loading_widget.dart';
 import 'item/back_btn_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,14 +26,22 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
   final _loginFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  LoginProvider?loginProvider;
+  @override
+  void initState() {
+    super.initState();
+    loginProvider = Provider.of<LoginProvider>(context, listen: false);
+
+  }
 
 
   @override
   Widget build(BuildContext context) {
+    loginProvider = Provider.of<LoginProvider>(context, listen: true);
     return BaseScreen(body: SafeArea(child: Stack(
       alignment:AlignmentDirectional.center,
       children: [
@@ -58,7 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 _skip(),
                 SizedBox(height: D.default_60,)
               ],),))
-          ],),)
+          ],),),
+        loginProvider!.isLoading?const LoadingProgress():Container()
       ],
     ),));
   }
@@ -115,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _loginButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigate(context, MainTabsScreen());
+        _onLoginClicked();
       },
       title: tr("login_title"),
       color: C.BLUE_1,
@@ -177,12 +190,26 @@ class _LoginScreenState extends State<LoginScreen> {
             BaseTextFiled(
               controller: _emailController,
               hint: tr("email"),
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_email");
+                }
+              },
             ),
             SizedBox(height: D.default_15,),
             BaseTextFiled(
               controller: _passwordController,
               hint: tr("password"),
               isPassword: true,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_password");
+                }
+              },
             ),
           ],
         ),
@@ -200,5 +227,14 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Text(tr("forget_password"),style: S.h3(color: C.GREY_1),)
           ],)),);
+  }
+  _onLoginClicked() {
+    if (_loginFormGlobalKey.currentState!.validate()) {
+      _loginFormGlobalKey.currentState!.save();
+      loginProvider!.login(
+          context,
+          _emailController.text,
+          _passwordController.text);
+    }
   }
 }
