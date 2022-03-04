@@ -4,7 +4,10 @@ import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/home_provider.dart';
+import '../../utils/widgets/loading_widget.dart';
 import 'items/ads_widget.dart';
 import 'items/card_icon.dart';
 import 'items/home_categories_list_widget/hom_gategories_list.dart';
@@ -18,19 +21,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeProvider? homeProvider;
+  @override
+  void initState() {
+    super.initState();
+    homeProvider=Provider.of<HomeProvider>(context,listen: false);
+    homeProvider!.getHomeData();
+  }
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: BaseScreen(body: Container(
-      child: Column(children: [
-        _header(),
-        Expanded(child: SingleChildScrollView(child:
-        Column(children: const [
-          AdsWidget(),
-          HomeCategoriesListWidget(),
-        ],),))
+    homeProvider=Provider.of<HomeProvider>(context,listen: true);
+    return SafeArea(child: BaseScreen(body:
+    Stack(children: [
+      Container(
+        child: Column(children: [
+          _header(),
+          Expanded(child: SingleChildScrollView(child:
+          homeProvider!.homeData!=null? Column(children:  [
+            AdsWidget(homeProvider!.homeData!.slider!),
+            HomeCategoriesListWidget(homeProvider!.homeData!),
+          ],):Container(),))
 
-      ],),
-    )));
+        ],),
+      ),
+      homeProvider!.isLoading?LoadingProgress():Container()
+    ],)));
   }
   Widget _header(){
     return Container(

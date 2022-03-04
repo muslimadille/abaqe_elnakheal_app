@@ -5,11 +5,13 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../dio/models/product_model.dart';
 import '../../../../utils/myUtils.dart';
 import '../../../products_screen/product_details_screen.dart';
 
 class HomeProductsListItem extends StatelessWidget {
-  const HomeProductsListItem({Key? key}) : super(key: key);
+  ProductModel productModel;
+   HomeProductsListItem(this.productModel) ;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class HomeProductsListItem extends StatelessWidget {
   }
   Widget _image(){
     return TransitionImage(
-      "assets/images/rice_img.png",
+      productModel.photo??"",
       height: D.default_100,
       width: double.infinity,
       fit: BoxFit.cover,
@@ -63,22 +65,22 @@ class HomeProductsListItem extends StatelessWidget {
         borderRadius: BorderRadius.only(topRight: Radius.circular(D.default_10),bottomLeft: Radius.circular(D.default_10)),
         color: C.BLUE_1,
       ),
-      child: Center(child: Text("خصم10%",style: S.h5(color: Colors.white),),),
+      child: Center(child: Text("خصم${productModel.discountPercentage}%",style: S.h5(color: Colors.white),),),
     );
   }
   Widget _description(){
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(top:D.default_10),
-        child: Text("سماد طبيعي للتزهير بتركيز 10%",style: S.h4(color: C.GREY_3),),),
+        child: Text(productModel.description!,style: S.h4(color: C.GREY_3),),),
     );
   }
   Widget _coast(){
     return Container(child:
     Row(children: [
-      Text("10جم",style: S.h4(color: C.BLUE_1),),
+      Text(productModel.offerPrice.toString()??"",style: S.h4(color: C.BLUE_1),),
       Text("/",style: S.h4(color: C.BLUE_1),),
-      Text("15جم",style: S.h4(color: C.GREY_3,decoration: TextDecoration.lineThrough),)
+      Text(productModel.price!,style: S.h4(color: C.GREY_3,decoration: TextDecoration.lineThrough),)
     ],),);
   }
 }

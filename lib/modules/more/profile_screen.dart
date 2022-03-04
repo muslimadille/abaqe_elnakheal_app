@@ -1,4 +1,6 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:abaqe_elnakheal_app/utils/constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/baseDimentions.dart';
@@ -57,11 +59,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Row(children: [
         Container(
             width: D.default_120,
-            child: Text("الاسم",style: S.h4(color: C.GREY_2),)),
-        Expanded(child: Text("عبد السلام محمد احمد",style: S.h4(color: C.GREY_2),)),
-        Text("تعديل",style: S.h4(color: C.BLUE_1),),
+            child: Text(tr("name"),style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("${Constants.currentUser!.username} ${Constants.currentUser!.lastName}",style: S.h4(color: C.GREY_2),)),
+        _editBtn(),
       ],)
       ,);
+  }
+  Widget _editBtn(){
+    return InkWell(onTap: (){},child: Text(tr("edit"),style: S.h4(color: C.BLUE_1),),);
   }
   Widget _userPhone(){
     return Container(
@@ -71,9 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Row(children: [
         Container(
             width: D.default_120,
-            child: Text("رقم التليفون",style: S.h4(color: C.GREY_2),)),
-        Expanded(child: Text("+20 1056749852",style: S.h4(color: C.GREY_2),)),
-        Text("تعديل",style: S.h4(color: C.BLUE_1),),
+            child: Text(tr("phone_num"),style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("${Constants.currentUser!.phone}",style: S.h4(color: C.GREY_2),)),
+        _editBtn(),
       ],)
       ,);
   }
@@ -85,8 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Row(children: [
         Container(
             width: D.default_120,
-            child: Text("رقم الهوية",style: S.h4(color: C.GREY_2),)),
-        Expanded(child: Text("26547412139856",style: S.h4(color: C.GREY_2),)),
+            child: Text(tr("National_ID"),style: S.h4(color: C.GREY_2),)),
+        Expanded(child: Text("${Constants.currentUser!.national_id??"........."}",style: S.h4(color: C.GREY_2),)),
         Text("تعديل",style: S.h4(color: C.BLUE_1),),
       ],)
       ,);

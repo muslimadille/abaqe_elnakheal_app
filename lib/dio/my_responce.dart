@@ -1,5 +1,6 @@
 
 
+import 'models/home_model.dart';
 import 'models/user_data.dart';
 
 class MyResponse<T> extends Object {
@@ -63,14 +64,9 @@ class MyResponse<T> extends Object {
       case UserData:
         _data = UserData.fromJson(json) as T;
         break;
-      /*case ServiceProviderModel:
-        _data = ServiceProviderModel.fromJson(json) as T;
+      case HomeModel:
+        _data = HomeModel.fromJson(json) as T;
         break;
-
-      case AnimalPagerListModel:
-        _data = AnimalPagerListModel.fromJson(json) as T;
-        break;*/
-
       default:_data = null;
     }
   }

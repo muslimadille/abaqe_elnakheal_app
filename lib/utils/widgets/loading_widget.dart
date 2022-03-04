@@ -16,20 +16,21 @@ class LoadingProgress extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child:Center(child: Container(
-        margin: EdgeInsets.all(D.default_60),
-        width: double.infinity,
-        height: D.default_80,
+        width: D.default_130,
+        height: D.default_130,
         padding: EdgeInsets.all(D.default_15),
         decoration:  BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
         ),
-        child:  Row(children: [
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           SpinKitCircle(
             color: C.BLUE_1,
-            size: D.default_40,
+            size: D.default_50,
           ),
-          SizedBox(width: D.default_10,),
+          SizedBox(height: D.default_15,),
           Text(tr("loading"),style: S.h4(color: C.BLUE_1),)
         ],),),) ,
     );

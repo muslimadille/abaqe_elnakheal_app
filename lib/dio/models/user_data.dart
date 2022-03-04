@@ -18,7 +18,9 @@ class UserData {
       this.stateName, 
       this.userTypeId, 
       this.token, 
-      this.activate,});
+      this.activate,
+    this.national_id
+  });
 
   UserData.fromJson(dynamic json) {
     id = json['id'];
@@ -37,6 +39,7 @@ class UserData {
     userTypeId = json['user_type_id'];
     token = json['token'];
     activate = json['activate'];
+    national_id=json['national_id'];
   }
   int? id;
   String? username;
@@ -54,6 +57,7 @@ class UserData {
   dynamic userTypeId;
   String? token;
   dynamic activate;
+  dynamic national_id;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -73,6 +77,7 @@ class UserData {
     map['user_type_id'] = userTypeId;
     map['token'] = token;
     map['activate'] = activate;
+    map['national_id']=national_id;
     return map;
   }
 

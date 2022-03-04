@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:abaqe_elnakheal_app/modules/splash_screen/spalsh_screen.dart';
 import 'package:abaqe_elnakheal_app/providers/common_provider_model.dart';
+import 'package:abaqe_elnakheal_app/providers/home_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/login_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/registeration_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/utils_provider.dart';
@@ -21,6 +22,8 @@ void main() async{
       ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
       ChangeNotifierProvider<RegisterProvider>(create: (ctx) => RegisterProvider(),),
       ChangeNotifierProvider<LoginProvider>(create: (ctx) => LoginProvider(),),
+      ChangeNotifierProvider<HomeProvider>(create: (ctx) => HomeProvider(),),
+
 
     ],
     child:EasyLocalization(

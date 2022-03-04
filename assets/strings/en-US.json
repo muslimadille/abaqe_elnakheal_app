@@ -39,7 +39,10 @@
   "enter_last_name": "Enter the last name",
   "enter_phone": "Enter a 9-digit phone number without 0",
   "enter_password": "Enter the password",
-  "loading": "Loading...."
+  "loading": "Loading",
+  "name": "Name",
+  "edit": "Edit",
+  "National_ID": "National ID"
 
 
 

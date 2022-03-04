@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../dio/models/user_data.dart';
@@ -8,8 +9,10 @@ class Constants extends Object{
   static   SharedPreferences? prefs ;
   static int OTP_LENGTH=4;
   static String? SAVED_PHONE_KEY="SAVED_PHONE";
+  static String? SAVED_EMAIL_KEY="SAVED_EMAIL";
   static String? SAVED_PASSWORD_KEY="SAVED_PASSWORD";
   static  UserData? currentUser;
+  static BuildContext? tabScreenContext;
 
 
 }

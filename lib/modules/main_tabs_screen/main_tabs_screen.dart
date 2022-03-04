@@ -12,6 +12,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+import '../../utils/constants.dart';
+import '../../utils/myUtils.dart';
+import '../login_screen/login_screen.dart';
 import '../my_orders_screen/my_orders_tabs_screen.dart';
 import 'bottom_bar_icons.dart';
 
@@ -33,6 +36,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Constants.tabScreenContext=context;
     return BaseScreen(
         body: Column(
       children: [
@@ -74,7 +78,14 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.simple, // Choose the nav bar style with this property.
+          NavBarStyle.simple,
+      onItemSelected: (index){
+        if(index>1&&Constants.currentUser==null){
+          MyUtils.navigate(context, LoginScreen());
+          _controller!.index=0;
+          _controller!.jumpToTab(0);
+        }
+      },// Choose the nav bar style with this property.
     );
   }
 

@@ -1,16 +1,20 @@
+import 'package:abaqe_elnakheal_app/modules/login_screen/login_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/more/profile_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/more/settings_screen.dart';
+import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:flutter/material.dart';
+import '../../utils/apis.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/my_colors.dart';
 import '../../utils/widgets/transition_image.dart';
 import '../home/items/card_icon.dart';
 import '../base_screen/base_screen.dart';
+import '../splash_screen/spalsh_screen.dart';
 import 'about_widget.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -22,7 +26,13 @@ class MoreScreen extends StatefulWidget {
 
 class _MoreScreenState extends State<MoreScreen> {
   @override
+  void initState() {
+    super.initState();
+
+  }
+  @override
   Widget build(BuildContext context) {
+
     return BaseScreen(body: SafeArea(child: Column(children: [
       _header(),
       Expanded(child: Container(
@@ -67,8 +77,8 @@ class _MoreScreenState extends State<MoreScreen> {
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("عبد السلام محمد احمد",style: S.h3(color: C.GREY_1),),
-          Text("+20 01065478965",style: S.h4(color: C.GREY_3),)
+          Text("${Constants.currentUser!.username} ${Constants.currentUser!.lastName}",style: S.h3(color: C.GREY_1),),
+          Text("${Constants.currentUser!.phone}",style: S.h4(color: C.GREY_3),)
         ],),))
 
     ],),);
@@ -133,7 +143,12 @@ class _MoreScreenState extends State<MoreScreen> {
   }
   Widget _logOutBtn(){
     return InkWell(
-      onTap: (){
+      onTap: ()async{
+        await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
+        await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
+        Apis.TOKEN_VALUE="";
+        Constants.currentUser=null;
+        MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
       },
       child: Container(
         padding: EdgeInsets.all(D.default_20),

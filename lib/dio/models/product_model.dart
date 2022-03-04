@@ -57,7 +57,7 @@ class ProductModel {
   String? quantity;
   dynamic minQuantity;
   String? cartCount;
-  int? rateCount;
+  dynamic rateCount;
   String? photo;
   String? thumb;
   List<ProductPhotoModel>? photos;

@@ -5,8 +5,10 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../providers/login_provider.dart';
 import '../../utils/constants.dart';
 
 
@@ -19,14 +21,19 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   SharedPreferences? prefs;
+  LoginProvider?loginProvider;
+
 
   @override
   void initState() {
     super.initState();
+    loginProvider = Provider.of<LoginProvider>(context, listen: false);
     _initPref(context);
+
   }
   @override
   Widget build(BuildContext context) {
+    loginProvider = Provider.of<LoginProvider>(context, listen: true);
     _timerNavigation();
     return BaseScreen(body: Stack(
       alignment:AlignmentDirectional.center,
@@ -53,7 +60,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void _initPref(BuildContext ctx)async{
     prefs =  await SharedPreferences.getInstance();
     Constants.prefs=prefs;
-
-
+    _initSavedUser();
+  }
+  _initSavedUser(){
+    if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString().isNotEmpty&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
+      loginProvider!.login(context,Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString());
+    }
   }
 }
