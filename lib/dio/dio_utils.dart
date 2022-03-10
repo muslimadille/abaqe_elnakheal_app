@@ -39,12 +39,14 @@ class BaseDioUtils {
 
         return handler.next(response);
       }, onError: (DioError e, ErrorInterceptorHandler handler) async {
-        var url = "${e.response!.realUri.path}";
-        print("$url : ERROR : ${e.error}");
+        //var url = "${e.response!.realUri.path}";
+        print(" ERROR : ${e}");
+
+        /*print("$url : ERROR : ${e.error}");
         print("$url : ERROR : ${e.message}");
         print("$url : ERROR : ${e.response?.data}");
         print("$url : ERROR : ${e.response?.statusCode}");
-        print("$url : ERROR : ${e.response?.statusMessage}");
+        print("$url : ERROR : ${e.response?.statusMessage}");*/
 
         return handler.next(e);
       }));

@@ -23,11 +23,12 @@ class _AdsWidgetState extends State<AdsWidget> {
   @override
   void initState() {
     super.initState();
+    _autoSlid();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    _autoSlid();
     return Container(
       width: double.infinity,
       height: D.default_180,

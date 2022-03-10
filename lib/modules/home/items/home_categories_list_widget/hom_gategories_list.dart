@@ -12,7 +12,7 @@ class HomeCategoriesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: homeData.categories!.length*D.default_300,
+      height:D.default_120+ (homeData.categories!.length*D.default_120),
       padding: EdgeInsets.all(D.default_10),
       child: ListView.builder(
           itemBuilder: (context, index) {

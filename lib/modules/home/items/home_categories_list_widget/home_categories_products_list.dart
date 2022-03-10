@@ -30,7 +30,7 @@ class HomeCategoriesListItem extends StatelessWidget {
             itemBuilder: (context,index){
           return HomeProductsListItem(homeCategoryModel.products![index]);
         },
-          itemCount:3,
+          itemCount:homeCategoryModel.products!.length,
           scrollDirection: Axis.horizontal,
         ),)
       ],),
