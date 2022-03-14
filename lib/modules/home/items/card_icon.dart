@@ -5,19 +5,29 @@ import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/cart_provider.dart';
+import '../../../utils/constants.dart';
 import '../../cart/my_cart_screen.dart';
+import '../../login_screen/login_screen.dart';
 
 class CardIconWidget extends StatelessWidget {
   bool isDarkBG;
+  CartProvider? cartProvider;
 
    CardIconWidget({this.isDarkBG=false});
 
   @override
   Widget build(BuildContext context) {
+    cartProvider=Provider.of<CartProvider>(context,listen: true);
     return InkWell(
       onTap: (){
-        MyUtils.navigate(context, MyCartScreen());
+        if(Constants.currentUser==null){
+          MyUtils.navigateReplaceCurrent(Constants.tabScreenContext!, LoginScreen());
+        }else{
+          MyUtils.navigate(context, MyCartScreen());
+        }
       },
       child: Container(
       child: Stack(
@@ -40,7 +50,7 @@ class CardIconWidget extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "1",
+                  "${cartProvider!.myCartModel!=null?cartProvider!.myCartModel!.items!.length:0}",
                   style: S.h6(color: isDarkBG?C.BLUE_1:Colors.white),
                 ),
               ),

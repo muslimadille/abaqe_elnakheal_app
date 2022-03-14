@@ -3,13 +3,15 @@ import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import '../../../dio/models/home_category_model.dart';
 import '../../../main.dart';
 
 class CategoryListItem extends StatefulWidget {
   int index;
   OnItemClickListener? onItemClickListener;
+  List<HomeCategoryModel>? categories;
   
-  CategoryListItem(this.index,this.onItemClickListener) ;
+  CategoryListItem(this.categories,this.index,this.onItemClickListener) ;
 
   @override
   _CategoryListItemState createState() => _CategoryListItemState();
@@ -41,26 +43,15 @@ class _CategoryListItemState extends State<CategoryListItem> {
             borderRadius: BorderRadius.circular(D.default_10),
           ),
           child: TransitionImage(
-            categorie[widget.index].img,
+            widget.categories![widget.index].photo??"assets/images/bzor.png",
             fit: BoxFit.cover,
             height:D.default_100,
             radius: D.default_10,
           )),
-      Text(categorie[widget.index].title,style: S.h4(color: C.GREY_1),)
+      Text(widget.categories![widget.index].name??"",style: S.h4(color: C.GREY_1),)
     ],),) ;
   }
-  List<Category> categorie=[
-    Category("assets/images/bzor.png","اسمدة"),
-    Category("assets/images/bzor2.png","بذور"),
-    Category("assets/images/bzor3.png","مبيدات حشرية"),
-    Category("assets/images/bzor.png","مبيدات اخري"),
-    Category("assets/images/bzor2.png","ادوات"),
-  ];
-}
-class Category{
-  String img="";
-  String title="";
-  Category(this.img,this.title);
 
 }
+
 

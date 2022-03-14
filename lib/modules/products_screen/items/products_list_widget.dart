@@ -3,10 +3,12 @@ import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../../dio/models/product_model.dart';
 import '../product_details_screen.dart';
 
 class ProductsListWidget extends StatelessWidget {
-  const ProductsListWidget({Key? key}) : super(key: key);
+  List<ProductModel>? data;
+   ProductsListWidget(this.data,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +24,14 @@ class ProductsListWidget extends StatelessWidget {
             ),
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
+                    GlobalKey key=GlobalKey();
                 return ProductsListItem(
+                    data![index],
                     index,(){
-                      MyUtils.navigate(context, ProductDetailsScreen());
-                });
+                      MyUtils.navigate(context, ProductDetailsScreen(data![index]));
+                },key);
               },
-              childCount: 5,
+              childCount: data!.length,
               semanticIndexOffset: 1,
             )),
 

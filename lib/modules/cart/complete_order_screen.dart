@@ -1,3 +1,4 @@
+import 'package:abaqe_elnakheal_app/dio/models/region_model.dart';
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/cart/add_cobon_widget.dart';
 import 'package:abaqe_elnakheal_app/modules/cart/change_address_widget.dart';
@@ -5,7 +6,11 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/cart_provider.dart';
+import '../../providers/regions_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../home/items/card_icon.dart';
@@ -24,12 +29,16 @@ class CompleteOrderScreen extends StatefulWidget {
 
 class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   TextEditingController _notesController=TextEditingController();
+  CartProvider? cartProvider;
+  RegionsProvider?regionsProvider;
+
 
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    regionsProvider=Provider.of<RegionsProvider>(context,listen: false);
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
   }
   @override
   void dispose() {
@@ -41,6 +50,8 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    regionsProvider=Provider.of<RegionsProvider>(context,listen: true);
+    cartProvider=Provider.of<CartProvider>(context,listen: true);
     return BaseScreen(body: SafeArea(child:
     Container(
       width: double.infinity,
@@ -76,7 +87,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
           IconButton(onPressed:(){
             Navigator.pop(context);
           }, icon: Icon(Icons.arrow_back_ios,color: C.GREY_1,size: D.default_25,),),
-          Expanded(child: Text("سلة التسوق",style: S.h2(color: C.GREY_2,),textAlign: TextAlign.center,)),
+          Expanded(child: Text(tr("cart"),style: S.h2(color: C.GREY_2,),textAlign: TextAlign.center,)),
           Container(width: D.default_50,),
 
         ],),);
@@ -93,28 +104,28 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
           SizedBox(height: D.default_15,),
           Container(
             width: double.infinity,
-            child: Text("تفاصيل الطلب",style: S.h3(color: C.GREY_1),textAlign: TextAlign.start,),),
+            child: Text(tr("order_details"),style: S.h3(color: C.GREY_1),textAlign: TextAlign.start,),),
           SizedBox(height: D.default_15,),
           Expanded(child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("إجمالي العربة",style: S.h4(color: C.GREY_3),),
+                Text(tr("cart_sum"),style: S.h4(color: C.GREY_3),),
                 Text("120 جم",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("مصاريف الشحن",style: S.h4(color: C.GREY_3),),
+                Text(tr("shipping_coast"),style: S.h4(color: C.GREY_3),),
                 Text("20 جم",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("المجموع الكلي",style: S.h3(color: C.BLUE_1),),
+                Text(tr("total_cost"),style: S.h3(color: C.BLUE_1),),
                 Text("120 جم",style: S.h3(color: C.BLUE_1),)
               ],)
           ],),),
           BaseButton(onItemClickListener: (){
             MyUtils.showBottomSheet(context, CompleteOrderWidget(), MediaQuery.of(context).size.height*0.65);
-          }, title: "تنفيذ الطلب",height: D.default_60,
+          }, title: tr("complete_order2"),height: D.default_60,
             textStyle: S.h2(color: Colors.white),),
         ],
       ),
@@ -131,7 +142,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-          Text("عنوان التوصيل",style: S.h4(color:C.GREY_3),),
+          Text(tr("shipping_address"),style: S.h4(color:C.GREY_3),),
           InkWell(onTap: (){
             MyUtils.showBottomSheet(context, ChangeAddresWidget(), MediaQuery.of(context).size.height*0.7);
           },
@@ -147,10 +158,10 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
                     spreadRadius: 1
                 )]
             ),
-            child: Center(child: Text("تغيير",style: S.h4(color: Colors.white),),),),)
+            child: Center(child: Text(tr("change"),style: S.h4(color: Colors.white),),),),)
 
         ],),
-        Container(child: Text("المنزل",style: S.h3(color: C.GREY_1),),),
+        Container(child: Text(tr("home_location"),style: S.h3(color: C.GREY_1),),),
           Row(children: [
             TransitionImage(
               "assets/images/location_ic_blue.png",
@@ -159,7 +170,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
               height: D.default_20,),
             Container(
               margin: EdgeInsets.all(D.default_10),
-              child: Text("82امتداد حسن المأمون مدينه نصر, القاهرة",style: S.h4(color: C.GREY_4),),)
+              child: Text(cartProvider!.myCartModel!.userAddresses!.isNotEmpty?cartProvider!.myCartModel!.userAddresses![0].address!:tr("add_location"),style: S.h4(color: C.GREY_4),),)
           ],)
 
 
@@ -176,7 +187,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
         children: [
           Container(
             margin: EdgeInsets.only(bottom: D.default_10),
-            child: Text("ملاحظات هامة(اختياري)",style: S.h3(color: C.GREY_1),),),
+            child: Text(tr("your_notes"),style: S.h3(color: C.GREY_1),),),
           Container(
             height: D.default_120,
               width: double.infinity,
@@ -188,7 +199,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
               controller: _notesController,
               style: S.h3(color: C.GREY_1),
               decoration: InputDecoration(
-                  hintText: "اكتب هنا...",
+                  hintText: tr("write_here"),
                   hintStyle: S.h4(color: C.GREY_4),
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,
@@ -218,10 +229,34 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-          Text("اضافة كوبون خصم",style: S.h3(color: C.GREY_1),),
+          Text(tr("add_cobon"),style: S.h3(color: C.GREY_1),),
           Icon(Icons.arrow_forward_ios,color: C.GREY_1,size: D.default_20,)
         ],),
       ),
     );
   }
+  double _getProductsCost(){
+    double cost=0;
+    for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
+      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!));
+    }
+    return cost;
+  }
+  double _getTotalCost(){
+    return _getProductsCost()+(cartProvider!.myCartModel!.deliveryPrice!.toDouble());
+  }
+  Widget _regionsSpinner(){
+    return DropdownButton<RegionsModel>(
+      items: regionsProvider!.regions.map((RegionsModel value) {
+        return DropdownMenuItem<RegionsModel>(
+          value: value,
+          child: Text(value.name!),
+        );
+      }).toList(),
+      onChanged: (value) {
+
+      },
+    );
+  }
+
 }

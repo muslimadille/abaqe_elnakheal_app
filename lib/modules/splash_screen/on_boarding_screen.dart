@@ -11,6 +11,7 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/constants.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -65,7 +66,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget _loginButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigate(context, LoginScreen());
+        MyUtils.navigateReplaceCurrent(context, LoginScreen());
       },
       title: tr("login_title"),
       color: C.BLUE_1,

@@ -1,3 +1,4 @@
+import 'package:abaqe_elnakheal_app/dio/models/state_model.dart';
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/login_screen/login_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
@@ -11,8 +12,13 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
+import '../../dio/models/region_model.dart';
+import '../../providers/regions_provider.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
+import '../../utils/input_validation_mixin.dart';
+
 
 class ChangeAddresWidget extends StatefulWidget {
   const ChangeAddresWidget({Key? key}) : super(key: key);
@@ -21,14 +27,25 @@ class ChangeAddresWidget extends StatefulWidget {
   _ChangeAddresWidgetState createState() => _ChangeAddresWidgetState();
 }
 
-class _ChangeAddresWidgetState extends State<ChangeAddresWidget> {
+class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValidationMixin{
   final _loginFormGlobalKey = GlobalKey<FormState>();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _fristNmaeController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
+  TextEditingController _fullNameController = TextEditingController();
+  TextEditingController _notesController = TextEditingController();
 
+  RegionsProvider?regionsProvider;
+  RegionsModel? selectedRegion=RegionsModel();
+  StatesModel? selectedState=StatesModel();
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    regionsProvider=Provider.of<RegionsProvider>(context,listen: false);
+    selectedRegion=regionsProvider!.regions[0];
+    selectedState=selectedRegion!.getStates![0];
+  }
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -60,7 +77,8 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> {
   Widget _DoneButton(){
     return BaseButton(
       onItemClickListener: (){
-        Navigator.pop(context);
+        //Navigator.pop(context);
+        _onSaveClicked();
       },
       title:"حفظ العنوان",
       color: C.BLUE_1,
@@ -75,36 +93,119 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> {
       child: Column(
         children: [
           BaseTextFiled(
-            controller: _emailController,
-            hint:"الاسم بالكامل",
+            controller: _fullNameController,
+            hint:tr("full_name"),
+            validator: (name) {
+              if (isFieldNotEmpty(name!)) {
+                return null;
+              } else {
+                return tr("enter_fullName");
+              }
+            },
           ),
           SizedBox(height: D.default_15,),
           Row(children: [
-            Expanded(child: BaseTextFiled(
-              controller: _fristNmaeController,
-              hint: "المحافظة",
-            )),
+            Expanded(child: _regionsSpinner()),
             SizedBox(width: D.default_10,),
-            Expanded(child: BaseTextFiled(
-              controller: _lastNameController,
-              hint: "المدينة",
-            )),
+            Expanded(child: _statesSpinner()),
           ],),
           SizedBox(height: D.default_15,),
           BaseTextFiled(
-            controller: _phoneNumberController,
-            hint: "العنوان",
-            isPassword: false,
-            inputType: TextInputType.phone,
+            controller: _addressController,
+            hint: tr("address"),
+            inputType: TextInputType.text,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_address");
+                }
+              }
           ),
           SizedBox(height: D.default_15,),
           BaseTextFiled(
-            controller: _passwordController,
-            hint: "ملاحظات أخري",
-            isPassword: false,
+            controller: _notesController,
+            hint: tr("notes"),
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return tr("enter_notes");
+                }
+              }
           ),
         ],
       ),
     ),);
   }
+  Widget _regionsSpinner(){
+    return Container(
+      height:D.default_60,
+      margin: EdgeInsets.all(D.default_5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_10),
+            border: Border.all(color: C.GREY_3),
+        ),
+      child: DropdownButton<RegionsModel>(
+          underline:Container(),
+        menuMaxHeight: D.default_200,
+        borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+        style: TextStyle(color: Colors.blue),
+        hint: Container(
+          margin: EdgeInsets.all(D.default_10),
+          child: Text(selectedRegion!.name!,style: S.h5(color: C.GREY_3),),),
+        isExpanded: true,
+        items: regionsProvider!.regions.map((RegionsModel value) {
+        return DropdownMenuItem<RegionsModel>(
+          value: value,
+          child: Container(
+            child: Text(value.name!,style: S.h4(color: C.GREY_3),),),
+        );
+      }).toList(),
+      onChanged: (value) {
+            setState(() {
+              selectedRegion=value!;
+              selectedState=selectedRegion!.getStates![0];
+            });
+      },
+    ),);
+  }
+  Widget _statesSpinner(){
+    return Container(
+      height:D.default_60,
+      margin: EdgeInsets.all(D.default_5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_10),
+        border: Border.all(color: C.GREY_3),
+      ),
+      child: DropdownButton<StatesModel>(
+        underline:Container(),
+        menuMaxHeight: D.default_200,
+        borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+        style: TextStyle(color: Colors.blue),
+        hint: Container(
+          margin: EdgeInsets.all(D.default_10),
+          child: Text(selectedState!.name!,style: S.h5(color: C.GREY_3),),),
+        isExpanded: true,
+        items: selectedRegion!.getStates!.map((StatesModel value) {
+          return DropdownMenuItem<StatesModel>(
+            value: value,
+            child: Container(
+              child: Text(value.name!,style: S.h4(color: C.GREY_3),),),
+          );
+        }).toList(),
+        onChanged: (value) {
+          setState(() {
+            selectedState=value!;
+          });
+        },
+      ),);
+  }
+  _onSaveClicked() {
+    if (_loginFormGlobalKey.currentState!.validate()) {
+      _loginFormGlobalKey.currentState!.save();
+
+    }
+  }
+
 }

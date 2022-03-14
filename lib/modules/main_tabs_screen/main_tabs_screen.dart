@@ -81,7 +81,7 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
           NavBarStyle.simple,
       onItemSelected: (index){
         if(index>1&&Constants.currentUser==null){
-          MyUtils.navigate(context, LoginScreen());
+          MyUtils.navigateReplaceCurrent(Constants.tabScreenContext!, LoginScreen());
           _controller!.index=0;
           _controller!.jumpToTab(0);
         }

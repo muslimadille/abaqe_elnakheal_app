@@ -2,8 +2,12 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../dio/models/product_model.dart';
+import '../../providers/cart_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
+import '../../utils/constants.dart';
 import '../../utils/my_colors.dart';
 import '../../utils/widgets/base_botton.dart';
 import '../../utils/widgets/transition_image.dart';
@@ -13,39 +17,24 @@ import '../login_screen/item/back_btn_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import '../login_screen/login_screen.dart';
 import 'items/product_rates_screen.dart';
+import 'package:sprintf/sprintf.dart';
 
 
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  ProductModel productModel;
+  ProductDetailsScreen(this.productModel,{Key? key}) : super(key: key);
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<Widget> images=[
-    TransitionImage(
-      "assets/images/rice_img.png",
-      height: D.default_200,
-      width: double.infinity,
-      fit: BoxFit.cover,
-      radius: D.default_10,
-    ),TransitionImage(
-      "assets/images/rice_img.png",
-      height: D.default_200,
-      width: double.infinity,
-      fit: BoxFit.cover,
-      radius: D.default_10,
-    ),TransitionImage(
-      "assets/images/rice_img.png",
-      height: D.default_200,
-      width: double.infinity,
-      fit: BoxFit.cover,
-      radius: D.default_10,
-    )
-  ];
+  List<Widget> images=[];
+  CartProvider? cartProvider;
+
 
   final _controller = PageController();
   TextEditingController? _textController=TextEditingController();
@@ -54,14 +43,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   double _btnWidth=D.default_300*1.3;
   double _counterOpacity=1;
   String btnTitle=tr("add_to_crd");
+  bool isKeboardopened=false;
 
   @override
   void initState() {
     super.initState();
-    _textController!.text="1";
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
+    _textController!.text=widget.productModel.cartCount!.toString();
+
+    _initSliderImages();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      setState(() {
+        if(widget.productModel.cartCount!>0){
+          _btnWidth=D.default_180*1.05;
+          _counterOpacity=1;
+          btnTitle=tr("added_to_crd");
+        }else{
+          _btnWidth=MediaQuery.of(context).size.width-D.default_60;
+          _counterOpacity=0;
+          btnTitle=tr("add_to_crd");
+        }
+      });
+    });
+
   }
   @override
   Widget build(BuildContext context) {
+    cartProvider=Provider.of<CartProvider>(context,listen: true);
+    isKeboardopened=MediaQuery.of(context).viewInsets!=0;
     return BaseScreen(body: SafeArea(child: Stack(
       clipBehavior: Clip.none,
       alignment:AlignmentDirectional.topCenter,
@@ -86,12 +95,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text("سماد طبيعي للتزهير والانبات بتركيز10%",style: S.h2(color: C.GREY_1),),
+                  Text("${widget.productModel.title}",style: S.h2(color: C.GREY_1),),
                     _remainsProducts(),
                     _ratingPart(),
                     SizedBox(height: D.default_10,),
-                    Text("عن المنتج",style: S.h1(color: C.GREY_1,underline: true),),
-                    Text("لوريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى .",style: S.h3(color: C.GREY_3,underline: false),),
+                    Text(tr("about_product"),style: S.h1(color: C.GREY_1,underline: true),),
+                    Text("${widget.productModel.description}",style: S.h3(color: C.GREY_3,underline: false),),
                     _condetions(),
                   ],),),
                 _AddPart()
@@ -110,7 +119,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           BackBottonWidget(ctx,color: Colors.white,),
-          Expanded(child: Text("تفاصيل المنتج",style: S.h1(color: Colors.white,),textAlign: TextAlign.center,)),
+          Expanded(child: Text(tr("product_details"),style: S.h1(color: Colors.white,),textAlign: TextAlign.center,)),
           CardIconWidget(isDarkBG: true,),
 
         ],),);
@@ -133,10 +142,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               color: Colors.white,
           ),
           child: Center(child: Row(children: [
-            Expanded(child: Text("4.5",style: S.h5(color: C.GREY_1),textAlign: TextAlign.center,)),
+            Expanded(child: Text("${widget.productModel.nitrates}",style: S.h5(color: C.GREY_1),textAlign: TextAlign.center,)),
             Icon(Icons.star,color: Colors.orange,size: D.default_15,)
           ],),),),
-        Text("10جم",style: S.h2(color: Colors.white),)
+        Text("${widget.productModel.offerPrice} ${tr("currency")}",style: S.h2(color: Colors.white),)
 
     ],),);
   }
@@ -144,6 +153,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Container(
       width: double.infinity,
       height: D.default_230,
+      margin: EdgeInsets.only(top: D.default_10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -180,7 +190,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       children: [
       Icon(Icons.info_outline,color: C.BLUE_3,size: D.default_25,),
       SizedBox(width: D.default_5,),
-      Text("متبقي 100 كيلو فقط من هذا المنتج",style: S.h3(color: C.BLUE_3),)
+      Text("${sprintf(tr("remains_products"),[widget.productModel.quantity.toString()])}",style: S.h3(color: C.BLUE_3),)
     ],),);
   }
   Widget _ratingPart(){
@@ -205,7 +215,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
           ),
           SizedBox(width: D.default_10,),
-          Text("(23 تقييم)",style: S.h3(color: Colors.amber,))
+          Text("${widget.productModel.rateCount}${tr("rates")}",style: S.h3(color: Colors.amber,))
         ],
       ),),);
   }
@@ -218,14 +228,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(Icons.check,color: C.BLUE_1,),
-          Text("كل المنتجات حاصلة علي موافقه وزارة الصحة",style: S.h3(color: C.GREY_3),)
+          Text(tr("product_term_1"),style: S.h3(color: C.GREY_3),)
         ],),
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(Icons.check,color: C.BLUE_1,),
-          Text("تعبئة وحفظ في الظروف المناسبة لطبيعة كل منتج",style: S.h3(color: C.GREY_3),)
+          Text(tr("product_term_2"),style: S.h3(color: C.GREY_3),)
         ],)
     ],),);
   }
@@ -241,19 +251,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             width: _btnWidth,
             duration: Duration(milliseconds: 300),
             child: BaseButton(onItemClickListener: () {
-              setState(() {
-                _showCounter? _showCounter=false:_showCounter=true;
-                if(_showCounter){
-                  _btnWidth=D.default_180*1.05;
-                  _counterOpacity=1;
-                   btnTitle=tr("added_to_crd");
+              if(Constants.currentUser==null){
+                MyUtils.navigateReplaceCurrent(Constants.tabScreenContext!, LoginScreen());
+              }else{
+                setState(() async{
+                  _showCounter? _showCounter=false:_showCounter=true;
+                  if(_showCounter){
+                    _btnWidth=D.default_180*1.05;
+                    _counterOpacity=1;
+                    btnTitle=tr("added_to_crd");
+                    if(widget.productModel.cartCount==0){
+                      _textController!.text=(widget.productModel.minQuantity).toString();
+                      await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.minQuantity!);
+                      widget.productModel.cartCount=widget.productModel.minQuantity;
+                    }
 
-                }else{
-                  _btnWidth=D.default_300*1.3;
-                  _counterOpacity=0;
-                  btnTitle=tr("add_to_crd");
-                }
-              });
+                  }
+                });
+              }
+
             }, title:btnTitle,height: D.default_60,enableShadow: false,margin: EdgeInsets.zero,),),left: 0,),
 
         ],
@@ -270,20 +286,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         border: Border.all(width: D.default_1,color: C.BLUE_1),
       ),
       child: Row(children: [
-        Expanded(child: TextFormField(
+        Expanded(child: Container(
+          margin: EdgeInsets.only(bottom: D.default_10),
+          child: TextFormField(
           controller: _textController,
+          enabled: false,
           onChanged: (value){
             setState(() {
-              if(value.isEmpty){
-                _textController!.text="1";
-              }else{
-                _textController!.text=value;
-              }
+              if(isKeboardopened){}
             });
           },
           style: S.h2(color: C.GREY_1),
           decoration: InputDecoration(
-            labelText: "الكمية",
+            labelText: tr("amount"),
             labelStyle: S.h3(color: C.BLUE_1),
             enabledBorder: InputBorder.none,
             focusedBorder: InputBorder.none,
@@ -294,12 +309,89 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           keyboardType:TextInputType.number,
           cursorColor: Colors.white,
           autofocus: false,
-        ),),
+        ),),),
         Container(
           width: D.default_40,
-          child: Text("كيلو",style: S.h3(color:C.BLUE_1),),)
+          child: Text(tr("kg"),style: S.h3(color:C.BLUE_1),),),
+        _removeBtn(),
+        _addBtn(),
+
+
       ],),
     ),);
+  }
+  Widget _addBtn(){
+    return InkWell(
+      onTap: ()async{
+        await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.cartCount!+1);
+        widget.productModel.cartCount=widget.productModel.cartCount!+1;
+        _textController!.text=widget.productModel.cartCount!.toString();
+      },
+      child: Container(
+        margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left: D.default_5,right: D.default_5),
+      width: D.default_30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_5),
+        color: C.BLUE_1,
+      ),
+      child: Center(child: Text("+",style: S.h3(color: Colors.white),),),
+
+    ),);
+  }
+  Widget _removeBtn(){
+    return InkWell(
+      onTap: ()async{
+        if(widget.productModel.cartCount!>widget.productModel.minQuantity!){
+          await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.cartCount!-1);
+          widget.productModel.cartCount=widget.productModel.cartCount!-1;
+          _textController!.text=widget.productModel.cartCount.toString();
+        }else{
+          await cartProvider!.addToCart(widget.productModel.id!,0);
+          widget.productModel.cartCount=0;
+          _textController!.text=widget.productModel.cartCount.toString();
+
+            _btnWidth=MediaQuery.of(context).size.width-D.default_60;
+            _counterOpacity=0;
+            btnTitle=tr("add_to_crd");
+
+        }
+      },
+      child: Container(
+        margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left: D.default_5,right: D.default_5),
+        width: D.default_30,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_5),
+          color: C.BLUE_1,
+        ),
+        child: Center(child: Text("-",style: S.h3(color: Colors.white),),),
+
+      ),);
+  }
+  void _initSliderImages(){
+    if(widget.productModel.photos!.isNotEmpty){
+      for(int i=0;i<widget.productModel.photos!.length;i++){
+        images.add(
+            TransitionImage(
+              widget.productModel.photos![i].photo??"assets/images/rice_img.png",
+              height: D.default_200,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              radius: D.default_10,
+            )
+        );
+      }
+    }else{
+      images.add(
+          TransitionImage(
+            "assets/images/rice_img.png",
+            height: D.default_200,
+            width: double.infinity,
+            fit: BoxFit.cover,
+            radius: D.default_10,
+          )
+      );
+    }
+
   }
 
 }

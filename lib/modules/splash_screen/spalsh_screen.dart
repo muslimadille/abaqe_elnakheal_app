@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../providers/login_provider.dart';
+import '../../providers/regions_provider.dart';
 import '../../utils/constants.dart';
 
 
@@ -22,17 +23,21 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   SharedPreferences? prefs;
   LoginProvider?loginProvider;
+  RegionsProvider? regionsProvider;
 
 
   @override
   void initState() {
     super.initState();
+    regionsProvider=Provider.of<RegionsProvider>(context,listen: false);
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    regionsProvider!.getRegions();
     _initPref(context);
 
   }
   @override
   Widget build(BuildContext context) {
+    regionsProvider=Provider.of<RegionsProvider>(context,listen: true);
     loginProvider = Provider.of<LoginProvider>(context, listen: true);
     _timerNavigation();
     return BaseScreen(body: Stack(

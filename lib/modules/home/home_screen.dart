@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/cart_provider.dart';
 import '../../providers/home_provider.dart';
 import '../../utils/widgets/loading_widget.dart';
 import 'items/ads_widget.dart';
@@ -22,15 +23,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   HomeProvider? homeProvider;
+  CartProvider? cartProvider;
+
   @override
   void initState() {
     super.initState();
     homeProvider=Provider.of<HomeProvider>(context,listen: false);
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
+    cartProvider!.getCartItems();
     homeProvider!.getHomeData();
   }
   @override
   Widget build(BuildContext context) {
     homeProvider=Provider.of<HomeProvider>(context,listen: true);
+    cartProvider=Provider.of<CartProvider>(context,listen: true);
     return SafeArea(child: BaseScreen(body:
     Stack(children: [
       Container(

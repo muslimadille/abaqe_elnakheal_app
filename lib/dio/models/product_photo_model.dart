@@ -13,7 +13,7 @@ class ProductPhotoModel {
     photo = json['photo'];
   }
   int? id;
-  String? productId;
+  int? productId;
   String? photo;
 
   Map<String, dynamic> toJson() {

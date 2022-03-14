@@ -1,6 +1,10 @@
 
 
+import '../modules/search/search_model.dart';
+import 'models/add_to_cart_model.dart';
 import 'models/home_model.dart';
+import 'models/my_cart_model.dart';
+import 'models/region_model.dart';
 import 'models/user_data.dart';
 
 class MyResponse<T> extends Object {
@@ -67,6 +71,16 @@ class MyResponse<T> extends Object {
       case HomeModel:
         _data = HomeModel.fromJson(json) as T;
         break;
+      case SearchModel:
+        _data = SearchModel.fromJson(json) as T;
+        break;
+      case AddToCartModel:
+        _data = AddToCartModel.fromJson(json) as T;
+        break;
+      case MyCartModel:
+        _data =MyCartModel.fromJson(json) as T;
+        break;
+
       default:_data = null;
     }
   }
@@ -77,7 +91,13 @@ class MyResponse<T> extends Object {
           .map((item) => UserData.fromJson(item))
           .toList() as T;
 
-    } else {
+    }else if ("$T".contains("List<RegionsModel>")) {
+      _data = (json as List)
+          .map((item) => RegionsModel.fromJson(item))
+          .toList() as T;
+
+    }
+    else {
       _data = null;
       return false;
     }

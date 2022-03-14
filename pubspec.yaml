@@ -53,6 +53,7 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   lottie: ^1.2.1
   flutter_keyboard_visibility: ^5.1.1
+  sprintf: ^6.0.0
 
 
 

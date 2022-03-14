@@ -44,7 +44,7 @@ class HomeCategoriesListItem extends StatelessWidget {
   }
   Widget _seeAll(BuildContext context){
     return InkWell(onTap: (){
-      MyUtils.navigate(context, ProductsListScreen());
+      MyUtils.navigate(context, ProductsListScreen(gategoryId:homeCategoryModel.id,title: homeCategoryModel.name,));
     },child: Container(
       margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
       child:Text( tr("more"),style: S.h3(color: C.BLUE_1,underline: true),),

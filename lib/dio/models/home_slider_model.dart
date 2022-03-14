@@ -3,11 +3,11 @@ HomeSliderModel homeSliderModelFromJson(String str) => HomeSliderModel.fromJson(
 String homeSliderModelToJson(HomeSliderModel data) => json.encode(data.toJson());
 class HomeSliderModel {
   HomeSliderModel({
-      this.title, 
-      this.description, 
-      this.buttonTitle, 
-      this.itemType, 
-      this.itemId, 
+      this.title,
+      this.description,
+      this.buttonTitle,
+      this.itemType,
+      this.itemId,
       this.item,});
 
   HomeSliderModel.fromJson(dynamic json) {
@@ -21,8 +21,8 @@ class HomeSliderModel {
   String? title;
   String? description;
   String? buttonTitle;
-  String? itemType;
-  String? itemId;
+  int? itemType;
+  int? itemId;
   Item? item;
 
   Map<String, dynamic> toJson() {
@@ -44,19 +44,19 @@ Item itemFromJson(String str) => Item.fromJson(json.decode(str));
 String itemToJson(Item data) => json.encode(data.toJson());
 class Item {
   Item({
-      this.id, 
-      this.categoryType, 
-      this.name, 
-      this.nameEn, 
-      this.photo, 
-      this.thumb, 
-      this.sort, 
-      this.parentId, 
-      this.isShop, 
-      this.stop, 
-      this.isArchived, 
-      this.createdAt, 
-      this.updatedAt, 
+      this.id,
+      this.categoryType,
+      this.name,
+      this.nameEn,
+      this.photo,
+      this.thumb,
+      this.sort,
+      this.parentId,
+      this.isShop,
+      this.stop,
+      this.isArchived,
+      this.createdAt,
+      this.updatedAt,
       this.color,});
 
   Item.fromJson(dynamic json) {
@@ -76,16 +76,16 @@ class Item {
     color = json['color'];
   }
   int? id;
-  String? categoryType;
+  int? categoryType;
   String? name;
   String? nameEn;
   String? photo;
   String? thumb;
-  String? sort;
-  String? parentId;
-  String? isShop;
-  String? stop;
-  String? isArchived;
+  int? sort;
+  int? parentId;
+  int? isShop;
+  int? stop;
+  int? isArchived;
   String? createdAt;
   String? updatedAt;
   String? color;

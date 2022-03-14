@@ -42,7 +42,49 @@
   "loading": "Loading",
   "name": "Name",
   "edit": "Edit",
-  "National_ID": "National ID"
+  "National_ID": "National ID",
+  "discount": "Discount",
+  "kg": "Kg",
+  "remains_products": "Only %s left of the product",
+  "amount": "amount",
+  "about_product": "About Product",
+  "product_details":"Product Details",
+  "currency": "L.E",
+  "start_search": "Search For Products Now",
+  "search": "Search",
+  "no_search": "There is no products found",
+  "product_term_1": "All products are approved by the Ministry of Health",
+  "product_term_2": "Packing and preservation in appropriate conditions for the nature of each product",
+  "rates": "Rates",
+  "no_product": "There are no current products",
+  "cart_no_product_subtitle": "You have not added anything to your cart yet! Start shopping and describe your products",
+  "cart": "Cart",
+  "order_details": "Order Details",
+  "cart_sum": "Cart Total",
+  "shipping_coast": "Shipping expenses",
+  "total_cost": "Total Cost",
+  "complete_order": "Complete Order",
+  "cobone_hint": "You can add the discount coupon in the next step",
+  "complete_order2": "Complete Order",
+  "shipping_address": "Delivery Address",
+  "home_location": "Home",
+  "your_notes": "Important notes (optional)",
+  "write_here": "Write here...",
+  "add_cobon": "Add a discount coupon",
+  "add_location": "Add you address",
+  "full_name": "Full Name",
+  "address": "Address",
+  "notes": "Other notes"
+
+
+
+
+
+
+
+
+
+
 
 
 

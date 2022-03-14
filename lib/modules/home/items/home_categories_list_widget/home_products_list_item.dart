@@ -16,7 +16,7 @@ class HomeProductsListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){MyUtils.navigate(context, ProductDetailsScreen());},
+      onTap: (){MyUtils.navigate(context, ProductDetailsScreen(productModel));},
       child: Container(
         margin: EdgeInsets.all(D.default_10),
         width: D.default_150,

@@ -7,12 +7,13 @@ import '../baseDimentions.dart';
 import '../my_colors.dart';
 
 class LoadingProgress extends StatelessWidget {
-  const LoadingProgress({Key? key}) : super(key: key);
+  bool onlyProgress;
+  LoadingProgress({this.onlyProgress=false}) ;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.5),
+      color: onlyProgress?Colors.transparent:C.BLUE_1.withOpacity(0.2),
       width: double.infinity,
       height: double.infinity,
       child:Center(child: Container(
@@ -20,7 +21,7 @@ class LoadingProgress extends StatelessWidget {
         height: D.default_130,
         padding: EdgeInsets.all(D.default_15),
         decoration:  BoxDecoration(
-          color: Colors.white,
+          color: onlyProgress?Colors.transparent:Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
         ),
         child:  Column(
@@ -31,7 +32,7 @@ class LoadingProgress extends StatelessWidget {
             size: D.default_50,
           ),
           SizedBox(height: D.default_15,),
-          Text(tr("loading"),style: S.h4(color: C.BLUE_1),)
+            onlyProgress?Container():Text(tr("loading"),style: S.h4(color: C.BLUE_1),)
         ],),),) ,
     );
   }

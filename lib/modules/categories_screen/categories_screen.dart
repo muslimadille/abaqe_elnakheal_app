@@ -8,7 +8,9 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/home_provider.dart';
 import 'items/categories_list_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -19,6 +21,16 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  HomeProvider? homeProvider;
+  @override
+  void initState() {
+    super.initState();
+    homeProvider=Provider.of<HomeProvider>(context,listen: false);
+    if(homeProvider!.homeData==null){
+      homeProvider!.getHomeData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: BaseScreen(body: Container(
@@ -59,11 +71,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
               return CategoryListItem(
+                  homeProvider!.homeData!.categories,
                   index,(){
-                    MyUtils.navigate(context, ProductsListScreen());
+                    MyUtils.navigate(context, ProductsListScreen(gategoryId:homeProvider!.homeData!.categories![index].id,title: homeProvider!.homeData!.categories![index].name,));
               });
             },
-            childCount: 5,
+            childCount: homeProvider!.homeData!.categories!.length,
             semanticIndexOffset: 1,
           )),
 

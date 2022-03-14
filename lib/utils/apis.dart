@@ -16,7 +16,13 @@ class Apis{
   static String REGISTER_API="${BASE_URL}/register";
   static String HOME_API="${BASE_URL}/home-page";
   static String LOGIN_API="${BASE_URL}/login";
-
+  ///--------------------------------------------------------
+  static String REGIONS_API="${BASE_URL}/regions";
+  static String CHANGE_LANGUAGE_API="${BASE_URL}/change-lang";
+  static String SEARCH_API="${BASE_URL}/search";
+  ///-------------------CART---------------------------------
+  static String ADD_TO_CART_API="${BASE_URL}/add-to-cart";
+  static String GET_CART_ITEMS_API="${BASE_URL}/cart-items";
 
 
 

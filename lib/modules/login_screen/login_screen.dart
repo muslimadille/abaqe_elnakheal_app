@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
                 SizedBox(height: D.default_60,)
               ],),))
           ],),),
-        loginProvider!.isLoading?const LoadingProgress():Container()
+        loginProvider!.isLoading? LoadingProgress():Container()
       ],
     ),));
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 import '../baseDimentions.dart';
 import '../base_text_style.dart';
 import '../my_colors.dart';
