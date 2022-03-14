@@ -2,6 +2,7 @@
 
 import '../modules/search/search_model.dart';
 import 'models/add_to_cart_model.dart';
+import 'models/coupon_model.dart';
 import 'models/home_model.dart';
 import 'models/my_cart_model.dart';
 import 'models/region_model.dart';
@@ -79,6 +80,9 @@ class MyResponse<T> extends Object {
         break;
       case MyCartModel:
         _data =MyCartModel.fromJson(json) as T;
+        break;
+      case CouponModel:
+        _data =CouponModel.fromJson(json) as T;
         break;
 
       default:_data = null;

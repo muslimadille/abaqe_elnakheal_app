@@ -207,7 +207,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
   double _getProductsCost(){
     double cost=0;
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
-      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!));
+      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!)*cartProvider!.myCartModel!.items![i].quantity!);
     }
     return cost;
   }

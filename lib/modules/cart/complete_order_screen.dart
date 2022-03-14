@@ -13,7 +13,6 @@ import '../../providers/cart_provider.dart';
 import '../../providers/regions_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
-import '../home/items/card_icon.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import 'complete_order_widget.dart';
@@ -238,25 +237,12 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   double _getProductsCost(){
     double cost=0;
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
-      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!));
+      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!*cartProvider!.myCartModel!.items![i].quantity!));
     }
     return cost;
   }
   double _getTotalCost(){
     return _getProductsCost()+(cartProvider!.myCartModel!.deliveryPrice!.toDouble());
-  }
-  Widget _regionsSpinner(){
-    return DropdownButton<RegionsModel>(
-      items: regionsProvider!.regions.map((RegionsModel value) {
-        return DropdownMenuItem<RegionsModel>(
-          value: value,
-          child: Text(value.name!),
-        );
-      }).toList(),
-      onChanged: (value) {
-
-      },
-    );
   }
 
 }

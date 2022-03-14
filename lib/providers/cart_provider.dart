@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../dio/models/add_to_cart_model.dart';
+import '../dio/models/coupon_model.dart';
 import '../dio/models/my_cart_model.dart';
 import '../dio/my_responce.dart';
 import '../modules/cart/data/cart_api_provider.dart';
@@ -11,6 +12,7 @@ class CartProvider with ChangeNotifier{
   ///.....ui controllers.........
   int clickedIndex=0;
   bool isLoading=false;
+  double couponCost=0;
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();
@@ -83,7 +85,27 @@ class CartProvider with ChangeNotifier{
   }
   setCartItemsData(MyCartModel data){
     myCartModel=data;
+    couponCost=0;
     notifyListeners();
+  }
+  ///..............COUPON.............................
+  getCoupon(BuildContext context,String code) async {
+    setIsLoading(true);
+    MyResponse<CouponModel> response =
+    await cartApiProvider.getCoupon(code);
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null) {
+      CouponModel data = response.data;
+      couponCost=data.money!.toDouble();
+      setIsLoading(false);
+      Navigator.pop(context);
+      if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
   }
 
 

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/cart_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/my_colors.dart';
@@ -16,9 +18,16 @@ class AddCoboneWidget extends StatefulWidget {
 
 class _AddCoboneWidgetState extends State<AddCoboneWidget> {
   TextEditingController _notesController=TextEditingController();
+  CartProvider? cartProvider;
+ @override
+  void initState() {
+    super.initState();
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
     return  Container(
       color: Colors.white,
       margin: EdgeInsets.only(top: D.default_10),
@@ -42,7 +51,7 @@ class _AddCoboneWidgetState extends State<AddCoboneWidget> {
   Widget _DoneButton(){
     return BaseButton(
       onItemClickListener: (){
-        Navigator.pop(context);
+        cartProvider!.getCoupon(context,_notesController.text);
       },
       title:"إضافة الكوبون",
       color: C.BLUE_1,

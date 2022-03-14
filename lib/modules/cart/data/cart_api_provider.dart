@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../../dio/dio_utils.dart';
 import '../../../dio/models/add_to_cart_model.dart';
+import '../../../dio/models/coupon_model.dart';
 import '../../../dio/models/my_cart_model.dart';
 import '../../../dio/my_responce.dart';
 import '../../../utils/apis.dart';
@@ -30,6 +31,16 @@ class CartApiProvider{
           json.decode(jsonEncode(response.data)));
     } else {
       return MyResponse<MyCartModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
+  Future<MyResponse<CouponModel>> getCoupon(String code) async {
+    final url = Apis.GET_COUPON_API;
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<CouponModel>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<CouponModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
 }
