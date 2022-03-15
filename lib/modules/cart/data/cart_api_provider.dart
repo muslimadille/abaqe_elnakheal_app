@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../../dio/dio_utils.dart';
 import '../../../dio/models/add_to_cart_model.dart';
+import '../../../dio/models/addressModel.dart';
 import '../../../dio/models/coupon_model.dart';
 import '../../../dio/models/my_cart_model.dart';
 import '../../../dio/my_responce.dart';
@@ -43,4 +44,5 @@ class CartApiProvider{
       return MyResponse<CouponModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+
 }

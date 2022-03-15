@@ -1,3 +1,5 @@
+import 'package:abaqe_elnakheal_app/dio/models/user_data.dart';
+
 class AddressModel {
   int? id;
   int? isHome;
@@ -10,7 +12,7 @@ class AddressModel {
   String? stateName;
   Region? region;
   State? state;
-  Null? user;
+  UserData? user;
 
   AddressModel(
       {this.id,
@@ -39,7 +41,7 @@ class AddressModel {
     region =
     json['region'] != null ? new Region.fromJson(json['region']) : null;
     state = json['state'] != null ? new State.fromJson(json['state']) : null;
-    user = json['user'];
+    user = json['user'] !=null? new UserData.fromJson(json['user']):null;
   }
 
   Map<String, dynamic> toJson() {

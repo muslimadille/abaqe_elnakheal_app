@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../dio/models/add_to_cart_model.dart';
+import '../dio/models/addressModel.dart';
 import '../dio/models/coupon_model.dart';
 import '../dio/models/my_cart_model.dart';
 import '../dio/my_responce.dart';
@@ -100,6 +101,7 @@ class CartProvider with ChangeNotifier{
       Navigator.pop(context);
       if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}
     }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      Navigator.pop(context);
       print("login error: ${response.msg}");
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");

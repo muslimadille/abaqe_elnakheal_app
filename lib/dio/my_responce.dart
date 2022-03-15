@@ -2,6 +2,7 @@
 
 import '../modules/search/search_model.dart';
 import 'models/add_to_cart_model.dart';
+import 'models/addressModel.dart';
 import 'models/coupon_model.dart';
 import 'models/home_model.dart';
 import 'models/my_cart_model.dart';
@@ -33,10 +34,17 @@ class MyResponse<T> extends Object {
       _msg = json['message'];
     }
     if (json.containsKey("Data")) {
-      _checkType(json['Data']);
+      if(_status=="400"){
+        _data=null;
+      }else{
+        _checkType(json['Data']);
+      }
     } else if (json.containsKey("data")) {
-      _checkType(json['data']);
-    }
+      if(_status=="400"){
+        _data=null;
+      }else{
+        _checkType(json['data']);
+      }    }
 
 
   }
@@ -50,6 +58,7 @@ class MyResponse<T> extends Object {
     } else {
       _data = data;
     }
+
   }
 
   _checkType(json) {
@@ -100,7 +109,12 @@ class MyResponse<T> extends Object {
           .map((item) => RegionsModel.fromJson(item))
           .toList() as T;
 
-    }
+    } else if ("$T".contains("List<AddressModel>")) {
+  _data = (json as List)
+      .map((item) => AddressModel.fromJson(item))
+      .toList() as T;
+
+  }
     else {
       _data = null;
       return false;

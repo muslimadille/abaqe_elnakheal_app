@@ -39,6 +39,7 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValid
 
 
 
+
   @override
   void initState() {
     super.initState();
@@ -204,7 +205,12 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValid
   _onSaveClicked() {
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
-
+      regionsProvider!.addAddress(context,
+          _fullNameController.text,
+          _addressController.text,
+          _notesController.text,
+          selectedRegion!.id!,
+          selectedState!.id!);
     }
   }
 
