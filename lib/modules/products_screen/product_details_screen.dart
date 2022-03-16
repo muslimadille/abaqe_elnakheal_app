@@ -103,9 +103,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Text("${widget.productModel.description}",style: S.h3(color: C.GREY_3,underline: false),),
                     _condetions(),
                   ],),),
-                _AddPart()
 
-              ],),))
+
+              ],),)),
+            _AddPart()
           ],),)
       ],
     ),));
@@ -227,21 +228,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(Icons.check,color: C.BLUE_1,),
-          Text(tr("product_term_1"),style: S.h3(color: C.GREY_3),)
+          Icon(Icons.check,color: C.BLUE_1,size: D.default_25,),
+          Expanded(child: Text(tr("product_term_1"),style: S.h3(color: C.GREY_3),))
         ],),
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(Icons.check,color: C.BLUE_1,),
-          Text(tr("product_term_2"),style: S.h3(color: C.GREY_3),)
+          Icon(Icons.check,color: C.BLUE_1,size: D.default_25,),
+          Expanded(child: Text(tr("product_term_2"),style: S.h3(color: C.GREY_3),))
         ],)
     ],),);
   }
   Widget _AddPart(){
     return Container(
       width: D.default_300*1.5,
+      margin: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
       height: D.default_60,
       child: Stack(
         alignment:AlignmentDirectional.centerStart ,
@@ -297,6 +299,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             });
           },
           style: S.h2(color: C.GREY_1),
+            textAlign:TextAlign.center ,
           decoration: InputDecoration(
             labelText: tr("amount"),
             labelStyle: S.h3(color: C.BLUE_1),

@@ -1,6 +1,7 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -26,7 +27,7 @@ class _MyPreviousOrdersScreenState extends State<MyPreviousOrdersScreen> {
               _showList=true;
             });
           },
-          child: _showList?_myOrdersList():NoDataWidget(image:"assets/lottie/dron.json",title:"لايوجد طلبات سابقة",subTitle:"ابدأ الطلب الآن"),
+          child: _showList?_myOrdersList():NoDataWidget(image:"assets/lottie/dron.json",title:tr("no_prev_orders"),subTitle:tr("start_order_now")),
         ));
   }
   Widget _myOrdersList(){

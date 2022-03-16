@@ -84,7 +84,21 @@
   "new_password_subtitle": "تم التأكد من هوية صاحب الحساب,أدخل كلمة السر الجديدة",
   "change_password_btn": "تغيير كلمة المرور",
   "new_password": "كلمة المرور الجديدة",
-  "conf_password": "تأكيد كلمة المرور"
+  "conf_password": "تأكيد كلمة المرور",
+  "notifications_subtitle": "جميع الإشعارات الخاصة بك",
+  "settings": "الاعدادات",
+  "settings_subtitle": "يمكنك من هنا التحكم في ملفك الشخصي",
+  "profile": "الملف الشخصي",
+  "profile_settings": "اعدادات الحساب",
+  "about_app": "عن عبق النخيل",
+  "log_out": "تسجيل الخروج",
+  "state": "المدينة",
+  "region": "المنطقة",
+  "current_orders": "الطلبات الجارية",
+  "prev_orders": "الطلبت السابقة",
+  "no_prev_orders": "لايوجد طلبات سابقة",
+  "start_order_now": "ابدأ الطلب الآن"
+
 
 
 

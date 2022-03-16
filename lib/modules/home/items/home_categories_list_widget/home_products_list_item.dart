@@ -2,6 +2,7 @@ import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -60,19 +61,19 @@ class HomeProductsListItem extends StatelessWidget {
   Widget _discoundWidget(){
     return Container(
       height: D.default_30,
-      width: D.default_80,
+      width: D.default_90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(topRight: Radius.circular(D.default_10),bottomLeft: Radius.circular(D.default_10)),
         color: C.BLUE_1,
       ),
-      child: Center(child: Text("خصم${productModel.discountPercentage}%",style: S.h5(color: Colors.white),),),
+      child: Center(child: Text("${tr("discount")}${productModel.discountPercentage}%",style: S.h5(color: Colors.white),),),
     );
   }
   Widget _description(){
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(top:D.default_10),
-        child: Text(productModel.description!,style: S.h4(color: C.GREY_3),),),
+        child: Text(productModel.title!,style: S.h4(color: C.GREY_3),),),
     );
   }
   Widget _coast(){
@@ -80,7 +81,8 @@ class HomeProductsListItem extends StatelessWidget {
     Row(children: [
       Text(productModel.offerPrice.toString()??"",style: S.h4(color: C.BLUE_1),),
       Text("/",style: S.h4(color: C.BLUE_1),),
-      Text(productModel.price!,style: S.h4(color: C.GREY_3,decoration: TextDecoration.lineThrough),)
+      Text(productModel.price!,style: S.h4(color: C.GREY_3,decoration: TextDecoration.lineThrough),),
+      Text(tr("currency"),style: S.h4(color: C.BLUE_1),)
     ],),);
   }
 }

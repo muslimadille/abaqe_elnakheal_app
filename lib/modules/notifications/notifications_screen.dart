@@ -1,4 +1,5 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
@@ -30,10 +31,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Expanded(child: Text("الإشعارات",style: S.h1(color: C.GREY_1),),),
+            Expanded(child: Text(tr("notifications"),style: S.h1(color: C.GREY_1),),),
             CardIconWidget(),
           ],),
-          Text("جميع الإشعارات الخاصة بك",style: S.h3(color: C.GREY_3),),
+          Text(tr("notifications_subtitle"),style: S.h3(color: C.GREY_3),),
         ],),
     );
   }

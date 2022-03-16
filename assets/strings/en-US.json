@@ -83,12 +83,20 @@
   "new_password_subtitle": "The identity of the account holder has been confirmed, enter the new password",
   "change_password_btn": "Change Password",
   "new_password": "New password",
-  "conf_password": "Confirm password"
-
-
-
-
-
+  "conf_password": "Confirm password",
+  "notifications_subtitle": "All your notifications",
+  "settings": "Settings",
+  "settings_subtitle": "From here you can control your profile",
+  "profile": "Profile",
+  "profile_settings": "Account settings",
+  "about_app": "About Abak Elnakhel",
+  "log_out": "Logout",
+  "state": "State",
+  "region": "Region",
+  "current_orders": "Ongoing orders",
+  "prev_orders": "Previous orders",
+  "no_prev_orders": "There are no previous requests",
+  "start_order_now": "Start ordering now"
 
 
 

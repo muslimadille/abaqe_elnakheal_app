@@ -37,8 +37,8 @@ class _MyOrdersTabsScreenState extends State<MyOrdersTabsScreen> with SingleTick
     MyPreviousOrdersScreen()
   ];
   List<String> tabsTexts=[
-    "الطلبات الجارية",
-    "الطلبت السابقة"
+    tr("current_orders"),
+    tr("prev_orders")
   ];
   Widget _header(){
     return Container(

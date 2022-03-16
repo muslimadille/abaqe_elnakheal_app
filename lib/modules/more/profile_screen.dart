@@ -45,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           BackBottonWidget(ctx),
-          Expanded(child: Text("الملف الشخصي",style: S.h1(color: C.GREY_1),textAlign: TextAlign.center,)),
+          Expanded(child: Text(tr("profile"),style: S.h1(color: C.GREY_1),textAlign: TextAlign.center,)),
           CardIconWidget(),
 
         ],),);
@@ -92,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: D.default_120,
             child: Text(tr("National_ID"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("${Constants.currentUser!.national_id??"........."}",style: S.h4(color: C.GREY_2),)),
-        Text("تعديل",style: S.h4(color: C.BLUE_1),),
+        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
   }
@@ -104,9 +104,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Row(children: [
         Container(
             width: D.default_120,
-            child: Text("المحافظة",style: S.h4(color: C.GREY_2),)),
+            child: Text(tr("region"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("القاهرة",style: S.h4(color: C.GREY_2),)),
-        Text("تعديل",style: S.h4(color: C.BLUE_1),),
+        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
   }
@@ -118,9 +118,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Row(children: [
         Container(
           width: D.default_120,
-            child: Text("الحي",style: S.h4(color: C.GREY_2),)),
+            child: Text(tr("state"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("مدينة نصر",style: S.h4(color: C.GREY_2),)),
-        Text("تعديل",style: S.h4(color: C.BLUE_1),),
+        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
       ],)
       ,);
   }

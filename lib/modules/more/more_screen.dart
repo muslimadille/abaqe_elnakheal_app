@@ -3,6 +3,7 @@ import 'package:abaqe_elnakheal_app/modules/more/profile_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/more/settings_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
@@ -56,10 +57,10 @@ class _MoreScreenState extends State<MoreScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Expanded(child: Text("الاعدادات",style: S.h1(color: C.GREY_1),),),
+            Expanded(child: Text(tr("settings"),style: S.h1(color: C.GREY_1),),),
             CardIconWidget(),
           ],),
-          Text("يمكنك من هنا التحكم في ملفك الشخصي",style: S.h3(color: C.GREY_3),),
+          Text(tr("settings_subtitle"),style: S.h3(color: C.GREY_3),),
         ],),
     );
   }
@@ -97,7 +98,7 @@ class _MoreScreenState extends State<MoreScreen> {
         ),
         Expanded(child: Container(
           margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-          child: Text("الملف الشخصي",style: S.h4(color: C.GREY_2),),)),
+          child: Text(tr("profile"),style: S.h4(color: C.GREY_2),),)),
         Icon(Icons.arrow_forward_ios,color: C.GREY_2,size: D.default_20,)
       ],)
       ,),) ;
@@ -116,7 +117,7 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-            child: Text("اعدادات الحساب",style: S.h4(color: C.GREY_2),),)),
+            child: Text(tr("profile_settings"),style: S.h4(color: C.GREY_2),),)),
           Icon(Icons.arrow_forward_ios,color: C.GREY_2,size: D.default_20,)
         ],)
         ,),) ;
@@ -136,7 +137,7 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-            child: Text("عن عبق النخيل",style: S.h4(color: C.GREY_2),),)),
+            child: Text(tr("about_app"),style: S.h4(color: C.GREY_2),),)),
           Icon(Icons.arrow_forward_ios,color: C.GREY_2,size: D.default_20,)
         ],)
         ,),) ;
@@ -159,7 +160,7 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-            child: Text("تسجيل الخروج",style: S.h4(color: C.GREY_2),),)),
+            child: Text(tr("log_out"),style: S.h4(color: C.GREY_2),),)),
           Icon(Icons.arrow_forward_ios,color: C.GREY_2,size: D.default_20,)
         ],)
         ,),) ;
