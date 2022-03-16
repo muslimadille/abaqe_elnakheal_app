@@ -3,6 +3,7 @@
 import '../modules/search/search_model.dart';
 import 'models/add_to_cart_model.dart';
 import 'models/addressModel.dart';
+import 'models/authCodeModel.dart';
 import 'models/coupon_model.dart';
 import 'models/home_model.dart';
 import 'models/my_cart_model.dart';
@@ -92,6 +93,9 @@ class MyResponse<T> extends Object {
         break;
       case CouponModel:
         _data =CouponModel.fromJson(json) as T;
+        break;
+      case AuthCodeModel:
+        _data =AuthCodeModel.fromJson(json) as T;
         break;
 
       default:_data = null;

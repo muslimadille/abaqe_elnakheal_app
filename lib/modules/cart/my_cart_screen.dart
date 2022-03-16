@@ -23,6 +23,10 @@ class MyCartScreen extends StatefulWidget {
 
 class _MyCartScreenState extends State<MyCartScreen> {
   CartProvider? cartProvider;
+  double allPrice=0;
+  double allDiscount=0;
+  double totalPrice=0;
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +58,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
       ),));
   }
   Widget _mainBody(){
+    _getProductCost();
     return Column(children: [
      Expanded(child:  _productsList()),
       Expanded(flex:0,child: Container()),
@@ -118,7 +123,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(cartProvider!.myCartModel!.items![index].title??"",style: S.h3(color: C.GREY_1),),
-                Text("${cartProvider!.myCartModel!.items![index].offerPrice} ${tr("currency")}",style: S.h4(color: C.GREY_4),)
+                Text("${cartProvider!.myCartModel!.items![index].price} ${tr("currency")}",style: S.h4(color: C.GREY_4),)
 
               ],),)),
           _counter(index)
@@ -164,7 +169,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
   Widget _coastPart(){
     return Container(
       width: double.infinity,
-      height: D.default_300,
+      height: D.default_300*1.05,
         color: Colors.white,
       padding: EdgeInsets.only(top:D.default_20,left:D.default_20,right: D.default_20),
       child: Column(
@@ -179,8 +184,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
               Text(tr("cart_sum"),style: S.h4(color: C.GREY_3),),
-                Text("${_getProductsCost()}",style: S.h4(color: C.GREY_3),)
+                Text("${allPrice}${tr("currency")}",style: S.h4(color: C.GREY_3),)
             ],),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(tr("cart_discount"),style: S.h4(color: C.GREY_3),),
+                Text("${allDiscount}${tr("currency")}",style: S.h4(color: C.GREY_3),)
+              ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("shipping_coast"),style: S.h4(color: C.GREY_3),),
@@ -189,8 +199,9 @@ class _MyCartScreenState extends State<MyCartScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("total_cost"),style: S.h3(color: C.BLUE_1),),
-                Text("${_getTotalCost()}${tr("currency")}",style: S.h3(color: C.BLUE_1),)
-              ],)
+                Text("${totalPrice}${tr("currency")}",style: S.h3(color: C.BLUE_1),)
+              ],),
+            SizedBox(height: D.default_10,),
           ],),),
           BaseButton(onItemClickListener: (){
             MyUtils.navigate(context, CompleteOrderScreen());
@@ -204,16 +215,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
     );
   }
 
-  double _getProductsCost(){
-    double cost=0;
+   _getProductCost(){
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
-      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!)*cartProvider!.myCartModel!.items![i].quantity!);
+      allPrice=(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
+      allDiscount=allPrice-(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!)*cartProvider!.myCartModel!.items![i].quantity!);
+      totalPrice=allPrice-allDiscount-cartProvider!.myCartModel!.deliveryPrice!;
     }
-    return cost;
   }
-  double _getTotalCost(){
-    return _getProductsCost()+(cartProvider!.myCartModel!.deliveryPrice!.toDouble());
-  }
+
 }
 
 

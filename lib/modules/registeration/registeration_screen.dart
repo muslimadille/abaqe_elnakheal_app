@@ -17,6 +17,8 @@ import '../../utils/input_validation_mixin.dart';
 import '../../utils/widgets/loading_widget.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
 
+
+
 class RegisterationScreen extends StatefulWidget {
   const RegisterationScreen({Key? key}) : super(key: key);
 
@@ -31,6 +33,8 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
   TextEditingController _fristNmaeController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _phoneKeyController = TextEditingController();
+
 
   RegisterProvider? registerProvider;
 
@@ -233,19 +237,39 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
             )),
           ],),
           SizedBox(height: D.default_15,),
-          BaseTextFiled(
-            controller: _phoneNumberController,
-            hint: tr("phone_num"),
-            isPassword: false,
-            inputType: TextInputType.phone,
-              validator: (name) {
-                if (isFieldNotEmpty(name!)) {
-                  return null;
-                } else {
-                  return tr("enter_phone");
+          Row(children: [
+            Expanded(
+              flex: 1,
+              child: BaseTextFiled(
+                controller: _phoneKeyController,
+                hint: tr("phone_key"),
+                isPassword: false,
+                inputType: TextInputType.phone,
+                validator: (name) {
+                  if (isFieldNotEmpty(name!)) {
+                    return null;
+                  } else {
+                    return "";
+                  }
                 }
-              }
-          ),
+            ),),
+            SizedBox(width:D.default_10),
+            Expanded(
+              flex:3,
+                child: BaseTextFiled(
+                controller: _phoneNumberController,
+                hint: tr("phone_num"),
+                isPassword: false,
+                inputType: TextInputType.phone,
+                validator: (name) {
+                  if (isFieldNotEmpty(name!)) {
+                    return null;
+                  } else {
+                    return tr("enter_phone");
+                  }
+                }
+            ))
+          ],),
           SizedBox(height: D.default_15,),
           BaseTextFiled(
             controller: _passwordController,

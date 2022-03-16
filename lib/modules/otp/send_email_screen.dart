@@ -12,6 +12,11 @@ import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/login_provider.dart';
+import '../../utils/input_validation_mixin.dart';
+import '../login_screen/data/login_api.dart';
 
 class SendOtpEmailScreen extends StatefulWidget {
   const SendOtpEmailScreen({Key? key}) : super(key: key);
@@ -20,13 +25,20 @@ class SendOtpEmailScreen extends StatefulWidget {
   _SendOtpEmailScreenState createState() => _SendOtpEmailScreenState();
 }
 
-class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> {
+class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> with InputValidationMixin{
   final _loginFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
+  LoginProvider? loginProvider;
 
+  @override
+  void initState() {
+    super.initState();
+    loginProvider=Provider.of<LoginProvider>(context,listen:false);
+  }
 
   @override
   Widget build(BuildContext context) {
+    loginProvider=Provider.of<LoginProvider>(context,listen:true);
     return BaseScreen(body: SafeArea(child: Stack(
       alignment:AlignmentDirectional.center,
       children: [
@@ -82,7 +94,11 @@ class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> {
   Widget _sendButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigate(context, OtpScreen("SendOtpEmailScreen","SendOtpEmailScreen"));
+        if (_loginFormGlobalKey.currentState!.validate()) {
+          _loginFormGlobalKey.currentState!.save();
+          loginProvider!.getAuthCode(context,_emailController.text);
+
+        }
       },
       title: tr("send"),
       color: C.BLUE_1,
@@ -111,6 +127,13 @@ class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> {
           BaseTextFiled(
             controller: _emailController,
             hint: tr("email"),
+            validator: (name) {
+              if (isFieldNotEmpty(name!)) {
+                return null;
+              } else {
+                return tr("enter_email");
+              }
+            },
           ),
         ],
       ),

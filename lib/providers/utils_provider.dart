@@ -1,4 +1,6 @@
+import 'package:abaqe_elnakheal_app/modules/splash_screen/spalsh_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/constants.dart';
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,9 +31,7 @@ class UtilsProviderModel with ChangeNotifier{
       currentLocalName="English";
       Constants.SELECTED_LANGUAGE="en";
       setLanguageState("en");
-
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
-
     }
     else{
       currentLocalName="العربية";
@@ -40,6 +40,7 @@ class UtilsProviderModel with ChangeNotifier{
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
     }
     notifyListeners();
+    MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!,SplashScreen());
   }
   setLanguageState(String type){
     if(type=="ar"){

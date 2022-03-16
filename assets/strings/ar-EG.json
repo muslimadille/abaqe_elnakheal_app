@@ -12,7 +12,7 @@
   "first_name": "الإسم الأول",
   "last_name": "الإسم الأخير",
   "phone_num": "رقم الهاتف",
-  "change_password": "إعادو تعيين كلمة المرور",
+  "change_password": "إعادة تعيين كلمة المرور",
   "code_sent_massage": "تم إرسال الكود إلى بريدك الإلكتروني ",
   "code_will_send_massage": "سيتم إرسال الكود إلى بريدك الإلكتروني ",
   "change": "تغيير",
@@ -50,7 +50,7 @@
   "amount": "الكمية",
   "about_product": "عن المنتج",
   "product_details":"تفاصيل المنتج",
-  "currency": "جنيه",
+  "currency": "ر.س",
   "start_search": "ابدأ البحث عن المنتجات الآن",
   "search": "البحث",
   "no_search": "لا توجد منتجات متاحة",
@@ -75,7 +75,16 @@
   "add_location": "أضف عنوانك",
   "full_name": "الإسم بالكامل",
   "address": "العنوان",
-  "notes": "ملاحظات أخرى"
+  "notes": "ملاحظات أخرى",
+  "cart_discount": "إجمالي الخصم",
+  "coupon_coast": "كوبون خصم",
+  "change_language": "تغيير اللغة",
+  "phone_key": "المفتاح",
+  "new_password_title": "إعادة تعيين كلمة المرور",
+  "new_password_subtitle": "تم التأكد من هوية صاحب الحساب,أدخل كلمة السر الجديدة",
+  "change_password_btn": "تغيير كلمة المرور",
+  "new_password": "كلمة المرور الجديدة",
+  "conf_password": "تأكيد كلمة المرور"
 
 
 

@@ -1,5 +1,6 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/baseDimentions.dart';
@@ -60,13 +61,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-            child: Text("تغيير اللغه",style: S.h3(color: C.GREY_2),),)),
+            child: Text(tr("change_language"),style: S.h3(color: C.GREY_2),),)),
           Text("العربية",style: S.h3(color: C.BLUE_2),),
           SizedBox(width: D.default_10,),
           Icon(Icons.arrow_forward_ios,color: C.GREY_1,size: D.default_20,)
         ],)
         ,),) ;
   }
+
   Widget _changePasswordBtn(){
     return InkWell(
       onTap: (){

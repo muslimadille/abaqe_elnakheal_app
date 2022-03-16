@@ -30,6 +30,9 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   TextEditingController _notesController=TextEditingController();
   CartProvider? cartProvider;
   RegionsProvider?regionsProvider;
+  double allPrice=0;
+  double allDiscount=0;
+  double totalPrice=0;
 
 
 
@@ -38,6 +41,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
     super.initState();
     regionsProvider=Provider.of<RegionsProvider>(context,listen: false);
     cartProvider=Provider.of<CartProvider>(context,listen: false);
+    cartProvider!.couponCost=0;
   }
   @override
   void dispose() {
@@ -51,6 +55,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   Widget build(BuildContext context) {
     regionsProvider=Provider.of<RegionsProvider>(context,listen: true);
     cartProvider=Provider.of<CartProvider>(context,listen: true);
+    _getProductCost();
     return BaseScreen(body: SafeArea(child:
     Container(
       width: double.infinity,
@@ -94,7 +99,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   Widget _coastPart(){
     return Container(
       width: double.infinity,
-      height: D.default_250,
+      height: D.default_300*1.05,
       color: Colors.white,
       padding: EdgeInsets.only(top:D.default_20,left:D.default_20,right: D.default_20),
       child: Column(
@@ -109,18 +114,29 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("cart_sum"),style: S.h4(color: C.GREY_3),),
-                Text("120 جم",style: S.h4(color: C.GREY_3),)
+                Text("${allPrice}${tr("currency")}",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text(tr("cart_discount"),style: S.h4(color: C.GREY_3),),
+                Text("${allDiscount}${tr("currency")}",style: S.h4(color: C.GREY_3),)
+              ],),
+            cartProvider!.couponCost>0?Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(tr("coupon_coast"),style: S.h4(color: C.GREY_3),),
+                Text("${cartProvider!.couponCost} ${tr("currency")}",style: S.h4(color: C.GREY_3),)
+              ],):Container(),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text(tr("shipping_coast"),style: S.h4(color: C.GREY_3),),
-                Text("20 جم",style: S.h4(color: C.GREY_3),)
+                Text("${cartProvider!.myCartModel!.deliveryPrice} ${tr("currency")}",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("total_cost"),style: S.h3(color: C.BLUE_1),),
-                Text("120 جم",style: S.h3(color: C.BLUE_1),)
-              ],)
+                Text("${totalPrice}${tr("currency")}",style: S.h3(color: C.BLUE_1),)
+              ],),
+            SizedBox(height: D.default_10,),
           ],),),
           BaseButton(onItemClickListener: (){
             MyUtils.showBottomSheet(context, CompleteOrderWidget(), MediaQuery.of(context).size.height*0.65);
@@ -234,15 +250,13 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
       ),
     );
   }
-  double _getProductsCost(){
-    double cost=0;
+  _getProductCost(){
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
-      cost=cost+(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!*cartProvider!.myCartModel!.items![i].quantity!));
+      allPrice=(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
+      allDiscount=allPrice-(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!)*cartProvider!.myCartModel!.items![i].quantity!);
+      totalPrice=allPrice-allDiscount-cartProvider!.myCartModel!.deliveryPrice!-cartProvider!.couponCost;
     }
-    return cost;
   }
-  double _getTotalCost(){
-    return _getProductsCost()+(cartProvider!.myCartModel!.deliveryPrice!.toDouble());
-  }
+
 
 }

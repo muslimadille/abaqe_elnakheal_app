@@ -46,10 +46,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      context.setLocale(const Locale('ar', 'EG'));
-     EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
+     //EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
     UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
-    return utilsProviderModel.currentLocalName.isNotEmpty?MaterialApp(
+    return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor:Colors.blue,
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               statusBarColor: Colors.black.withOpacity(0.7),
           ),
         child: const SplashScreen()) ,
-    ):Container();
+    );
   }
 }
 class MyHttpOverrides extends HttpOverrides{

@@ -1,42 +1,41 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
-import 'package:abaqe_elnakheal_app/modules/otp/reset_password_screen.dart';
-import 'package:abaqe_elnakheal_app/modules/registeration/registeration_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
-import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/otp_field_style.dart';
-import 'package:otp_text_field/style.dart';
+import 'package:provider/provider.dart';
+import '../../providers/login_provider.dart';
+import '../../utils/input_validation_mixin.dart';
+import '../../utils/widgets/base_text_files.dart';
 
-import '../more/change_password_screen.dart';
-
-class OtpScreen extends StatefulWidget {
-  String otpFalge;
-  String title;
+class ResetPasswordScreen extends StatefulWidget {
   String code;
   String email;
-  OtpScreen(this.otpFalge,this.title,{this.code="",this.email=""}) ;
+  ResetPasswordScreen(this.email,this.code) ;
 
   @override
-  _OtpScreenState createState() => _OtpScreenState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _OtpScreenState extends State<OtpScreen> {
-  String _userCode="";
-  DateTime? _timer;
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> with InputValidationMixin{
+  final _loginFormGlobalKey = GlobalKey<FormState>();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confPasswordController = TextEditingController();
+  LoginProvider? loginProvider;
+
   @override
   void initState() {
     super.initState();
+    loginProvider=Provider.of<LoginProvider>(context,listen:false);
   }
 
   @override
   Widget build(BuildContext context) {
+    loginProvider=Provider.of<LoginProvider>(context,listen:true);
     return BaseScreen(body: SafeArea(child: Stack(
       alignment:AlignmentDirectional.center,
       children: [
@@ -54,7 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 _titleText(),
                 _introText(),
                 SizedBox(height: D.default_60,),
-                _otpField(),
+                _loginForm(),
                 SizedBox(height: D.default_10,),
                 _sendButton(),
                 SizedBox(height: D.default_10,),
@@ -77,28 +76,27 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget _introText(){
     return Container(
       width: double.infinity,
-      child: Text(tr("code_will_send_massage"),style: S.h3(color:C.GREY_3),textAlign: TextAlign.center,),);
+      child: Text(tr("new_password_subtitle"),style: S.h3(color:C.GREY_3),textAlign: TextAlign.center,),);
 
   }
   Widget _titleText(){
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: D.default_10,bottom:D.default_10),
-      child: Text(tr("change_password"),style: S.h1(color:Colors.black),textAlign: TextAlign.center,),);
+      child: Text(tr("new_password_title"),style: S.h1(color:Colors.black),textAlign: TextAlign.center,),);
 
   }
 
   Widget _sendButton(){
     return BaseButton(
       onItemClickListener: (){
-        if(widget.code==_userCode||_userCode=="0000"){
-          if(widget.title=="SendOtpEmailScreen"){
-            MyUtils.navigate(context, ResetPasswordScreen(widget.email,widget.code));
-          }
-
+        if (_loginFormGlobalKey.currentState!.validate()) {
+          _loginFormGlobalKey.currentState!.save();
+          loginProvider!.setNewPassword(context, widget.email, widget.code, _passwordController.text, _confPasswordController.text);
         }
+
       },
-      title: tr("send"),
+      title: tr("change_password_btn"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
       margin: EdgeInsets.all(D.default_5),
@@ -116,35 +114,43 @@ class _OtpScreenState extends State<OtpScreen> {
       margin: EdgeInsets.all(D.default_5),
     );
   }
-  Widget _otpField(){
-    return Directionality(textDirection: TextDirection.ltr, child: Container(
-      padding: EdgeInsets.all(D.default_30),
-      child: OTPTextField(
-        length: 4,
-        width: double.infinity,
-        fieldWidth: D.default_50,
-        otpFieldStyle:OtpFieldStyle(
-          focusBorderColor: C.BLUE_1
-        ),
-        style: TextStyle(
-            fontSize: D.default_20
-        ),
-        textFieldAlignment: MainAxisAlignment.spaceAround,
-        fieldStyle: FieldStyle.underline,
-        onCompleted: (pin) {
-          setState(() {
-            _userCode=pin;
-          });
-        },
-      ),));
-  }
-  Widget _resendTimer(){
-    return Container(
-      child:Row(children: [
-        Text("resent_code_in",style: S.h4(color: C.GREY_4),),
 
-      ],)
-    );
+  Widget _loginForm(){
+    return Container(child:
+    Form(
+      key: _loginFormGlobalKey,
+      child: Column(
+        children: [
+          BaseTextFiled(
+            controller: _passwordController,
+            hint:tr("new_password"),
+            isPassword: true,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return "";
+                }
+              }
+          ),
+          SizedBox(height: D.default_15,),
+          BaseTextFiled(
+            controller: _confPasswordController,
+            hint: tr("new_password"),
+            isPassword: true,
+              validator: (name) {
+                if (isFieldNotEmpty(name!)) {
+                  return null;
+                } else {
+                  return "";
+                }
+              }
+          ),
+
+        ],
+      ),
+    ),);
   }
+
 
 }

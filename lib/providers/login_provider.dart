@@ -1,9 +1,12 @@
 import 'package:abaqe_elnakheal_app/modules/login_screen/data/login_api.dart';
+import 'package:abaqe_elnakheal_app/modules/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../dio/models/authCodeModel.dart';
 import '../dio/models/user_data.dart';
 import '../dio/my_responce.dart';
 import '../modules/main_tabs_screen/main_tabs_screen.dart';
+import '../modules/otp/use_code_screen.dart';
 import '../utils/apis.dart';
 import '../utils/constants.dart';
 import '../utils/myUtils.dart';
@@ -49,6 +52,43 @@ class LoginProvider with ChangeNotifier{
     Constants.currentUser=user;
     Apis.TOKEN_VALUE=user.token!;
     notifyListeners();
+  }
+
+  getAuthCode(BuildContext ctx,String email) async {
+    setIsLoading(true);
+    MyResponse<AuthCodeModel> response =
+    await loginApi.getAuthCode(email);
+    if (response.status == Apis.CODE_SUCCESS) {
+      //AuthCodeModel user=response.data;
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+      MyUtils.navigate(
+          ctx, OtpScreen("SendOtpEmailScreen", "SendOtpEmailScreen",email: email,code:"" ,));
+    }
+    else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("otp error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
+  setNewPassword(BuildContext ctx,String email,String code,String password, String confPassword) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await loginApi.setNewPassword( email, code, password,  confPassword);
+    if (response.status == Apis.CODE_SUCCESS) {
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+      MyUtils.navigateAsFirstScreen(ctx, LoginScreen());
+    }
+    else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("otp error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
   }
 
 

@@ -49,7 +49,7 @@
   "amount": "amount",
   "about_product": "About Product",
   "product_details":"Product Details",
-  "currency": "L.E",
+  "currency": "SAR",
   "start_search": "Search For Products Now",
   "search": "Search",
   "no_search": "There is no products found",
@@ -74,16 +74,16 @@
   "add_location": "Add you address",
   "full_name": "Full Name",
   "address": "Address",
-  "notes": "Other notes"
-
-
-
-
-
-
-
-
-
+  "notes": "Other notes",
+  "cart_discount": "Total discount",
+  "coupon_coast": "Discount coupon",
+  "change_language": "Change the language",
+  "phone_key": "key",
+  "new_password_title": "Password Reset",
+  "new_password_subtitle": "The identity of the account holder has been confirmed, enter the new password",
+  "change_password_btn": "Change Password",
+  "new_password": "New password",
+  "conf_password": "Confirm password"
 
 
 

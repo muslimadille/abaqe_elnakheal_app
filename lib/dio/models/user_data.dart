@@ -50,9 +50,9 @@ class UserData {
   String? photo;
   String? longitude;
   String? latitude;
-  int? regionId;
+  dynamic regionId;
   String? regionName;
-  int? stateId;
+  dynamic stateId;
   String? stateName;
   dynamic userTypeId;
   String? token;

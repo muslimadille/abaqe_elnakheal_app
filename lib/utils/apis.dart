@@ -16,6 +16,11 @@ class Apis{
   static String REGISTER_API="${BASE_URL}/register";
   static String HOME_API="${BASE_URL}/home-page";
   static String LOGIN_API="${BASE_URL}/login";
+  static String GET_AUTH_CODE_API="${BASE_URL}/get-code";
+  static String SET_NEW_PASSWORD_API="${BASE_URL}/set-new-password";
+  static String CHANGE_PASSWORD_API="${BASE_URL}/change-password";
+  static String UPDATE_PROFILE_API="${BASE_URL}/update-profile";
+
   ///--------------------------------------------------------
   static String REGIONS_API="${BASE_URL}/regions";
   static String CHANGE_LANGUAGE_API="${BASE_URL}/change-lang";

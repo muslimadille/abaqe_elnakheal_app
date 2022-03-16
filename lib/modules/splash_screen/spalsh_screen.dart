@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../providers/login_provider.dart';
 import '../../providers/regions_provider.dart';
+import '../../providers/utils_provider.dart';
 import '../../utils/constants.dart';
 
 
@@ -24,11 +25,13 @@ class _SplashScreenState extends State<SplashScreen> {
   SharedPreferences? prefs;
   LoginProvider?loginProvider;
   RegionsProvider? regionsProvider;
+  UtilsProviderModel?utilsProviderModel;
 
 
   @override
   void initState() {
     super.initState();
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen:false);
     regionsProvider=Provider.of<RegionsProvider>(context,listen: false);
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
     regionsProvider!.getRegions();
@@ -39,6 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     regionsProvider=Provider.of<RegionsProvider>(context,listen: true);
     loginProvider = Provider.of<LoginProvider>(context, listen: true);
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen:false);
+
     _timerNavigation();
     return BaseScreen(body: Stack(
       alignment:AlignmentDirectional.center,
@@ -65,7 +70,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void _initPref(BuildContext ctx)async{
     prefs =  await SharedPreferences.getInstance();
     Constants.prefs=prefs;
+     String local= await Constants.prefs!.get(Constants.LANGUAGE_KEY!)!=null?Constants.prefs!.get(Constants.LANGUAGE_KEY!).toString():"ar";
+     if(local=="ar"){
+       utilsProviderModel!.setCurrentLocal(ctx, Locale('ar', 'EG'));
+     }else{
+       utilsProviderModel!.setCurrentLocal(ctx, Locale('en', 'US'));
+     }
     _initSavedUser();
+
   }
   _initSavedUser(){
     if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString().isNotEmpty&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
