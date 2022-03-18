@@ -32,7 +32,7 @@
   "shop_now": "Shop now",
   "add_to_crd": "Add to cart",
   "registeration_text":"Enter the following data to join Apak Elnakheal",
-  "added_to_crd": "Added",
+  "added_to_crd": "Add",
   "my_orders_subtitle": "You can browse all your requests from here",
   "enter_email": "Enter the email",
   "enter_first_name":"Enter the first name",
@@ -98,7 +98,9 @@
   "no_prev_orders": "There are no previous requests",
   "start_order_now": "Start ordering now",
   "select_country": "Choose the country",
-  "register": "Register"
+  "register": "Register",
+  "min_quan": "Minimum order quantity is %s kg"
+
 
 
 

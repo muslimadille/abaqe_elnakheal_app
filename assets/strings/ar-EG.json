@@ -32,7 +32,7 @@
   "shop_now": "تسوق الآن",
   "add_to_crd": "إضافة للعربة",
   "registeration_text":"ادخل البيانات التالية للانضمام الي عبق النخيل",
-  "added_to_crd": "تم الإضافة",
+  "added_to_crd": "إضافة",
   "my_orders_subtitle": "يمكنك تصفح جميع طلباتك من هنا",
 
   "enter_email": "قم بإدخال البريد الإلكتروني",
@@ -99,7 +99,8 @@
   "no_prev_orders": "لايوجد طلبات سابقة",
   "start_order_now": "ابدأ الطلب الآن",
   "select_country": "اختر الدولة",
-  "register": "تسجيل"
+  "register": "تسجيل",
+  "min_quan": "أقل كمية للطلب هي%s كجم"
 
 
 

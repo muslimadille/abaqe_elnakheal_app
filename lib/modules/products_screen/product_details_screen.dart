@@ -2,6 +2,7 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../../dio/models/product_model.dart';
 import '../../providers/cart_provider.dart';
@@ -248,7 +249,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Stack(
         alignment:AlignmentDirectional.centerStart ,
         children: [
-          Positioned(child: _counter(),right: 0,),
+          Positioned(child: _NewCounter(),right: 0,),
           Positioned(child: AnimatedContainer(
             width: _btnWidth,
             duration: Duration(milliseconds: 300),
@@ -257,7 +258,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 MyUtils.navigateReplaceCurrent(Constants.tabScreenContext!, LoginScreen());
               }else{
                 setState(() async{
-                  _showCounter? _showCounter=false:_showCounter=true;
+                  _showCounter=true;
                   if(_showCounter){
                     _btnWidth=D.default_180*1.05;
                     _counterOpacity=1;
@@ -266,6 +267,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       _textController!.text=(widget.productModel.minQuantity).toString();
                       await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.minQuantity!);
                       widget.productModel.cartCount=widget.productModel.minQuantity;
+                    }else{
+                      if(int.parse(_textController!.text)<widget.productModel.minQuantity!&&int.parse(_textController!.text)!=0){
+                         Fluttertoast.showToast(msg: "${sprintf(tr("min_quan"),[widget.productModel.minQuantity.toString()])}");
+                      }else{
+                        if(int.parse(_textController!.text)==0){
+                          _showCounter=false;
+
+                        }
+                        await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.minQuantity!);
+                        widget.productModel.cartCount=widget.productModel.minQuantity;
+                      }
                     }
 
                   }
@@ -277,6 +289,47 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ],
       )
     );
+  }
+  Widget _NewCounter(){
+    return AnimatedOpacity(opacity: _counterOpacity, duration: Duration(milliseconds: 400),child: Container(
+      height: D.default_60,
+      width: D.default_180*1.05,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_10),
+        color: Colors.white,
+        border: Border.all(width: D.default_1,color: C.BLUE_1),
+      ),
+      child: Row(children: [
+        Expanded(child: Container(
+          margin: EdgeInsets.only(bottom: D.default_10),
+          child: TextFormField(
+          controller: _textController,
+          enabled: true,
+          onChanged: (value){
+            setState(() {
+              if(isKeboardopened){}
+            });
+          },
+          style: S.h2(color: C.GREY_1),
+            textAlign:TextAlign.start ,
+          decoration: InputDecoration(
+            labelText: tr("amount"),
+            labelStyle: S.h3(color: C.BLUE_1),
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            border:InputBorder.none,
+            errorStyle: S.h4(color: Colors.red),
+            contentPadding: EdgeInsets.fromLTRB(D.default_10,D.default_10, D.default_10, D.default_10),
+          ),
+          keyboardType:TextInputType.number,
+          cursorColor: Colors.white,
+          autofocus: false,
+        ),),),
+        Container(
+          width: D.default_40,
+          child: Text(tr("kg"),style: S.h3(color:C.BLUE_1),),),
+      ],),
+    ),);
   }
   Widget _counter(){
     return AnimatedOpacity(opacity: _counterOpacity, duration: Duration(milliseconds: 400),child: Container(
@@ -291,28 +344,28 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         Expanded(child: Container(
           margin: EdgeInsets.only(bottom: D.default_10),
           child: TextFormField(
-          controller: _textController,
-          enabled: false,
-          onChanged: (value){
-            setState(() {
-              if(isKeboardopened){}
-            });
-          },
-          style: S.h2(color: C.GREY_1),
+            controller: _textController,
+            enabled: false,
+            onChanged: (value){
+              setState(() {
+                if(isKeboardopened){}
+              });
+            },
+            style: S.h2(color: C.GREY_1),
             textAlign:TextAlign.center ,
-          decoration: InputDecoration(
-            labelText: tr("amount"),
-            labelStyle: S.h3(color: C.BLUE_1),
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            border:InputBorder.none,
-            errorStyle: S.h4(color: Colors.red),
-            contentPadding: EdgeInsets.fromLTRB(D.default_10,D.default_10, D.default_10, D.default_10),
-          ),
-          keyboardType:TextInputType.number,
-          cursorColor: Colors.white,
-          autofocus: false,
-        ),),),
+            decoration: InputDecoration(
+              labelText: tr("amount"),
+              labelStyle: S.h3(color: C.BLUE_1),
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              border:InputBorder.none,
+              errorStyle: S.h4(color: Colors.red),
+              contentPadding: EdgeInsets.fromLTRB(D.default_10,D.default_10, D.default_10, D.default_10),
+            ),
+            keyboardType:TextInputType.number,
+            cursorColor: Colors.white,
+            autofocus: false,
+          ),),),
         Container(
           width: D.default_40,
           child: Text(tr("kg"),style: S.h3(color:C.BLUE_1),),),

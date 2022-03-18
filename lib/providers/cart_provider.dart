@@ -35,7 +35,7 @@ class CartProvider with ChangeNotifier{
       AddToCartModel data = response.data;
       setHomeData(data);
       setIsLoading(false);
-      if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}
+      //if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}
       updateCartItems();
     }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
       print("login error: ${response.msg}");
