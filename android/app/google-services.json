@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285258979765",
+    "project_id": "abak-elnakheal",
+    "storage_bucket": "abak-elnakheal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285258979765:android:8249c2e779b3d2d6faa1fc",
+        "android_client_info": {
+          "package_name": "com.example.abaqe_elnakheal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285258979765-10gprq75eeol49o8n8bvaj444hcugjoj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.abaqe_elnakheal_app",
+            "certificate_hash": "b7b9ede8f938b7c5c33d80ee1ec09e38c43859f5"
+          }
+        },
+        {
+          "client_id": "285258979765-7v9g33b0795rqsb7rkm26gka3dc48ke1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9lgE2zdSrzu5YpPuaQyz2T4bkrVjSYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285258979765-7v9g33b0795rqsb7rkm26gka3dc48ke1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

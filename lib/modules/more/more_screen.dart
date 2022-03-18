@@ -149,7 +149,7 @@ class _MoreScreenState extends State<MoreScreen> {
         await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
         Apis.TOKEN_VALUE="";
         Constants.currentUser=null;
-        MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
+        MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, LoginScreen());
       },
       child: Container(
         padding: EdgeInsets.all(D.default_20),

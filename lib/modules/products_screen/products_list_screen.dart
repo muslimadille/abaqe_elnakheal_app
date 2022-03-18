@@ -51,7 +51,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   Widget _header(BuildContext ctx){
     return Container(
       height: D.default_160,
-      padding: EdgeInsets.only(top:D.default_30,left:D.default_30,right:D.default_30),
+      padding: EdgeInsets.only(top:D.default_20,left:D.default_30,right:D.default_30),
       child: Column(
         children: [
           Row(

@@ -11,7 +11,7 @@
   "have_account_title": "لديك حساب",
   "first_name": "الإسم الأول",
   "last_name": "الإسم الأخير",
-  "phone_num": "رقم الهاتف",
+  "phone_num": "رقم الجوال",
   "change_password": "إعادة تعيين كلمة المرور",
   "code_sent_massage": "تم إرسال الكود إلى بريدك الإلكتروني ",
   "code_will_send_massage": "سيتم إرسال الكود إلى بريدك الإلكتروني ",
@@ -38,7 +38,7 @@
   "enter_email": "قم بإدخال البريد الإلكتروني",
   "enter_first_name":"قم بإدخال الأسم الاول",
   "enter_last_name": "قم بإدخال الإسم الأخير",
-  "enter_phone": "قم بإدخال رقم هاتف يتكون من 9أرقام بدون0",
+  "enter_phone": "قم بإدخال رقم الجوال  بدون0",
   "enter_password": "قم بإدخال كلمة المرور",
   "loading": "جاري التحميل",
   "name":"الإسم",
@@ -97,7 +97,9 @@
   "current_orders": "الطلبات الجارية",
   "prev_orders": "الطلبت السابقة",
   "no_prev_orders": "لايوجد طلبات سابقة",
-  "start_order_now": "ابدأ الطلب الآن"
+  "start_order_now": "ابدأ الطلب الآن",
+  "select_country": "اختر الدولة",
+  "register": "تسجيل"
 
 
 

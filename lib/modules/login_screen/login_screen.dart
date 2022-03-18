@@ -12,6 +12,7 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/login_provider.dart';
@@ -26,16 +27,29 @@ class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-
+final GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: <String>[
+    'email',
+  ],
+);
 class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
   final _loginFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   LoginProvider?loginProvider;
+  ///----------google sign in----------------
+  GoogleSignInAccount? _userAccount;
+
+
+
   @override
   void initState() {
-    super.initState();
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      _userAccount=account;
+    });
+    _googleSignIn.signInSilently();
+    super.initState();
 
   }
 
@@ -106,7 +120,9 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
-            onTap: (){},
+            onTap: (){
+              _googleSignInClicked();
+            },
             child: TransitionImage(
             Res.GOOGLE_IC,
             width: D.default_50,
@@ -236,6 +252,13 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
           context,
           _emailController.text,
           _passwordController.text);
+    }
+  }
+  Future <void> _googleSignInClicked()async{
+    try{
+      await _googleSignIn.signIn();
+    }catch(e){
+      print("google sign in error: $e");
     }
   }
 }

@@ -37,7 +37,7 @@
   "enter_email": "Enter the email",
   "enter_first_name":"Enter the first name",
   "enter_last_name": "Enter the last name",
-  "enter_phone": "Enter a 9-digit phone number without 0",
+  "enter_phone": "Enter a phone number without 0",
   "enter_password": "Enter the password",
   "loading": "Loading",
   "name": "Name",
@@ -96,7 +96,12 @@
   "current_orders": "Ongoing orders",
   "prev_orders": "Previous orders",
   "no_prev_orders": "There are no previous requests",
-  "start_order_now": "Start ordering now"
+  "start_order_now": "Start ordering now",
+  "select_country": "Choose the country",
+  "register": "Register"
+
+
+
 
 
 

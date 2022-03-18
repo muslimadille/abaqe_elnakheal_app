@@ -10,12 +10,13 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/input_validation_mixin.dart';
 import '../../utils/widgets/loading_widget.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 
 
@@ -34,15 +35,25 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
   TextEditingController _lastNameController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
   TextEditingController _phoneKeyController = TextEditingController();
-
-
   RegisterProvider? registerProvider;
+  CountryCode? selectedCode;
+  int  mobileLength=10;
+  String mobileText="";
+
 
 @override
   void initState() {
     super.initState();
     registerProvider = Provider.of<RegisterProvider>(context, listen: false);
-
+    _phoneNumberController.addListener(() {
+      if(_phoneNumberController.text.length>mobileLength){
+        setState(() {
+          _phoneNumberController.text=mobileText;
+        });
+      }else{
+        mobileText=_phoneNumberController.text;
+      }
+    });
 }
 
 
@@ -139,7 +150,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
       onItemClickListener: (){
         _onRegisterClicked();
       },
-      title: tr("login_title"),
+      title: tr("register"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
       margin: EdgeInsets.all(D.default_5),
@@ -237,25 +248,36 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
             )),
           ],),
           SizedBox(height: D.default_15,),
-          Row(children: [
-            Expanded(
-              flex: 1,
-              child: BaseTextFiled(
-                controller: _phoneKeyController,
-                hint: tr("phone_key"),
-                isPassword: false,
-                inputType: TextInputType.phone,
-                validator: (name) {
-                  if (isFieldNotEmpty(name!)) {
-                    return null;
-                  } else {
-                    return "";
-                  }
-                }
-            ),),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height:D.default_60,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(D.default_10),
+                  border: Border.all(color: C.GREY_3),
+                ),
+                child: CountryCodePicker(
+                  onChanged: (country){
+                    setState(() {
+                      selectedCode=country;
+                    });
+                  },
+                  textStyle: S.h4(color: C.GREY_3),
+                  dialogTextStyle: S.h2(color: C.GREY_3),
+                  padding:EdgeInsets.zero,
+                  // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                  initialSelection: 'SA',
+                  // optional. Shows only country name and flag
+                  showCountryOnly: false,
+                  // optional. Shows only country name and flag when popup is closed.
+                  showOnlyCountryWhenClosed: false,
+                  // optional. aligns the flag and the Text left
+                  alignLeft: false,
+                ),),
             SizedBox(width:D.default_10),
             Expanded(
-              flex:3,
+              flex:4,
                 child: BaseTextFiled(
                 controller: _phoneNumberController,
                 hint: tr("phone_num"),
@@ -296,7 +318,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
           context,
           _fristNmaeController.text,
           _lastNameController.text,
-          _emailController.text,
+          _emailController.text.replaceAll(" ", ""),
           _phoneNumberController.text,
           _passwordController.text);
     }

@@ -40,10 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    regionsProvider=Provider.of<RegionsProvider>(context,listen: true);
-    loginProvider = Provider.of<LoginProvider>(context, listen: true);
-    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen:false);
-
+    //loginProvider = Provider.of<LoginProvider>(context, listen: true);
+    //utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen:true);
     _timerNavigation();
     return BaseScreen(body: Stack(
       alignment:AlignmentDirectional.center,
@@ -70,12 +68,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void _initPref(BuildContext ctx)async{
     prefs =  await SharedPreferences.getInstance();
     Constants.prefs=prefs;
-     String local= await Constants.prefs!.get(Constants.LANGUAGE_KEY!)!=null?Constants.prefs!.get(Constants.LANGUAGE_KEY!).toString():"ar";
+     /*String local= await Constants.prefs!.get(Constants.LANGUAGE_KEY!)!=null?Constants.prefs!.get(Constants.LANGUAGE_KEY!).toString():"ar";
      if(local=="ar"){
        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar', 'EG'));
      }else{
        utilsProviderModel!.setCurrentLocal(ctx, Locale('en', 'US'));
-     }
+     }*/
     _initSavedUser();
 
   }
