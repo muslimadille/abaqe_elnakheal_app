@@ -99,7 +99,14 @@
   "start_order_now": "Start ordering now",
   "select_country": "Choose the country",
   "register": "Register",
-  "min_quan": "Minimum order quantity is %s kg"
+  "min_quan": "Minimum order quantity is %s kg",
+  "add_nationalId_hint": "Attach a copy of the ID or the farm's commercial register",
+  "niatrat_hint": "Attach the nitrate need report document",
+  "attach": "attach",
+  "done": "Done"
+
+
+
 
 
 

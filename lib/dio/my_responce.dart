@@ -1,6 +1,7 @@
 
 
 import '../modules/search/search_model.dart';
+import 'models/add_order_model.dart';
 import 'models/add_to_cart_model.dart';
 import 'models/addressModel.dart';
 import 'models/authCodeModel.dart';
@@ -97,6 +98,10 @@ class MyResponse<T> extends Object {
       case AuthCodeModel:
         _data =AuthCodeModel.fromJson(json) as T;
         break;
+      case AddOrderModel:
+        _data =AddOrderModel.fromJson(json) as T;
+        break;
+
 
       default:_data = null;
     }

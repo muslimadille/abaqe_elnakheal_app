@@ -30,6 +30,8 @@ class Apis{
   static String GET_CART_ITEMS_API="${BASE_URL}/cart-items";
   static String GET_COUPON_API="${BASE_URL}/check-coupon";
   static String ADD_ADDRESS_API="${BASE_URL}/add-address";
+  static String ADD_ORDER_API="${BASE_URL}/add-order";
+
 
 
 

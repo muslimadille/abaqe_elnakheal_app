@@ -1,5 +1,8 @@
+
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../dio/models/add_order_model.dart';
 import '../dio/models/add_to_cart_model.dart';
 import '../dio/models/addressModel.dart';
 import '../dio/models/coupon_model.dart';
@@ -7,6 +10,10 @@ import '../dio/models/my_cart_model.dart';
 import '../dio/my_responce.dart';
 import '../modules/cart/data/cart_api_provider.dart';
 import '../utils/apis.dart';
+import 'package:dio/dio.dart';
+
+import '../utils/widgets/web_viewer_screen.dart';
+
 
 class CartProvider with ChangeNotifier{
 
@@ -14,6 +21,10 @@ class CartProvider with ChangeNotifier{
   int clickedIndex=0;
   bool isLoading=false;
   double couponCost=0;
+  String couponeCode="";
+  AddOrderModel? addOrderResponse;
+  FormData? addOrderBody;
+
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();
@@ -107,6 +118,28 @@ class CartProvider with ChangeNotifier{
       await Fluttertoast.showToast(msg: "${response.msg}");
     }
     notifyListeners();
+
+  }
+  ///-------------------------------------------------------------
+  addOrder(BuildContext ctx) async {
+    if(addOrderBody!=null){
+      setIsLoading(true);
+      MyResponse<AddOrderModel> response =
+      await cartApiProvider.addOrder(addOrderBody!);
+      if (response.status == Apis.CODE_SUCCESS &&response.data!=null) {
+        addOrderResponse = response.data;
+        MyUtils.navigate(ctx, WebPage(addOrderResponse!.paymentUrl!));
+        setIsLoading(false);
+      }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+        print("add order error: ${response.msg}");
+        setIsLoading(false);
+        await Fluttertoast.showToast(msg: "${response.msg}");
+      }
+      notifyListeners();
+
+    }else{
+      await Fluttertoast.showToast(msg: "empty body");
+    }
 
   }
 
