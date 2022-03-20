@@ -128,13 +128,13 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
             width: D.default_50,
             height: D.default_50,
           ),),
-         InkWell(
+         /*InkWell(
            onTap:(){},
            child:TransitionImage(
            Res.APPLE_IC,
            width: D.default_50,
            height: D.default_50,
-         ),),
+         ),),*/
 
 
 
