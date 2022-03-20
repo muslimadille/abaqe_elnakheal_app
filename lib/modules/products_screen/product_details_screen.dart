@@ -273,10 +273,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       }else{
                         if(int.parse(_textController!.text)==0){
                           _showCounter=false;
-
                         }
-                        await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.minQuantity!);
-                        widget.productModel.cartCount=widget.productModel.minQuantity;
+                        await cartProvider!.addToCart(widget.productModel.id!,int.parse(_textController!.text));
+                        widget.productModel.cartCount=int.parse(_textController!.text);
                       }
                     }
 
