@@ -7,6 +7,7 @@ import '../dio/models/user_data.dart';
 import '../dio/my_responce.dart';
 import '../modules/main_tabs_screen/main_tabs_screen.dart';
 import '../modules/otp/use_code_screen.dart';
+import '../modules/splash_screen/spalsh_screen.dart';
 import '../utils/apis.dart';
 import '../utils/constants.dart';
 import '../utils/myUtils.dart';
@@ -90,6 +91,32 @@ class LoginProvider with ChangeNotifier{
     notifyListeners();
 
   }
+  /// edit profile
+  editProfile(Map<String,dynamic> userData) async {
+    setIsLoading(true);
+    MyResponse<UserData> response =
+    await loginApi.editProfile(userData);
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      UserData user=response.data;
+      setCurrentUserData(user);
+      //await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
+      //await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
+      setIsLoading(false);
+      MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
+    }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
+      UserData user=response.data;
+      setCurrentUserData(user);
+      setIsLoading(false);
+      MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
+
 
 
 }

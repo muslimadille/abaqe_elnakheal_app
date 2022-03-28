@@ -66,7 +66,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ,);
   }
   Widget _editBtn(){
-    return InkWell(onTap: (){},child: Text(tr("edit"),style: S.h4(color: C.BLUE_1),),);
+    return InkWell(onTap: (){
+      //call edit profil api
+    },child: Text(tr("edit"),style: S.h4(color: C.BLUE_1),),);
   }
   Widget _userPhone(){
     return Container(
@@ -92,8 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: D.default_120,
             child: Text(tr("National_ID"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("${Constants.currentUser!.national_id??"........."}",style: S.h4(color: C.GREY_2),)),
-        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
-      ],)
+        _editBtn()      ],)
       ,);
   }
   Widget _userCovernat(){
@@ -106,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: D.default_120,
             child: Text(tr("region"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("القاهرة",style: S.h4(color: C.GREY_2),)),
-        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
+        _editBtn()
       ],)
       ,);
   }
@@ -120,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           width: D.default_120,
             child: Text(tr("state"),style: S.h4(color: C.GREY_2),)),
         Expanded(child: Text("مدينة نصر",style: S.h4(color: C.GREY_2),)),
-        Text(tr("edit"),style: S.h4(color: C.BLUE_1),),
+        _editBtn()
       ],)
       ,);
   }
@@ -142,5 +143,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _devider(){
     return Container(height: D.default_1,color: C.GREY_5,width: double.infinity,);
   }
+
 
 }

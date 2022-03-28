@@ -53,4 +53,14 @@ class LoginApi{
       return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+  Future<MyResponse<UserData>> editProfile(Map<String,dynamic>userData) async {
+    final url = "${Apis.UPDATE_PROFILE_API}";
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: userData);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<UserData>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<UserData>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
 }

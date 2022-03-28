@@ -12,6 +12,7 @@ class WebPage extends StatefulWidget {
 
 
 class _WebPageState extends State<WebPage> {
+  WebViewController? _controller;
   @override
   void initState() {
     super.initState();
@@ -20,8 +21,26 @@ class _WebPageState extends State<WebPage> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(body: SafeArea(child:
-    WebView(
+
+      WebView(
       initialUrl: widget.link,
-    ) ,),);
+      javascriptMode: JavascriptMode.unrestricted,
+      onWebViewCreated: (WebViewController webViewController) {
+       // _controller!.currentUrl();
+      },
+      navigationDelegate: (NavigationRequest request) {
+        if (request.url.contains("success")){
+
+          //You can do anything
+
+          //Prevent that url works
+          return NavigationDecision.prevent;
+        }
+        //Any other url works
+        return NavigationDecision.navigate;
+      },
+    )
+
+      ,),);
   }
 }
