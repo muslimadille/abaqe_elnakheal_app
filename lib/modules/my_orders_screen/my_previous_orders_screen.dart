@@ -1,10 +1,13 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
+import 'package:abaqe_elnakheal_app/utils/widgets/loading_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/my_orders_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/widgets/no_data_widget.dart';
 import 'order_list_item.dart';
@@ -17,17 +20,24 @@ class MyPreviousOrdersScreen extends StatefulWidget {
 }
 
 class _MyPreviousOrdersScreenState extends State<MyPreviousOrdersScreen> {
-  bool _showList=false;
+  MyordersProvider? myordersProvider;
+  @override
+  void initState() {
+    super.initState();
+    myordersProvider=Provider.of<MyordersProvider>(context,listen: false);
+    myordersProvider!.getMyOrders();
+  }
   @override
   Widget build(BuildContext context) {
+    myordersProvider=Provider.of<MyordersProvider>(context,listen: true);
     return BaseScreen(
         body: InkWell(
           onTap: (){
             setState(() {
-              _showList=true;
+
             });
           },
-          child: _showList?_myOrdersList():NoDataWidget(image:"assets/lottie/dron.json",title:tr("no_prev_orders"),subTitle:tr("start_order_now")),
+          child: myordersProvider!.isLoading?LoadingProgress():myordersProvider!.previousOrdersList!.isNotEmpty?_myOrdersList():NoDataWidget(image:"assets/lottie/dron.json",title:tr("no_prev_orders"),subTitle:tr("start_order_now")),
         ));
   }
   Widget _myOrdersList(){
@@ -36,12 +46,12 @@ class _MyPreviousOrdersScreenState extends State<MyPreviousOrdersScreen> {
       height: double.infinity,
       child: ListView.separated(
           itemBuilder: (context,index){
-            return OrderListItem();
+            return OrderListItem(myordersProvider!.previousOrdersList![index]);
           },
           separatorBuilder: (context,index){
             return Container(
               height: D.default_10,
             );
-          }, itemCount: 3),);
+          }, itemCount: myordersProvider!.previousOrdersList!.length),);
   }
 }

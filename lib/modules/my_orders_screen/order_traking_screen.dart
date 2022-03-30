@@ -3,15 +3,16 @@ import 'package:abaqe_elnakheal_app/modules/my_orders_screen/rating_order_widget
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
-import 'package:abaqe_elnakheal_app/utils/widgets/no_data_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../dio/models/my_orders_model.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/widgets/transition_image.dart';
-import '../cart/complete_order_screen.dart';
-import '../home/items/card_icon.dart';
+
 class OrderTrakingScreen extends StatefulWidget {
-  const OrderTrakingScreen({Key? key}) : super(key: key);
+  OrderData order;
+   OrderTrakingScreen(this.order,{Key? key}) : super(key: key);
 
   @override
   _OrderTrakingScreenState createState() => _OrderTrakingScreenState();
@@ -53,8 +54,8 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
           IconButton(onPressed:(){
             Navigator.pop(context);
           }, icon: Icon(Icons.arrow_back_ios,color: C.GREY_1,size: D.default_25,),),
-          Expanded(child: Text("تفاصيل الطلب",style: S.h2(color: C.GREY_2,),textAlign: TextAlign.center,)),
-          Text("المساعدة",style: S.h2(color: C.BLUE_1,),textAlign: TextAlign.center,),
+          Expanded(child: Text(tr("order_details"),style: S.h2(color: C.GREY_2,),textAlign: TextAlign.center,)),
+          Text(tr('help'),style: S.h2(color: C.BLUE_1,),textAlign: TextAlign.center,),
 
         ],),);
   }
@@ -67,9 +68,9 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TransitionImage("assets/images/rice_img.png",height: D.default_170,width: D.default_170,fit: BoxFit.cover,),
-          Text("رقم الطلب: 123-4511",style: S.h2(color: C.GREY_2),),
-          Text("أكتوبر 2021 12:30م",style: S.h3(color: C.GREY_4),),
+          TransitionImage(widget.order.cartItems![0].photo!,height: D.default_170,width: D.default_170,fit: BoxFit.cover,),
+          Text("${tr("order_num")}:${widget.order.id}",style: S.h2(color: C.GREY_2),),
+          Text("${widget.order.createdAt}",style: S.h3(color: C.GREY_4),),
           Container(
             margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left:D.default_10,right:D.default_10),
             padding: EdgeInsets.only(top:D.default_5,bottom: D.default_5,left:D.default_10,right:D.default_10),
@@ -77,7 +78,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
               borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
               color: C.BLUE_2.withOpacity(0.5),
             ),
-            child: Text("قيد التوصيل",style: S.h4(color: C.BLUE_1),),
+            child: Text(widget.order.statusText!.name!,style: S.h4(color: C.BLUE_1),),
           ),
           _trakingList()
 
@@ -97,32 +98,32 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
           SizedBox(height: D.default_15,),
           Container(
             width: double.infinity,
-            child: Text("تفاصيل الطلب",style: S.h3(color: C.GREY_1),textAlign: TextAlign.start,),),
+            child: Text(tr("order_details"),style: S.h3(color: C.GREY_1),textAlign: TextAlign.start,),),
           SizedBox(height: D.default_15,),
           Expanded(child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("إجمالي العربة",style: S.h4(color: C.GREY_3),),
+                Text(tr("all_cost"),style: S.h4(color: C.GREY_3),),
                 Text("120 جم",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("مصاريف الشحن",style: S.h4(color: C.GREY_3),),
+                Text(tr("shipping_fee"),style: S.h4(color: C.GREY_3),),
                 Text("20 جم",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("المجموع الكلي",style: S.h3(color: C.BLUE_1),),
+                Text(tr("total_cost"),style: S.h3(color: C.BLUE_1),),
                 Text("120 جم",style: S.h3(color: C.BLUE_1),)
               ],)
           ],),),
           BaseButton(onItemClickListener: (){
             MyUtils.showBottomSheet(context, RatesOrderScreen(), D.default_300*2);
-          }, title: "تقييم المنتجات",margin: EdgeInsets.zero,height: D.default_60,
+          }, title: tr("rate_products"),margin: EdgeInsets.zero,height: D.default_60,
             textStyle: S.h2(color: Colors.white),),
           Container(
             margin: EdgeInsets.all(D.default_10),
-            child: Text("يساعد رايك علي التطوير من منتجاتنا",style: S.h4(color: C.GREY_3),),)
+            child: Text(tr("openion"),style: S.h4(color: C.GREY_3),),)
         ],
       ),
     );
@@ -138,7 +139,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         children: [
           Container(
             padding: EdgeInsets.only(top:D.default_20,left: D.default_20,right: D.default_20),
-            child: Text("تفاصيل التوصيل",style: S.h3(color: C.GREY_2),),),
+            child: Text(tr("shipping_details"),style: S.h3(color: C.GREY_2),),),
          Container(
            margin: EdgeInsets.only(left:D.default_20,right: D.default_20),
            child:  Row(children: [
@@ -199,7 +200,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         children: [
           Container(
             padding: EdgeInsets.only(top:D.default_20,left: D.default_20,right: D.default_20),
-            child: Text("المنتجات",style: S.h3(color: C.GREY_2),),),
+            child: Text(tr("products"),style: S.h3(color: C.GREY_2),),),
           Expanded(flex:1,child: ListView.separated(itemBuilder: (context,index){
             return _productListItem();
           }, separatorBuilder: (context,index){

@@ -8,6 +8,7 @@ import 'models/authCodeModel.dart';
 import 'models/coupon_model.dart';
 import 'models/home_model.dart';
 import 'models/my_cart_model.dart';
+import 'models/my_orders_model.dart';
 import 'models/region_model.dart';
 import 'models/user_data.dart';
 
@@ -100,6 +101,9 @@ class MyResponse<T> extends Object {
         break;
       case AddOrderModel:
         _data =AddOrderModel.fromJson(json) as T;
+        break;
+      case MyOrdersModel:
+        _data =MyOrdersModel.fromJson(json) as T;
         break;
 
 

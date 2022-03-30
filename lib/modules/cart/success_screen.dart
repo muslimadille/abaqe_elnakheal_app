@@ -1,6 +1,7 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,6 +12,7 @@ import '../../utils/res.dart';
 import '../../utils/widgets/transition_image.dart';
 import '../home/home_screen.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
+import '../my_orders_screen/my_orders_tabs_screen.dart';
 import '../my_orders_screen/order_traking_screen.dart';
 
 class SuccessScreen extends StatefulWidget {
@@ -42,13 +44,13 @@ class _SuccessScreenState extends State<SuccessScreen> {
             )),
               Container(
                 margin: EdgeInsets.all(D.default_10),
-                child: Text("تم ارسال طلبك للبائع بنجاح",style: S.h2(color: Colors.white),),),
+                child: Text(tr("u_order_sent"),style: S.h2(color: Colors.white),),),
               Container(
                 margin: EdgeInsets.all(D.default_10),
-                child: Text("يمكنك متابعة حالة طلبك من قائمة الطلبات الخاصة بك",style: S.h4(color: Colors.white),textAlign: TextAlign.center,),),
+                child: Text(tr("u_can_track_order"),style: S.h4(color: Colors.white),textAlign: TextAlign.center,),),
               BaseButton(onItemClickListener: (){
-                MyUtils.navigate(context, const OrderTrakingScreen());
-              }, title: "متابعة الطلب",color: Colors.white
+                MyUtils.navigate(context,  MyOrdersTabsScreen());
+              }, title: tr("follow_order"),color: Colors.white
                 ,textStyle: S.h2(color:C.BLUE_1),
                 enableShadow: false,
                 height: D.default_50,),
@@ -57,7 +59,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
                 onTap: (){
                   MyUtils.navigateAsFirstScreen(context, HomeScreen());
                 },
-                  child: Text("العوده للصفحة الرئيسية",style: S.h2(color: Colors.white),textAlign: TextAlign.center,))
+                  child: Text(tr("go_to_home"),style: S.h2(color: Colors.white),textAlign: TextAlign.center,))
           ],),),
 
 

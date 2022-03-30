@@ -1,7 +1,10 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../modules/cart/success_screen.dart';
 
 class WebPage extends StatefulWidget {
   String link;
@@ -30,13 +33,9 @@ class _WebPageState extends State<WebPage> {
       },
       navigationDelegate: (NavigationRequest request) {
         if (request.url.contains("success")){
-
-          //You can do anything
-
-          //Prevent that url works
+          MyUtils.navigateReplaceCurrent(context, SuccessScreen());
           return NavigationDecision.prevent;
         }
-        //Any other url works
         return NavigationDecision.navigate;
       },
     )

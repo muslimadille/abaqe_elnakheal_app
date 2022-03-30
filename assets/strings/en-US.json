@@ -103,7 +103,33 @@
   "add_nationalId_hint": "Attach a copy of the ID or the farm's commercial register",
   "niatrat_hint": "Attach the nitrate need report document",
   "attach": "attach",
-  "done": "Done"
+  "done": "Done",
+  "no_current_orders": "There isn no current orders",
+  "start_order":"Start order now",
+  "order_num": "order number",
+  "follow_order": "track order",
+  "u_can_track_order": "You can follow the status of your order from your order list",
+  "u_order_sent": "Your order has been successfully sent to the seller",
+  "go_to_home": "Return to the home page",
+  "help": "Help",
+  "all_cost": "All cost",
+  "shipping_fee": "Shipping",
+  "rate_products": "Products Rate",
+  "openion": "Your opinion helps the development of our products",
+  "shipping_details": "Delivery details"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
