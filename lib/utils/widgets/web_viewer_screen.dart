@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +30,35 @@ class _WebPageState extends State<WebPage> {
       WebView(
       initialUrl: widget.link,
       javascriptMode: JavascriptMode.unrestricted,
+        javascriptChannels: Set.from([
+          JavascriptChannel(
+              name: 'messageHandler',
+              onMessageReceived: (JavascriptMessage message) {
+                print(message.message);
+                var jsonData = jsonDecode(message.message);
+                if(jsonData['status'] == 'CANCELLED'){
+                  // Your code
+                }else if(jsonData['status'] == 'SUCCESS'){
+                  // Your code
+                }
+              })
+        ]),
+      onPageFinished: (value){
+        print("$value");
+
+      },
       onWebViewCreated: (WebViewController webViewController) {
-       // _controller!.currentUrl();
+        webViewController!.currentUrl().then((value) {
+          print("$value");
+        });
       },
       navigationDelegate: (NavigationRequest request) {
         if (request.url.contains("success")){
           MyUtils.navigateReplaceCurrent(context, SuccessScreen());
           return NavigationDecision.prevent;
+        }
+        if(request.url.contains("cancel")){
+          Navigator.pop(context);
         }
         return NavigationDecision.navigate;
       },

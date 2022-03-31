@@ -250,11 +250,12 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
       ),
     );
   }
+
   _getProductCost(){
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
-      allPrice=(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
-      allDiscount=allPrice-(double.parse(cartProvider!.myCartModel!.items![i].offerPrice!)*cartProvider!.myCartModel!.items![i].quantity!);
-      totalPrice=allPrice-allDiscount-cartProvider!.myCartModel!.deliveryPrice!-cartProvider!.couponCost;
+      allPrice=allPrice+(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
+      allDiscount=allDiscount+(((double.parse(cartProvider!.myCartModel!.items![i].price!)-double.parse(cartProvider!.myCartModel!.items![i].offerPrice!))*cartProvider!.myCartModel!.items![i].quantity!));
+      totalPrice=totalPrice+(allPrice-allDiscount-cartProvider!.myCartModel!.deliveryPrice!);
     }
   }
 

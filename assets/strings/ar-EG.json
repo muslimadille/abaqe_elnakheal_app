@@ -117,7 +117,13 @@
   "shipping_fee": "مصاريف الشحن",
   "rate_products": "تقييم المنتجات",
   "openion": "يساعد رايك علي التطوير من منتجاتنا",
-  "shipping_details": "تفاصيل التوصيل"
+  "shipping_details": "تفاصيل التوصيل",
+  "Demand": "تحت الطلب",
+  "Underway": "قيد التنفيذ",
+  "Delivery": "قيد التوصيل",
+  "Delivered": "تم التوصيل",
+  "Canceled": "طلب ملغي",
+  "cancel_order": "إلغاء الطلب"
 
 
 

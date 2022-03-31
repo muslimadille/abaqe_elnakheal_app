@@ -1,5 +1,6 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/modules/my_orders_screen/rating_order_widget.dart';
+import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
@@ -104,30 +105,37 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("all_cost"),style: S.h4(color: C.GREY_3),),
-                Text("120 جم",style: S.h4(color: C.GREY_3),)
+                Text("${widget.order.orderPrice!.toString()}${tr("currency")}",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("shipping_fee"),style: S.h4(color: C.GREY_3),),
-                Text("20 جم",style: S.h4(color: C.GREY_3),)
+                Text("0${tr("currency")}",style: S.h4(color: C.GREY_3),)
               ],),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(tr("total_cost"),style: S.h3(color: C.BLUE_1),),
-                Text("120 جم",style: S.h3(color: C.BLUE_1),)
+                Text("${widget.order.finalPrice!.toString()}${tr("currency")}",style: S.h3(color: C.BLUE_1),)
               ],)
           ],),),
           BaseButton(onItemClickListener: (){
-            MyUtils.showBottomSheet(context, RatesOrderScreen(), D.default_300*2);
-          }, title: tr("rate_products"),margin: EdgeInsets.zero,height: D.default_60,
-            textStyle: S.h2(color: Colors.white),),
+            if(widget.order.status==7){
+              MyUtils.showBottomSheet(context, RatesOrderScreen(), D.default_300*2);
+            }
+            if(widget.order.status!=5&&widget.order.status!=7){}
+          }, title: widget.order.status==7?tr("rate_products"):widget.order.status==5?tr("Canceled"):tr("cancel_order")
+            ,margin: EdgeInsets.zero,height: D.default_60,
+            textStyle: S.h2(color: Colors.white),
+            color: btnColor(),
+          ),
           Container(
             margin: EdgeInsets.all(D.default_10),
-            child: Text(tr("openion"),style: S.h4(color: C.GREY_3),),)
+            child: widget.order.status==7?Text(tr("openion"),style: S.h4(color: C.GREY_3),):Container(),)
         ],
       ),
     );
   }
+
   Widget _contacts(){
     return Container(
       width: double.infinity,
@@ -150,7 +158,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
              height: D.default_25,),
            Container(
              margin: EdgeInsets.all(D.default_10),
-             child: Text("82امتداد حسن المأمون مدينه نصر, القاهرة",style: S.h4(color: C.GREY_3),),)
+             child: Text(widget.order.address!.address!,style: S.h4(color: C.GREY_3),),)
          ],),),
           Container(
             margin: EdgeInsets.only(left:D.default_20,right: D.default_20),
@@ -162,7 +170,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
                 height: D.default_25,),
               Container(
                 margin: EdgeInsets.all(D.default_10),
-                child: Text("01152478962",style: S.h4(color: C.GREY_3),),)
+                child: Text(Constants.currentUser!.phone!,style: S.h4(color: C.GREY_3),),)
             ],),)
         ],),
     );
@@ -202,7 +210,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
             padding: EdgeInsets.only(top:D.default_20,left: D.default_20,right: D.default_20),
             child: Text(tr("products"),style: S.h3(color: C.GREY_2),),),
           Expanded(flex:1,child: ListView.separated(itemBuilder: (context,index){
-            return _productListItem();
+            return _productListItem(index);
           }, separatorBuilder: (context,index){
             return Container(height: D.default_1,color: C.GREY_4,);
           }, itemCount: 2,
@@ -211,7 +219,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         ],),
     );
   }
-  Widget _productListItem(){
+  Widget _productListItem(int index){
     return Container(
       color: Colors.white,
       padding: EdgeInsets.only(bottom: D.default_10,left: D.default_20,right: D.default_20),
@@ -219,10 +227,10 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("x1",style: S.h4(color: C.GREY_4),),
+          Text("X${widget.order.cartItems![index].quantity}",style: S.h4(color: C.GREY_4),),
           SizedBox(width: D.default_10,),
           TransitionImage(
-            "assets/images/rice_img.png",
+            widget.order.cartItems![index].photo??"",
             width: D.default_70,
             height: D.default_70,
             radius: D.default_5,
@@ -234,9 +242,9 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("سماد طبيعي للتزهير والانبات بتركيز10%",style: S.h3(color: C.GREY_1),),
+                Text(widget.order.cartItems![index].title??"",style: S.h3(color: C.GREY_1),),
               ],),)),
-          Text("10جم",style: S.h4(color: C.GREY_3),)
+          /*Text("${widget.order.}${tr("currency")}",style: S.h4(color: C.GREY_3),)*/
 
         ],),
 
@@ -250,10 +258,71 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _trackItem(isDone: true, title: 'تحت الطلب'),
-          _trackItem(isDone: true, title: 'قيد التفيذ'),
-          _trackItem(isDone: false, title: 'قيد التوصيل'),
-          _trackItem(isDone: false, title: 'تم التوصيل',showDots: false),
+          _trackItem(isDone: widget.order.status==1||widget.order.status!>7||widget.order.status==2, title: statusNames[0]),
+          _trackItem(isDone: widget.order.status==3||widget.order.status==4, title: statusNames[1]),
+          _trackItem(isDone: widget.order.status==6, title: statusNames[2]),
+          _trackItem(isDone: widget.order.status==7, title: statusNames[3],showDots: false),
         ],),);
   }
+  String statusName(){
+    switch(widget.order.status){
+      case 1:{
+        return statusNames[0];
+      }
+      case 2:{
+        return statusNames[1];
+      }
+      case 3:{
+        return statusNames[2];
+      }
+      case 4:{
+        return statusNames[2];
+      }
+      case 5:{
+        return statusNames[4];
+      }
+      case 6:{
+        return statusNames[3];
+      }
+      case 7:{
+        return statusNames[3];
+      }
+      default :return statusNames[3];
+
+    }
+  }
+  Color btnColor(){
+    switch(widget.order.status){
+      case 1:{
+        return Colors.redAccent;
+      }
+      case 2:{
+        return Colors.redAccent;
+      }
+      case 3:{
+        return Colors.redAccent;
+      }
+      case 4:{
+        return Colors.redAccent;
+      }
+      case 5:{
+        return C.GREY_3;
+      }
+      case 6:{
+        return Colors.redAccent;
+      }
+      case 7:{
+        return C.BLUE_1;
+      }
+      default :return Colors.redAccent;
+
+    }
+  }
+  List<String>statusNames=[
+    tr("Demand"),
+    tr("Underway"),
+    tr("Delivery"),
+    tr("Delivered"),
+    tr("Canceled")
+  ];
 }

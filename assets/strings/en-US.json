@@ -116,28 +116,13 @@
   "shipping_fee": "Shipping",
   "rate_products": "Products Rate",
   "openion": "Your opinion helps the development of our products",
-  "shipping_details": "Delivery details"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "shipping_details": "Delivery details",
+  "Demand": "Demand",
+  "Underway": "Underway",
+  "Delivery": "Delivery",
+  "Delivered": "Delivery",
+  "Canceled": "Canceled",
+  "cancel_order": "Cancelling order"
 
 
 }

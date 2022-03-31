@@ -117,6 +117,4 @@ class LoginProvider with ChangeNotifier{
 
   }
 
-
-
 }
