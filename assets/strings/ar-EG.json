@@ -123,9 +123,8 @@
   "Delivery": "قيد التوصيل",
   "Delivered": "تم التوصيل",
   "Canceled": "طلب ملغي",
-  "cancel_order": "إلغاء الطلب"
-
-
+  "cancel_order": "إلغاء الطلب",
+  "old_password": "كلمة المرور القديمة"
 
 
 

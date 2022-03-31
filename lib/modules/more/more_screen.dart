@@ -150,6 +150,7 @@ class _MoreScreenState extends State<MoreScreen> {
         Apis.TOKEN_VALUE="";
         Constants.currentUser=null;
         MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, LoginScreen());
+        googleSignIn.signOut();
       },
       child: Container(
         padding: EdgeInsets.all(D.default_20),

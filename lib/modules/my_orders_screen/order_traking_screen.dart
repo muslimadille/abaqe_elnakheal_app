@@ -4,7 +4,7 @@ import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart'hide TextDirection;
 import 'package:flutter/material.dart';
 import '../../dio/models/my_orders_model.dart';
 import '../../utils/baseDimentions.dart';
@@ -61,7 +61,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         ],),);
   }
   Widget _trakingItem(){
-    return Container(
+    return Directionality(textDirection: TextDirection.rtl, child: Container(
       width: double.infinity,
       color: Colors.white,
       margin: EdgeInsets.only(top: D.default_10,bottom: D.default_10,),
@@ -84,7 +84,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
           _trakingList()
 
         ],),
-    );
+    ));
   }
 
   Widget _coastPart(){

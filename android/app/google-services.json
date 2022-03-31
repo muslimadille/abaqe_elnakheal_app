@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "285258979765-a026f997hku99u409rhcucs1hs13ghh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.abaqe_elnakheal_app",
+            "certificate_hash": "eba47f85563510e5fb199bdacd88d995e3dfbe15"
+          }
+        },
+        {
           "client_id": "285258979765-7v9g33b0795rqsb7rkm26gka3dc48ke1.apps.googleusercontent.com",
           "client_type": 3
         }

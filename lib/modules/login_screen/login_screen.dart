@@ -27,7 +27,7 @@ class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-final GoogleSignIn _googleSignIn = GoogleSignIn(
+final GoogleSignIn googleSignIn = GoogleSignIn(
   scopes: <String>[
     'email',
   ],
@@ -45,14 +45,12 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
   @override
   void initState() {
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
-    _googleSignIn.onCurrentUserChanged.listen((account) {
+   /* _googleSignIn.onCurrentUserChanged.listen((account) {
+
+    });*/
+   /* _googleSignIn.signInSilently().then((account) {
       _userAccount=account;
-      Map<String,dynamic>body ={
-        "username":account!.displayName!,
-      };
-      loginProvider!.socialLogin(context,body);
-    });
-    _googleSignIn.signInSilently();
+    });*/
     super.initState();
 
   }
@@ -260,8 +258,18 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
   }
   Future <void> _googleSignInClicked()async{
     try{
-      await _googleSignIn.signIn().then((value) {
-        print("$value");
+      await googleSignIn.signIn().then((account) {
+        _userAccount=account;
+        Map<String,dynamic>body ={
+          "username":account!.displayName!.split(" ")[0],
+          "last_name":account.displayName!.split(" ")[1],
+          "userId":account.id,
+          "email":account.email,
+          "device_token":"",
+          "avatar":"",
+          "provider":"google"
+        };
+        loginProvider!.socialLogin(context,body);
       });
     }catch(e){
       print("google sign in error: $e");

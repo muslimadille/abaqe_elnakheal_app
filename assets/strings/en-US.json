@@ -122,7 +122,9 @@
   "Delivery": "Delivery",
   "Delivered": "Delivery",
   "Canceled": "Canceled",
-  "cancel_order": "Cancelling order"
+  "cancel_order": "Cancelling order",
+  "old_password": "Old password"
+
 
 
 }

@@ -1,4 +1,5 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
+import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           BackBottonWidget(ctx),
-          Expanded(child: Text("اعدادات الحساب",style: S.h1(color: C.GREY_1),textAlign: TextAlign.center,)),
+          Expanded(child: Text(tr("profile_settings"),style: S.h1(color: C.GREY_1),textAlign: TextAlign.center,)),
           CardIconWidget(),
 
         ],),);
@@ -62,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
             child: Text(tr("change_language"),style: S.h3(color: C.GREY_2),),)),
-          Text("العربية",style: S.h3(color: C.BLUE_2),),
+          Text(Constants.SELECTED_LANGUAGE=="ar"?"العربية":"English",style: S.h3(color: C.BLUE_2),),
           SizedBox(width: D.default_10,),
           Icon(Icons.arrow_forward_ios,color: C.GREY_1,size: D.default_20,)
         ],)
@@ -85,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Expanded(child: Container(
             margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
-            child: Text("تغيير كلمة المرور",style: S.h3(color: C.GREY_2),),)),
+            child: Text(tr("change_password"),style: S.h3(color: C.GREY_2),),)),
           Icon(Icons.arrow_forward_ios,color: C.GREY_1,size: D.default_20,)
         ],)
         ,),) ;
