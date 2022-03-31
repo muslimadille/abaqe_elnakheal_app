@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../../dio/models/product_model.dart';
 import '../../providers/cart_provider.dart';
+import '../../providers/rate_rovider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/constants.dart';
@@ -35,6 +36,8 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   List<Widget> images=[];
   CartProvider? cartProvider;
+  RatesProvider?ratesProvider;
+
 
 
   final _controller = PageController();
@@ -50,6 +53,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   void initState() {
     super.initState();
     cartProvider=Provider.of<CartProvider>(context,listen: false);
+    ratesProvider=Provider.of<RatesProvider>(context,listen: false);
+    ratesProvider!.getProductRates(widget.productModel.id!);
     _textController!.text=widget.productModel.cartCount!.toString();
 
     _initSliderImages();
@@ -71,6 +76,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     cartProvider=Provider.of<CartProvider>(context,listen: true);
+    ratesProvider=Provider.of<RatesProvider>(context,listen: true);
     isKeboardopened=MediaQuery.of(context).viewInsets!=0;
     return BaseScreen(body: SafeArea(child: Stack(
       clipBehavior: Clip.none,
@@ -144,7 +150,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               color: Colors.white,
           ),
           child: Center(child: Row(children: [
-            Expanded(child: Text("${widget.productModel.nitrates}",style: S.h5(color: C.GREY_1),textAlign: TextAlign.center,)),
+            Expanded(child: Text("${widget.productModel.rateCount??0}",style: S.h5(color: C.GREY_1),textAlign: TextAlign.center,)),
             Icon(Icons.star,color: Colors.orange,size: D.default_15,)
           ],),),),
         Text("${widget.productModel.offerPrice} ${tr("currency")}",style: S.h2(color: Colors.white),)
@@ -198,14 +204,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget _ratingPart(){
     return InkWell(
       onTap: (){
-        MyUtils.showBottomSheet(context,ProductRatesScreen(),D.default_300*2);
+        if(widget.productModel.rateCount!>0){
+          MyUtils.showBottomSheet(context,ProductRatesScreen(widget.productModel),D.default_300*2);
+        }
       },
       child: Container(
       margin: EdgeInsets.only(top: D.default_10),
       child: Row(
         children: [
           RatingBarIndicator(
-            rating: 4.50,
+            rating: (widget.productModel.rateCount??0).toDouble(),
             itemBuilder: (context, index) => Icon(
               Icons.star,
               color: Colors.amber,
@@ -217,7 +225,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
           ),
           SizedBox(width: D.default_10,),
-          Text("${widget.productModel.rateCount}${tr("rates")}",style: S.h3(color: Colors.amber,))
+          Text("${ratesProvider!.isLoading?"-":ratesProvider!.productRatesModel!.data!.length}${tr("rates")}",style: S.h3(color: Colors.amber,))
         ],
       ),),);
   }

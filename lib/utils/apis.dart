@@ -20,6 +20,9 @@ class Apis{
   static String SET_NEW_PASSWORD_API="${BASE_URL}/set-new-password";
   static String CHANGE_PASSWORD_API="${BASE_URL}/change-password";
   static String UPDATE_PROFILE_API="${BASE_URL}/update-profile";
+  static String SOCIAL_LOGIN_API="${BASE_URL}/social-login";
+
+
 
   ///--------------------------------------------------------
   static String REGIONS_API="${BASE_URL}/regions";
@@ -33,6 +36,9 @@ class Apis{
   static String ADD_ORDER_API="${BASE_URL}/add-order";
   ///------------------my orders------------------------------
   static String MY_ORDERS_API="${BASE_URL}/my-orders";
+  ///-----------------rates-----------------------------------
+  static String PRODUCT_RATES="${BASE_URL}/product-rates";
+
 
 
 

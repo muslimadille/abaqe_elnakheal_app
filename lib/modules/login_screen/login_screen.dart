@@ -47,6 +47,10 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
     _googleSignIn.onCurrentUserChanged.listen((account) {
       _userAccount=account;
+      Map<String,dynamic>body ={
+        "username":account!.displayName!,
+      };
+      loginProvider!.socialLogin(context,body);
     });
     _googleSignIn.signInSilently();
     super.initState();
@@ -256,7 +260,9 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
   }
   Future <void> _googleSignInClicked()async{
     try{
-      await _googleSignIn.signIn();
+      await _googleSignIn.signIn().then((value) {
+        print("$value");
+      });
     }catch(e){
       print("google sign in error: $e");
     }

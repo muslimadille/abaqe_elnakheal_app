@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../../../dio/dio_utils.dart';
+import '../../../dio/models/produc_rates_model.dart';
 import '../../../dio/models/user_data.dart';
 import '../../../dio/my_responce.dart';
 import '../../../utils/apis.dart';
@@ -17,6 +18,17 @@ class SearchApi{
           json.decode(jsonEncode(response.data)));
     } else {
       return MyResponse<SearchModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
+  Future<MyResponse<ProductRatesModel>> getProductsRates(int productId) async {
+    final url = "${Apis.PRODUCT_RATES}/$productId";
+
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<ProductRatesModel>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<ProductRatesModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
 }

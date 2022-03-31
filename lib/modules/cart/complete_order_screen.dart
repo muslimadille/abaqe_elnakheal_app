@@ -252,11 +252,12 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
   }
 
   _getProductCost(){
+    totalPrice=0;allDiscount=0;allPrice=0;
     for(int i=0;i<cartProvider!.myCartModel!.items!.length;i++){
       allPrice=allPrice+(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
       allDiscount=allDiscount+(((double.parse(cartProvider!.myCartModel!.items![i].price!)-double.parse(cartProvider!.myCartModel!.items![i].offerPrice!))*cartProvider!.myCartModel!.items![i].quantity!));
-      totalPrice=totalPrice+(allPrice-allDiscount-cartProvider!.myCartModel!.deliveryPrice!);
     }
+    totalPrice=allPrice-allDiscount;
   }
 
 

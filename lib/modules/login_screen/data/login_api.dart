@@ -63,4 +63,14 @@ class LoginApi{
       return MyResponse<UserData>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+  Future<MyResponse<UserData>> socialLogin(Map<String,dynamic> loginBody) async {
+    final url = "${Apis.SOCIAL_LOGIN_API}";
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: loginBody);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<UserData>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<UserData>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
 }

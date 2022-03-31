@@ -48,6 +48,30 @@ class LoginProvider with ChangeNotifier{
     notifyListeners();
 
   }
+  socialLogin(BuildContext ctx,Map<String,dynamic>loginBody) async {
+    setIsLoading(true);
+    MyResponse<UserData> response =
+    await loginApi.socialLogin(loginBody);
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      UserData user=response.data;
+      setCurrentUserData(user);
+      //await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
+      //await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
+      setIsLoading(false);
+      MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
+    }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
+      UserData user=response.data;
+      setCurrentUserData(user);
+      setIsLoading(false);
+      MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
   setCurrentUserData(UserData user){
     currentUser=user;
     Constants.currentUser=user;
