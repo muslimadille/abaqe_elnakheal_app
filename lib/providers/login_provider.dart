@@ -115,6 +115,24 @@ class LoginProvider with ChangeNotifier{
     notifyListeners();
 
   }
+  changePassword(BuildContext ctx,String oldPassword,String newPassword,String confPassword) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await loginApi.changePassword( oldPassword, newPassword,  confPassword);
+    if (response.status == Apis.CODE_SUCCESS) {
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+      MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, LoginScreen());
+    }
+    else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("otp error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
+
   /// edit profile
   editProfile(Map<String,dynamic> userData) async {
     setIsLoading(true);

@@ -1,6 +1,8 @@
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../providers/login_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/my_colors.dart';
@@ -21,8 +23,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   TextEditingController _oldPasswordController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confPasswordController = TextEditingController();
+  LoginProvider? loginProvider;
+  @override
+  void initState() {
+    super.initState();
+    loginProvider=Provider.of<LoginProvider>(context,listen: false);
+  }
   @override
   Widget build(BuildContext context) {
+    loginProvider=Provider.of<LoginProvider>(context,listen: true);
     return BaseScreen(body: SafeArea(child: Column(children: [
       _header(context),
       Container(
@@ -58,7 +67,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   Widget _loginButton(){
     return BaseButton(
-      onItemClickListener: (){},
+      onItemClickListener: (){
+        loginProvider!.changePassword(context,
+            _oldPasswordController.text
+            , _passwordController.text
+            , _confPasswordController.text);
+      },
       title: tr("change_password_btn"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),

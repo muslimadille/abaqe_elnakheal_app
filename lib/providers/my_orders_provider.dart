@@ -35,6 +35,20 @@ class MyordersProvider with ChangeNotifier{
     }
     notifyListeners();
   }
+  cancelOrders(BuildContext context,int orderId) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await myOrdersApi.cancelOrder(orderId);
+    if (response.status == Apis.CODE_SUCCESS) {
+      Navigator.pop(context);
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("RegionsApi error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+  }
   setOredrs(List<OrderData> data){
     previousOrdersList!.clear();
     currentOrdersList!.clear();

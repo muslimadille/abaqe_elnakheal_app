@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:abaqe_elnakheal_app/modules/base_screen/base_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -17,7 +19,6 @@ class WebPage extends StatefulWidget {
 
 
 class _WebPageState extends State<WebPage> {
-  WebViewController? _controller;
   @override
   void initState() {
     super.initState();
@@ -44,12 +45,26 @@ class _WebPageState extends State<WebPage> {
               })
         ]),
       onPageFinished: (value){
-        print("$value");
+        print("$value" );
+        if (value.toString().contains("success-callback")){
+          MyUtils.navigateReplaceCurrent(context, SuccessScreen());
+        }
+        if(value.toString().contains("error-callback")){
+          Navigator.pop(context);
+          Fluttertoast.showToast(msg:tr("فشل عملية الدفع حاول مرة اخري"));
+        }
 
       },
       onWebViewCreated: (WebViewController webViewController) {
-        webViewController!.currentUrl().then((value) {
+        webViewController.currentUrl().then((value) {
           print("$value");
+          if (value.toString().contains("success-callback")){
+            MyUtils.navigateReplaceCurrent(context, SuccessScreen());
+          }
+          if(value.toString().contains("error-callback")){
+            Navigator.pop(context);
+             Fluttertoast.showToast(msg:tr("فشل عملية الدفع حاول مرة اخري"));
+          }
         });
       },
       navigationDelegate: (NavigationRequest request) {
@@ -57,9 +72,7 @@ class _WebPageState extends State<WebPage> {
           MyUtils.navigateReplaceCurrent(context, SuccessScreen());
           return NavigationDecision.prevent;
         }
-        if(request.url.contains("cancel")){
-          Navigator.pop(context);
-        }
+
         return NavigationDecision.navigate;
       },
     )

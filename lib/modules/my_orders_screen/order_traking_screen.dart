@@ -4,9 +4,14 @@ import 'package:abaqe_elnakheal_app/utils/constants.dart';
 import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
+import 'package:abaqe_elnakheal_app/utils/widgets/loading_widget.dart';
 import 'package:easy_localization/easy_localization.dart'hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../dio/models/my_orders_model.dart';
+import '../../providers/my_orders_provider.dart';
+import '../../providers/my_orders_provider.dart';
+import '../../providers/my_orders_provider.dart';
 import '../../utils/baseDimentions.dart';
 import '../../utils/base_text_style.dart';
 import '../../utils/widgets/transition_image.dart';
@@ -20,8 +25,15 @@ class OrderTrakingScreen extends StatefulWidget {
 }
 
 class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
+  MyordersProvider? myordersProvider;
+  @override
+  void initState() {
+    super.initState();
+    myordersProvider=Provider.of<MyordersProvider>(context,listen: false);
+  }
   @override
   Widget build(BuildContext context) {
+    myordersProvider=Provider.of<MyordersProvider>(context,listen: true);
     return BaseScreen(body: SafeArea(child: Container(
       width: double.infinity,
       height: double.infinity,
@@ -29,7 +41,10 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
       child: Column(
         children: [
           _header(context),
-          Expanded(child: _mainBody())],
+          Expanded(child: Stack(children: [
+            _mainBody(),
+            myordersProvider!.isLoading?LoadingProgress():Container()
+          ],))],
       ),
     ),));
   }
@@ -122,7 +137,9 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
             if(widget.order.status==7){
               MyUtils.showBottomSheet(context, RatesOrderScreen(), D.default_300*2);
             }
-            if(widget.order.status!=5&&widget.order.status!=7){}
+            if(widget.order.status!=5&&widget.order.status!=7){
+              myordersProvider!.cancelOrders(context, widget.order.id!);
+            }
           }, title: widget.order.status==7?tr("rate_products"):widget.order.status==5?tr("Canceled"):tr("cancel_order")
             ,margin: EdgeInsets.zero,height: D.default_60,
             textStyle: S.h2(color: Colors.white),
@@ -213,7 +230,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
             return _productListItem(index);
           }, separatorBuilder: (context,index){
             return Container(height: D.default_1,color: C.GREY_4,);
-          }, itemCount: 2,
+          }, itemCount:widget.order.cartItems!.length ,
               physics: const NeverScrollableScrollPhysics(),
           )),
         ],),

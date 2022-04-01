@@ -36,6 +36,8 @@ class Apis{
   static String ADD_ORDER_API="${BASE_URL}/add-order";
   ///------------------my orders------------------------------
   static String MY_ORDERS_API="${BASE_URL}/my-orders";
+  static String CANCEL_ORDER_API="${BASE_URL}/cancel-order";
+
   ///-----------------rates-----------------------------------
   static String PRODUCT_RATES="${BASE_URL}/product-rates";
 

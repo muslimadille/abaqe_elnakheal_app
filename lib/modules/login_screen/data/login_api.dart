@@ -53,6 +53,21 @@ class LoginApi{
       return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+  Future<MyResponse<dynamic>> changePassword(String oldPassword,String password, String confPassword) async {
+    final url = "${Apis.CHANGE_PASSWORD_API}";
+    Map<String,dynamic>body={
+      "old_password":oldPassword,
+      "password":password,
+      "password_confirmation":confPassword
+    };
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<dynamic>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
   Future<MyResponse<UserData>> editProfile(Map<String,dynamic>userData) async {
     final url = "${Apis.UPDATE_PROFILE_API}";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: userData);
