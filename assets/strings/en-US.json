@@ -123,7 +123,9 @@
   "Delivered": "Delivery",
   "Canceled": "Canceled",
   "cancel_order": "Cancelling order",
-  "old_password": "Old password"
+  "old_password": "Old password",
+  "enter_valid_code": "Enter a valid code"
+
 
 
 

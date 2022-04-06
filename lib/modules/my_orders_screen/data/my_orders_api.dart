@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import '../../../dio/dio_utils.dart';
 import '../../../dio/models/my_orders_model.dart';
-import '../../../dio/models/user_data.dart';
 import '../../../dio/my_responce.dart';
 import '../../../utils/apis.dart';
 

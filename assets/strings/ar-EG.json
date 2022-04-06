@@ -35,7 +35,7 @@
   "added_to_crd": "إضافة",
   "my_orders_subtitle": "يمكنك تصفح جميع طلباتك من هنا",
 
-  "enter_email": "قم بإدخال البريد الإلكتروني",
+  "enter_email": "قم بإدخال بريد إلكتروني صالح",
   "enter_first_name":"قم بإدخال الأسم الاول",
   "enter_last_name": "قم بإدخال الإسم الأخير",
   "enter_phone": "قم بإدخال رقم الجوال  بدون0",
@@ -124,11 +124,7 @@
   "Delivered": "تم التوصيل",
   "Canceled": "طلب ملغي",
   "cancel_order": "إلغاء الطلب",
-  "old_password": "كلمة المرور القديمة"
-
-
-
-
-
+  "old_password": "كلمة المرور القديمة",
+  "enter_valid_code": "أدخل كود صحيح"
 
 }

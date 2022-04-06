@@ -10,6 +10,7 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
@@ -96,6 +97,8 @@ class _OtpScreenState extends State<OtpScreen> {
             MyUtils.navigate(context, ResetPasswordScreen(widget.email,widget.code));
           }
 
+        }else{
+           Fluttertoast.showToast(msg:tr("enter_valid_code"));
         }
       },
       title: tr("send"),

@@ -66,7 +66,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget _loginButton(){
     return BaseButton(
       onItemClickListener: (){
-        MyUtils.navigateReplaceCurrent(context, LoginScreen());
+        MyUtils.navigate(context, LoginScreen());
       },
       title: tr("login_title"),
       color: C.BLUE_1,

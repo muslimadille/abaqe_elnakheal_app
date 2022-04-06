@@ -8,6 +8,7 @@ import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
+import 'package:abaqe_elnakheal_app/utils/widgets/loading_widget.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,8 @@ class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> with InputValid
   @override
   Widget build(BuildContext context) {
     loginProvider=Provider.of<LoginProvider>(context,listen:true);
-    return BaseScreen(body: SafeArea(child: Stack(
+    return BaseScreen(body: SafeArea(child:
+    Stack(
       alignment:AlignmentDirectional.center,
       children: [
         TransitionImage(Res.LOGIN_BG,fit: BoxFit.cover,
@@ -62,7 +64,8 @@ class _SendOtpEmailScreenState extends State<SendOtpEmailScreen> with InputValid
                 SizedBox(height: D.default_10,),
                 _cancelButton()
               ],),))
-          ],),)
+          ],),),
+        loginProvider!.isLoading?LoadingProgress():Container()
       ],
     ),));
   }

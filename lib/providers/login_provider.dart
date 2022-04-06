@@ -84,11 +84,11 @@ class LoginProvider with ChangeNotifier{
     MyResponse<AuthCodeModel> response =
     await loginApi.getAuthCode(email);
     if (response.status == Apis.CODE_SUCCESS) {
-      //AuthCodeModel user=response.data;
+      AuthCodeModel code=response.data;
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");
       MyUtils.navigate(
-          ctx, OtpScreen("SendOtpEmailScreen", "SendOtpEmailScreen",email: email,code:"" ,));
+          ctx, OtpScreen("SendOtpEmailScreen", "SendOtpEmailScreen",email: email,code: code.activationCode.toString(),));
     }
     else if(response.status == Apis.CODE_SHOW_MESSAGE ){
       print("otp error: ${response.msg}");

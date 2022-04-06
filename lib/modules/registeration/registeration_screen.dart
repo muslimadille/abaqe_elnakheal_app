@@ -210,7 +210,11 @@ class _RegisterationScreenState extends State<RegisterationScreen> with InputVal
             hint: tr("email"),
             validator: (name) {
               if (isFieldNotEmpty(name!)) {
-                return null;
+                if(isEmailValid(name)){
+                  return null;
+                }else{
+                  return tr("enter_email");
+                }
               } else {
                 return tr("enter_email");
               }
