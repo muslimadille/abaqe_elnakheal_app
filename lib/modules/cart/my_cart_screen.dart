@@ -144,17 +144,21 @@ class _MyCartScreenState extends State<MyCartScreen> {
             await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,0,hideLoading: true);
             }
           });
+        },()async{
+          setState(() async {
+            await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,0,hideLoading: true);
+          });
         }),
         Expanded(child: Text("${cartProvider!.myCartModel!.items![index].quantity}${tr("kg")}",style: S.h4(color: C.GREY_3),textAlign: TextAlign.center,)),
         _bottonWidget(Icons.add,(){
           setState(() async{
             await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,cartProvider!.myCartModel!.items![index].quantity!+1,hideLoading:true);
           });
-        }),
+        },(){}),
 
       ],),);
   }
-  Widget _bottonWidget(IconData icon,Function onClick){
+  Widget _bottonWidget(IconData icon,Function onClick,Function onLongClick){
     return Container(
         height: D.default_35,
         width: D.default_35,
@@ -163,6 +167,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
           color: C.BLUE_2.withOpacity(0.4),
         ),
         child: InkWell(
+          onLongPress: (){onLongClick();},
           onTap: (){onClick();},
           child: Center(child:  Icon(icon,color: C.BLUE_1,size: D.default_25,),),)) ;
   }

@@ -125,6 +125,14 @@
   "Canceled": "طلب ملغي",
   "cancel_order": "إلغاء الطلب",
   "old_password": "كلمة المرور القديمة",
-  "enter_valid_code": "أدخل كود صحيح"
+  "enter_valid_code": "أدخل كود صحيح",
+  "add_address": "يجب إضافة عنوان لإكمال عملية الشراء",
+  "enter_notes": "أدخل ملاحظاتك",
+  "enter_address": "أدخل العنوان",
+  "enter_fullName": "ادخل الاسم بالكامل",
+  "save_address": "حفظ العنوان",
+  "save_address_alert": "سيتم حفظ بيانات هذا العنوان للمره القادمة",
+  "add_new_address": "اضافة عنوان جديد",
+  "no_connection": "لا يوجد إتصال بالشبكة"
 
 }

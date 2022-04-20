@@ -6,6 +6,7 @@ import '../dio/models/state_model.dart';
 import '../dio/my_responce.dart';
 import '../modules/regions/regions_api.dart';
 import '../utils/apis.dart';
+import 'cart_provider.dart';
 
 class RegionsProvider with ChangeNotifier{
   List<AddressModel> addressList=[];
@@ -40,13 +41,15 @@ class RegionsProvider with ChangeNotifier{
     regions=data;
     notifyListeners();
   }
-  addAddress(BuildContext context,String name,String address,String note,int regionId,int stateId) async {
+  addAddress(BuildContext context,String name,String address,String note,int regionId,int stateId,CartProvider cartProvider) async {
     setIsLoading(true);
     MyResponse<List<AddressModel>> response =
     await regionsApi.addAddress( name, address, note, regionId, stateId);
+
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null) {
       List<AddressModel> data = response.data;
-      addressList=data;
+      addressList.addAll(data);
+      cartProvider.getCartItems();
       setIsLoading(false);
       Navigator.pop(context);
       if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}

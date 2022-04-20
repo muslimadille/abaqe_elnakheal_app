@@ -8,6 +8,7 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
@@ -197,16 +198,22 @@ CartProvider? cartProvider;
       contentType: MediaType("image",  _naitratImg!.path.split('/').last.split(".").last),);
 
 
-    FormData formData =  FormData.fromMap({
-      "code":cartProvider!.couponeCode,
-      "address_id":cartProvider!.myCartModel!.userAddresses![0].id,
-      "notes":"",
-      "nitrates_image":nationalImgFile,
-      "national_id_image":naitratImgFile,
-      "national_id":_nationalIdController.text,
-     
-    });
-    cartProvider!.addOrderBody=formData;
-    cartProvider!.addOrder(context);
+    if(cartProvider!.myCartModel!.userAddresses!.isNotEmpty){
+      FormData formData =  FormData.fromMap({
+        "code":cartProvider!.couponeCode,
+        "address_id":cartProvider!.myCartModel!.userAddresses![0].id,
+        "notes":"",
+        "nitrates_image":nationalImgFile,
+        "national_id_image":naitratImgFile,
+        "national_id":_nationalIdController.text,
+
+      });
+      cartProvider!.addOrderBody=formData;
+      cartProvider!.addOrder(context);
+    }else{
+       Fluttertoast.showToast(msg:tr("add_address"));
+
+    }
+
   }
 }

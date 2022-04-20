@@ -8,20 +8,24 @@ import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
+import 'package:abaqe_elnakheal_app/utils/widgets/loading_widget.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../dio/models/region_model.dart';
+import '../../providers/cart_provider.dart';
 import '../../providers/regions_provider.dart';
 import '../main_tabs_screen/main_tabs_screen.dart';
 import '../../utils/input_validation_mixin.dart';
 
 
 class ChangeAddresWidget extends StatefulWidget {
-  const ChangeAddresWidget({Key? key}) : super(key: key);
+  CartProvider? cartProvider;
+   ChangeAddresWidget(this.cartProvider,{Key? key}) : super(key: key);
 
   @override
   _ChangeAddresWidgetState createState() => _ChangeAddresWidgetState();
@@ -49,23 +53,29 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValid
   }
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      padding: EdgeInsets.only(left: D.default_40,right: D.default_40),
-      width: double.infinity,
-      child: Column(children: [
-        Expanded(child: SingleChildScrollView(child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _image(),
-            Center(child: Text("اضافة عنوان جديد",style: S.h1(color: C.GREY_1),),),
-            Center(child: Text("سيتم حفظ بيانات هذا العنوان للمره القادمة",style: S.h3(color: C.GREY_3),),),
-            SizedBox(height: D.default_20,),
-            _loginForm(),
-            SizedBox(height: D.default_40,),
-            _DoneButton(),
-            SizedBox(height: D.default_60,)
-          ],),))
-      ],),);
+    return  Stack(
+      fit:StackFit.expand,
+      alignment: AlignmentDirectional.center,
+      children: [
+      Container(
+        padding: EdgeInsets.only(left: D.default_40,right: D.default_40),
+        width: double.infinity,
+        child: Column(children: [
+          Expanded(child: SingleChildScrollView(child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _image(),
+              Center(child: Text(tr("add_new_address"),style: S.h1(color: C.GREY_1),),),
+              Center(child: Text(tr("save_address_alert"),style: S.h3(color: C.GREY_3),),),
+              SizedBox(height: D.default_20,),
+              _loginForm(),
+              SizedBox(height: D.default_40,),
+              _DoneButton(),
+              SizedBox(height: D.default_60,)
+            ],),))
+        ],),),
+      regionsProvider!.isLoading?LoadingProgress():Container()
+    ],);
   }
   Widget _image(){
     return Center(child: Lottie.asset(
@@ -81,7 +91,7 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValid
         //Navigator.pop(context);
         _onSaveClicked();
       },
-      title:"حفظ العنوان",
+      title:tr("save_address"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
       margin: EdgeInsets.all(D.default_5),
@@ -210,7 +220,7 @@ class _ChangeAddresWidgetState extends State<ChangeAddresWidget> with InputValid
           _addressController.text,
           _notesController.text,
           selectedRegion!.id!,
-          selectedState!.id!);
+          selectedState!.id!,widget.cartProvider!);
     }
   }
 

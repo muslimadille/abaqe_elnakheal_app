@@ -19,6 +19,7 @@ import 'complete_order_widget.dart';
 
 
 class CompleteOrderScreen extends StatefulWidget {
+
   const CompleteOrderScreen({Key? key}) : super(key: key);
 
   @override
@@ -159,7 +160,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
           children: [
           Text(tr("shipping_address"),style: S.h4(color:C.GREY_3),),
           InkWell(onTap: (){
-            MyUtils.showBottomSheet(context, ChangeAddresWidget(), MediaQuery.of(context).size.height*0.7);
+            MyUtils.showBottomSheet(context, ChangeAddresWidget(cartProvider), MediaQuery.of(context).size.height*0.7);
           },
           child: Container(
             padding: EdgeInsets.only(top:D.default_5,bottom: D.default_5,left: D.default_20,right: D.default_20),

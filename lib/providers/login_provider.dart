@@ -144,12 +144,10 @@ class LoginProvider with ChangeNotifier{
       //await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
       //await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
       setIsLoading(false);
-      MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
       setIsLoading(false);
-      MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, SplashScreen());
     }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
       print("login error: ${response.msg}");
       setIsLoading(false);

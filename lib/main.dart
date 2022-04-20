@@ -10,9 +10,12 @@ import 'package:abaqe_elnakheal_app/providers/regions_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/registeration_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/search_provider.dart';
 import 'package:abaqe_elnakheal_app/providers/utils_provider.dart';
+import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 
@@ -52,6 +55,8 @@ class MyApp extends StatelessWidget {
      //EasyLocalization.of(context)!.setLocale(const Locale('ar', 'EG'));
     UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
+
+
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -65,8 +70,8 @@ class MyApp extends StatelessWidget {
           value: SystemUiOverlayStyle(
               statusBarColor: Colors.black.withOpacity(0.7),
           ),
-        child: const SplashScreen()) ,
-    );
+        child:  SplashScreen() ,
+    ));
   }
 }
 class MyHttpOverrides extends HttpOverrides{

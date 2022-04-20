@@ -11,6 +11,7 @@ import 'package:abaqe_elnakheal_app/utils/widgets/base_botton.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/base_text_files.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -211,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
               hint: tr("email"),
               validator: (name) {
                 if (isFieldNotEmpty(name!)) {
-                  if(isEmailValid(name)){
+                  if(MyUtils.validateEmail(name)){
                     return null;
                   }else{
                     return tr("enter_email");

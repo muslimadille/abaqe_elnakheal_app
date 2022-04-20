@@ -124,8 +124,15 @@
   "Canceled": "Canceled",
   "cancel_order": "Cancelling order",
   "old_password": "Old password",
-  "enter_valid_code": "Enter a valid code"
-
+  "enter_valid_code": "Enter a valid code",
+  "add_address": "Add your address to complete the order",
+  "enter_notes": "Enter your notes",
+  "enter_address": "Enter your address",
+  "enter_fullName": "Enter your full name",
+  "save_address": "Save the address",
+  "save_address_alert": "This address data will be saved for the next time",
+  "add_new_address": "Adding new address",
+  "no_connection": "There is no internet connection"
 
 
 

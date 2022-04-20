@@ -11,6 +11,11 @@ class UtilsProviderModel with ChangeNotifier{
   Locale currentLocal =Locale('ar', 'EG');
   String currentLocalName="العربية";
   int currentRegionIndex=0;
+  bool isAppConnected=true;
+  setIsAppConnected(bool value){
+    isAppConnected=value;
+    notifyListeners();
+  }
 
   setCurrentRegionIndex(int value){
     currentRegionIndex=value;
