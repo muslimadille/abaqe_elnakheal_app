@@ -276,17 +276,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       await cartProvider!.addToCart(widget.productModel.id!,widget.productModel.minQuantity!);
                       widget.productModel.cartCount=widget.productModel.minQuantity;
                     }else{
-                      if(int.parse(_textController!.text)<widget.productModel.minQuantity!&&int.parse(_textController!.text)!=0){
-                         Fluttertoast.showToast(msg: "${sprintf(tr("min_quan"),[widget.productModel.minQuantity.toString()])}");
-                      }else{
-                        if(int.parse(_textController!.text)==0){
-                          _showCounter=false;
-                          _btnWidth=MediaQuery.of(context).size.width-D.default_60;
-                          _counterOpacity=0;
-                          btnTitle=tr("add_to_crd");
+                      if(int.tryParse(_textController!.text)!=null){
+                        if(int.parse(_textController!.text)<widget.productModel.minQuantity!&&int.parse(_textController!.text)!=0){
+                          Fluttertoast.showToast(msg: "${sprintf(tr("min_quan"),[widget.productModel.minQuantity.toString()])}");
+                        }else{
+                          if(int.parse(_textController!.text)==0){
+                            _showCounter=false;
+                            _btnWidth=MediaQuery.of(context).size.width-D.default_60;
+                            _counterOpacity=0;
+                            btnTitle=tr("add_to_crd");
+                          }
+                          await cartProvider!.addToCart(widget.productModel.id!,int.parse(_textController!.text));
+                          widget.productModel.cartCount=int.parse(_textController!.text);
                         }
-                        await cartProvider!.addToCart(widget.productModel.id!,int.parse(_textController!.text));
-                        widget.productModel.cartCount=int.parse(_textController!.text);
+                      }else{
+                        Fluttertoast.showToast(msg: "${sprintf(tr("enter_valid_amunt"),[widget.productModel.minQuantity.toString()])}");
                       }
                     }
 

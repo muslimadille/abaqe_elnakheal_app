@@ -1,5 +1,6 @@
 
 
+import '../modules/notifications/data/notification_model.dart';
 import '../modules/search/search_model.dart';
 import 'models/add_order_model.dart';
 import 'models/add_to_cart_model.dart';
@@ -109,8 +110,9 @@ class MyResponse<T> extends Object {
       case ProductRatesModel:
         _data =ProductRatesModel.fromJson(json) as T;
         break;
-
-
+      case NotificationModel:
+        _data =NotificationModel.fromJson(json) as T;
+        break;
       default:_data = null;
     }
   }

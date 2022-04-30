@@ -40,6 +40,9 @@ class Apis{
 
   ///-----------------rates-----------------------------------
   static String PRODUCT_RATES="${BASE_URL}/product-rates";
+  ///----------------notifications----------------------------
+  static String NOTIFICATIONS="${BASE_URL}/notifications";
+
 
 
 

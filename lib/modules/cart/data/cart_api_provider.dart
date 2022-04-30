@@ -38,8 +38,11 @@ class CartApiProvider{
     }
   }
   Future<MyResponse<CouponModel>> getCoupon(String code) async {
+    Map<String,String>body={
+      "code":"$code"
+    };
     final url = Apis.GET_COUPON_API;
-    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url);
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {
       return MyResponse<CouponModel>.fromJson(
           json.decode(jsonEncode(response.data)));

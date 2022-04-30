@@ -138,11 +138,12 @@ class _MyCartScreenState extends State<MyCartScreen> {
       child: Row(children: [
         _bottonWidget(Icons.delete_outlined,()async{
           setState(() async {
-            if(cartProvider!.myCartModel!.items![index].quantity!>cartProvider!.myCartModel!.items![index].minQuantity!){
+            /*if(cartProvider!.myCartModel!.items![index].quantity!>cartProvider!.myCartModel!.items![index].minQuantity!){
               await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,cartProvider!.myCartModel!.items![index].quantity!-1,hideLoading: true);
             }else{
             await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,0,hideLoading: true);
-            }
+            }*/
+            await cartProvider!.addToCart(cartProvider!.myCartModel!.items![index].itemId!,0,hideLoading: true);
           });
         },()async{
           setState(() async {

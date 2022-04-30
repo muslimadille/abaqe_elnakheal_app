@@ -133,6 +133,16 @@
   "save_address": "حفظ العنوان",
   "save_address_alert": "سيتم حفظ بيانات هذا العنوان للمره القادمة",
   "add_new_address": "اضافة عنوان جديد",
-  "no_connection": "لا يوجد إتصال بالشبكة"
+  "no_connection": "لا يوجد إتصال بالشبكة",
+  "no_notifications": "لا يوجد إشعارات",
+  "enter_valid_amunt": "أدخل كمية صحيحة",
+  "national_num": "رقم بطاقة الهوية",
+  "submet": "المتابعة",
+  "add_valid_num": "ادخل رقم هوية صحيح",
+  "Save_on_your_order":"وفر في طلبك",
+  "copon_num": "رقم الكوبون",
+  "coupon_adding": "إضافة الكوبون"
+
+
 
 }

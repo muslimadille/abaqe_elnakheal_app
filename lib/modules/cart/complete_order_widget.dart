@@ -17,6 +17,7 @@ import 'dart:io';
 
 import 'package:provider/provider.dart';
 
+import '../../utils/input_validation_mixin.dart';
 import '../../utils/widgets/loading_widget.dart';
 
 
@@ -29,7 +30,7 @@ class CompleteOrderWidget extends StatefulWidget {
   _CompleteOrderWidgetState createState() => _CompleteOrderWidgetState();
 }
 
-class _CompleteOrderWidgetState extends State<CompleteOrderWidget> {
+class _CompleteOrderWidgetState extends State<CompleteOrderWidget> with InputValidationMixin{
   final _loginFormGlobalKey = GlobalKey<FormState>();
   TextEditingController _nationalIdController = TextEditingController();
   File? _nationalImg = null;
@@ -84,7 +85,7 @@ CartProvider? cartProvider;
         //MyUtils.navigate(context, SuccessScreen());
         _setOrderBody();
       },
-      title:"المتابعة",
+      title:tr("submet"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
       margin: EdgeInsets.all(D.default_5),
@@ -98,8 +99,15 @@ CartProvider? cartProvider;
         children: [
           BaseTextFiled(
             controller: _nationalIdController,
-            hint:"رقم بطاقة الهوية",
+            hint:tr("national_num"),
             inputType: TextInputType.number,
+            validator: (name){
+              if (isFieldNotEmpty(name!)) {
+                return null;
+              } else {
+                return tr("national_num");
+              }
+            },
           ),
          Container(
            width: double.infinity,
@@ -108,7 +116,7 @@ CartProvider? cartProvider;
            children: [
              Container(
                margin: EdgeInsets.only(bottom: D.default_10,top: D.default_10),
-               child: Text(tr("niatrat_hint"),style: S.h4(color: C.GREY_1),),),
+               child: Text(tr("niatrat_hint"),style: S.h4(color: _validNaitratImg?C.GREY_1:Colors.red),),),
              InkWell(
                onTap: (){
                  _naitratImgFromGallery();
@@ -132,7 +140,7 @@ CartProvider? cartProvider;
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: D.default_10,top: D.default_10),
-                  child: Text(tr("add_nationalId_hint"),style: S.h4(color: C.GREY_1),),),
+                  child: Text(tr("add_nationalId_hint"),style: S.h4(color:_validNationalImg?C.GREY_1:Colors.red),),),
                 InkWell(
                   onTap: (){
                     _nationalImgFromGallery();
@@ -188,7 +196,24 @@ CartProvider? cartProvider;
     });
     _naitratImg!.length().then((value) => print("image size ${value}"));
   }
+  bool _validNationalImg=true;
+  bool _validNaitratImg=true;
   void _setOrderBody()async{
+  if(int.tryParse(_nationalIdController.text)==null){
+    Fluttertoast.showToast(msg:tr("add_valid_num"));
+  }
+  if(_nationalImg==null){
+    setState(() {
+      _validNationalImg=false;
+    });
+  }
+  if(_naitratImg==null){
+    setState(() {
+      _validNaitratImg=false;
+    });
+  }
+  if(_loginFormGlobalKey.currentState!.validate()){
+    _loginFormGlobalKey.currentState!.save();
     MultipartFile nationalImgFile = await MultipartFile.fromFile(
       _nationalImg!.path, filename:  _nationalImg!.path.split('/').last,
       contentType: MediaType("image",  _nationalImg!.path.split('/').last.split(".").last),);
@@ -211,9 +236,11 @@ CartProvider? cartProvider;
       cartProvider!.addOrderBody=formData;
       cartProvider!.addOrder(context);
     }else{
-       Fluttertoast.showToast(msg:tr("add_address"));
+      Fluttertoast.showToast(msg:tr("add_address"));
 
     }
+  }
+
 
   }
 }

@@ -33,6 +33,13 @@ class CartProvider with ChangeNotifier{
     clickedIndex=value;
     notifyListeners();
   }
+  void resetData(){
+     clickedIndex=0;
+     isLoading=false;
+     couponCost=0;
+     couponeCode="";
+
+  }
 
 
   /// ............add to cart...............
@@ -63,6 +70,7 @@ class CartProvider with ChangeNotifier{
   ///.............GET CART ITEMS.................
   MyCartModel? myCartModel;
   getCartItems() async {
+    resetData();
     setIsLoading(true);
     MyResponse<MyCartModel> response =
     await cartApiProvider.getCartItems();
@@ -108,6 +116,7 @@ class CartProvider with ChangeNotifier{
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null) {
       CouponModel data = response.data;
       couponCost=data.money!.toDouble();
+      couponeCode=code;
       setIsLoading(false);
       Navigator.pop(context);
       if(response.msg!.isNotEmpty){await Fluttertoast.showToast(msg: "${response.msg}");}

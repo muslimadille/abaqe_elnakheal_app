@@ -31,7 +31,9 @@ class LoginProvider with ChangeNotifier{
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
-      await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
+      await Constants.prefs!.setBool(Constants.IS_LOGIN!,true);
+      await Constants.prefs!.setBool(Constants.IS_SOCIAL_LOGIN!,false);
+      await Constants.prefs!.setString(Constants.SAVED_EMAIL_KEY!,phone);
       await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
@@ -55,8 +57,13 @@ class LoginProvider with ChangeNotifier{
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
-      //await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
-      //await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
+      await Constants.prefs!.setBool(Constants.IS_LOGIN!,true);
+      await Constants.prefs!.setBool(Constants.IS_SOCIAL_LOGIN!,true);
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_FIRST_NAME!,loginBody["username"].toString());
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_LAST_NAME!,loginBody["last_name"].toString());
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_ID!,loginBody["userId"].toString());
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_EMAIL!,loginBody["userId"].toString());
+
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
@@ -141,8 +148,6 @@ class LoginProvider with ChangeNotifier{
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
-      //await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
-      //await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
       setIsLoading(false);
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
       UserData user=response.data;

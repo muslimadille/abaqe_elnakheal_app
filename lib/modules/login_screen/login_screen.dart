@@ -274,6 +274,7 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
           "avatar":"",
           "provider":"google"
         };
+        print(body.toString());
         loginProvider!.socialLogin(context,body);
       });
     }catch(e){

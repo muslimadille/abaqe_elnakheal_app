@@ -132,7 +132,20 @@
   "save_address": "Save the address",
   "save_address_alert": "This address data will be saved for the next time",
   "add_new_address": "Adding new address",
-  "no_connection": "There is no internet connection"
+  "no_connection": "There is no internet connection",
+  "no_notifications": "There is no notifications",
+  "enter_valid_amunt": "Enter a valid amount",
+  "national_num": "National ID number",
+  "submet": "Submit",
+  "add_valid_num": "Enter a valid national ID",
+  "Save_on_your_order":"Save on your order",
+  "copon_num": "coupon number",
+  "coupon_adding": "add coupon"
+
+
+
+
+
 
 
 

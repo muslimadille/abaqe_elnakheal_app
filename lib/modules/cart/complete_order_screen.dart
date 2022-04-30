@@ -186,7 +186,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
               height: D.default_20,),
             Container(
               margin: EdgeInsets.all(D.default_10),
-              child: Text(cartProvider!.myCartModel!.userAddresses!.isNotEmpty?cartProvider!.myCartModel!.userAddresses![0].address!:tr("add_location"),style: S.h4(color: C.GREY_4),),)
+              child: Text(cartProvider!.myCartModel!.userAddresses!.isNotEmpty?cartProvider!.myCartModel!.userAddresses![0].address!:tr("add_location"),style: S.h4(color: C.GREY_3),),)
           ],)
 
 
@@ -258,7 +258,7 @@ class _CompleteOrderScreenState extends State<CompleteOrderScreen> {
       allPrice=allPrice+(double.parse(cartProvider!.myCartModel!.items![i].price!)*cartProvider!.myCartModel!.items![i].quantity!);
       allDiscount=allDiscount+(((double.parse(cartProvider!.myCartModel!.items![i].price!)-double.parse(cartProvider!.myCartModel!.items![i].offerPrice!))*cartProvider!.myCartModel!.items![i].quantity!));
     }
-    totalPrice=allPrice-allDiscount;
+    totalPrice=allPrice-allDiscount-cartProvider!.couponCost;
   }
 
 

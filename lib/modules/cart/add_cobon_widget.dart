@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,10 +39,10 @@ class _AddCoboneWidgetState extends State<AddCoboneWidget> {
           Center(child: Container(height: D.default_5,width: D.default_150,color: C.GREY_5,margin: EdgeInsets.all(D.default_10),),),
           Container(
             margin: EdgeInsets.only(bottom: D.default_10),
-            child: Text("وفر في طلبك",style: S.h3(color: C.GREY_1),),),
+            child: Text(tr("Save_on_your_order"),style: S.h3(color: C.GREY_1),),),
           BaseTextFiled(
             controller: _notesController,
-            hint:"رقم الكوبون",
+            hint:tr("copon_num"),
           ),
           SizedBox(height: D.default_20,),
           _DoneButton()
@@ -53,7 +54,7 @@ class _AddCoboneWidgetState extends State<AddCoboneWidget> {
       onItemClickListener: (){
         cartProvider!.getCoupon(context,_notesController.text);
       },
-      title:"إضافة الكوبون",
+      title:tr("coupon_adding"),
       color: C.BLUE_1,
       textStyle: S.h3(color: Colors.white),
       margin: EdgeInsets.all(D.default_5),

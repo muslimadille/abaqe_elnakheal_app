@@ -11,6 +11,20 @@ class Constants extends Object{
   static String? SAVED_PHONE_KEY="SAVED_PHONE";
   static String? SAVED_EMAIL_KEY="SAVED_EMAIL";
   static String? SAVED_PASSWORD_KEY="SAVED_PASSWORD";
+  static String? IS_SOCIAL_LOGIN="IS_SOCIAL_LOGIN";
+  static String? SOCIAL_LOGIN_FIRST_NAME="SOCIAL_LOGIN_FIRST_NAME";
+  static String? SOCIAL_LOGIN_LAST_NAME="SOCIAL_LOGIN_LAST_NAME";
+  static String? SOCIAL_LOGIN_EMAIL="SOCIAL_LOGIN_EMAIL";
+  static String? SOCIAL_LOGIN_ID="SOCIAL_LOGIN_ID";
+  static String? SOCIAL_LOGIN_PROVIDER="SOCIAL_LOGIN_PROVIDER";
+  static String? IS_LOGIN="IS_LOGIN";
+
+
+
+
+
+
+
   static  UserData? currentUser;
   static BuildContext? tabScreenContext;
 
