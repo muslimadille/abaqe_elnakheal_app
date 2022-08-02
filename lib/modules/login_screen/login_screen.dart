@@ -17,6 +17,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/login_provider.dart';
+import '../../utils/constants.dart';
 import '../../utils/input_validation_mixin.dart';
 import '../../utils/widgets/loading_widget.dart';
 import 'item/back_btn_widget.dart';
@@ -270,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> with InputValidationMixin{
           "last_name":account.displayName!.split(" ")[1],
           "userId":account.id,
           "email":account.email,
-          "device_token":"",
+          "device_token":Constants.DEVICE_TOKEN,
           "avatar":"",
           "provider":"google"
         };

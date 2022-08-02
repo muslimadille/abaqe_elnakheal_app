@@ -142,13 +142,25 @@ class _MoreScreenState extends State<MoreScreen> {
         ],)
         ,),) ;
   }
+  _unSubscripeUser()async{
+    await Constants.prefs!.setBool(Constants.IS_LOGIN!,false);
+    await Constants.prefs!.setBool(Constants.IS_SOCIAL_LOGIN!,false);
+    await Constants.prefs!.setString(Constants.SAVED_EMAIL_KEY!,"");
+    await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
+    await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_FIRST_NAME!,"");
+    await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_LAST_NAME!,"");
+    await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_ID!,"");
+    await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_EMAIL!,"");
+    await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_PROVIDER!,"");
+    await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
+    await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
+    Apis.TOKEN_VALUE="";
+    Constants.currentUser=null;
+  }
   Widget _logOutBtn(){
     return InkWell(
       onTap: ()async{
-        await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
-        await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
-        Apis.TOKEN_VALUE="";
-        Constants.currentUser=null;
+       await _unSubscripeUser();
         MyUtils.navigateAsFirstScreen(Constants.tabScreenContext!, LoginScreen());
         googleSignIn.signOut();
       },

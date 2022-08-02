@@ -4,6 +4,7 @@ import '../../../dio/dio_utils.dart';
 import '../../../dio/models/user_data.dart';
 import '../../../dio/my_responce.dart';
 import '../../../utils/apis.dart';
+import '../../../utils/constants.dart';
 
 class RegisterationApi{
 
@@ -18,7 +19,7 @@ class RegisterationApi{
       "state_id":stateId,
       "password":password,
       "password_confirmation":password,
-      "device_token":""
+      "device_token":Constants.DEVICE_TOKEN
     };
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {

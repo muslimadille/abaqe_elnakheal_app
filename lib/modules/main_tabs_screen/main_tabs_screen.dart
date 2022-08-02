@@ -8,6 +8,7 @@ import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
 import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -19,7 +20,8 @@ import '../my_orders_screen/my_orders_tabs_screen.dart';
 import 'bottom_bar_icons.dart';
 
 class MainTabsScreen extends StatefulWidget {
-  MainTabsScreen();
+  int selectedTab;
+  MainTabsScreen({this.selectedTab=0});
 
   @override
   _MainTabsScreenState createState() => _MainTabsScreenState();
@@ -31,7 +33,9 @@ class _MainTabsScreenState extends State<MainTabsScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
+    _controller = PersistentTabController(initialIndex: widget.selectedTab);
+           /* _controller!.index=widget.selectedTab;
+            _controller!.jumpToTab(widget.selectedTab);*/
   }
 
   @override

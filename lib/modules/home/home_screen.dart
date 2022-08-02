@@ -5,7 +5,6 @@ import 'package:abaqe_elnakheal_app/utils/my_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/cart_provider.dart';
 import '../../providers/home_provider.dart';
 import '../../utils/widgets/loading_widget.dart';

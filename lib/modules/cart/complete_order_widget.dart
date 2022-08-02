@@ -241,6 +241,5 @@ CartProvider? cartProvider;
     }
   }
 
-
   }
 }

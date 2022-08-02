@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   LoginProvider?loginProvider;
   RegionsProvider? regionsProvider;
   UtilsProviderModel?utilsProviderModel;
+  bool loadingFinish=false;
 
 
   @override
@@ -40,9 +41,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    //loginProvider = Provider.of<LoginProvider>(context, listen: true);
+    loginProvider = Provider.of<LoginProvider>(context, listen: true);
     //utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen:true);
-    _timerNavigation();
     return BaseScreen(body: Stack(
       alignment:AlignmentDirectional.center,
       children: [
@@ -74,12 +74,33 @@ class _SplashScreenState extends State<SplashScreen> {
      }else{
        utilsProviderModel!.setCurrentLocal(ctx, Locale('en', 'US'));
      }*/
-    _initSavedUser();
+     checkLogin();
 
   }
-  _initSavedUser(){
-    if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString().isNotEmpty&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
-      loginProvider!.login(context,Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString());
+
+  void checkLogin()async{
+    bool? isLogin= await prefs?.getBool(Constants.IS_LOGIN!)??false;
+    if(isLogin){
+      bool?isSocial=await prefs?.getBool(Constants.IS_SOCIAL_LOGIN!)??false;
+      if(isSocial){
+        Map<String,dynamic>body ={
+          "username":await prefs?.getString(Constants.SOCIAL_LOGIN_FIRST_NAME!),
+          "last_name":await prefs?.getString(Constants.SOCIAL_LOGIN_LAST_NAME!),
+          "userId":await prefs?.getString(Constants.SOCIAL_LOGIN_ID!),
+          "email":await prefs?.getString(Constants.SOCIAL_LOGIN_EMAIL!),
+          "device_token":Constants.DEVICE_TOKEN,
+          "avatar":"",
+          "provider":"google"
+        };
+        print(body.toString());
+        loginProvider!.socialLogin(context,body);
+      }else{
+        String? email=await Constants.prefs!.getString(Constants.SAVED_EMAIL_KEY!)??"";
+        String? password=await Constants.prefs!.getString(Constants.SAVED_PASSWORD_KEY!)??"";
+        loginProvider!.login(context,email,password);
+      }
+    }else{
+      _timerNavigation();
     }
   }
 }

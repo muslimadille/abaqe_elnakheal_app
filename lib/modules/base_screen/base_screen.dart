@@ -1,7 +1,11 @@
 
+import 'package:abaqe_elnakheal_app/modules/main_tabs_screen/main_tabs_screen.dart';
+import 'package:abaqe_elnakheal_app/modules/notifications/notifications_screen.dart';
 import 'package:abaqe_elnakheal_app/utils/base_text_style.dart';
+import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -11,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../providers/utils_provider.dart';
 import '../../utils/baseDimentions.dart';
+import '../../utils/constants.dart';
 import '../../utils/my_colors.dart';
 
 

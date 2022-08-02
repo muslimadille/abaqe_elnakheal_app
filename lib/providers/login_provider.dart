@@ -13,7 +13,7 @@ import '../utils/constants.dart';
 import '../utils/myUtils.dart';
 
 class LoginProvider with ChangeNotifier{
-
+ String deviceToken="";
   ///.....ui controllers.........
   bool isLoading=false;
   void setIsLoading(bool value){
@@ -35,6 +35,7 @@ class LoginProvider with ChangeNotifier{
       await Constants.prefs!.setBool(Constants.IS_SOCIAL_LOGIN!,false);
       await Constants.prefs!.setString(Constants.SAVED_EMAIL_KEY!,phone);
       await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
+
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
@@ -62,8 +63,8 @@ class LoginProvider with ChangeNotifier{
       await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_FIRST_NAME!,loginBody["username"].toString());
       await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_LAST_NAME!,loginBody["last_name"].toString());
       await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_ID!,loginBody["userId"].toString());
-      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_EMAIL!,loginBody["userId"].toString());
-
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_EMAIL!,loginBody["email"].toString());
+      await Constants.prefs!.setString(Constants.SOCIAL_LOGIN_PROVIDER!,loginBody["provider"].toString());
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainTabsScreen());
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){

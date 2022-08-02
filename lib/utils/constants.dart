@@ -18,6 +18,10 @@ class Constants extends Object{
   static String? SOCIAL_LOGIN_ID="SOCIAL_LOGIN_ID";
   static String? SOCIAL_LOGIN_PROVIDER="SOCIAL_LOGIN_PROVIDER";
   static String? IS_LOGIN="IS_LOGIN";
+  static String? DEVICE_TOKEN="";
+  static int? SELECTED_TAB=0;
+
+
 
 
 

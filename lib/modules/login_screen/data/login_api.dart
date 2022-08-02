@@ -7,6 +7,7 @@ import '../../../dio/models/authCodeModel.dart';
 import '../../../dio/models/user_data.dart';
 import '../../../dio/my_responce.dart';
 import '../../../utils/apis.dart';
+import '../../../utils/constants.dart';
 
 class LoginApi{
 
@@ -14,7 +15,8 @@ class LoginApi{
     final url = "${Apis.LOGIN_API}";
     Map<String,dynamic>body={
       "email":phone,
-      "password":password
+      "password":password,
+      //"device_token":Constants.DEVICE_TOKEN
     };
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {
