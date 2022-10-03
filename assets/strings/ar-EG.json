@@ -141,7 +141,12 @@
   "add_valid_num": "ادخل رقم هوية صحيح",
   "Save_on_your_order":"وفر في طلبك",
   "copon_num": "رقم الكوبون",
-  "coupon_adding": "إضافة الكوبون"
+  "coupon_adding": "إضافة الكوبون",
+  "complete_data": "استكمال البيانات",
+  "Please_complete_info": "برجاء استكمال البيانات الاتية لاتمام تنفيذ الطلب",
+  "order_rate": "تقييم الطلب",
+  "add_u_rate": "أضف تعليقك",
+  "select_rate": "الرجاء اختيار تقييم لك منتج"
 
 
 

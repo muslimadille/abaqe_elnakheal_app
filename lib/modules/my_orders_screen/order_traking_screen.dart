@@ -135,7 +135,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
           ],),),
           BaseButton(onItemClickListener: (){
             if(widget.order.status==7){
-              MyUtils.showBottomSheet(context, RatesOrderScreen(), D.default_300*2);
+              MyUtils.showBottomSheet(context, RatesOrderScreen(widget.order), D.default_300*2);
             }
             if(widget.order.status!=5&&widget.order.status!=7){
               myordersProvider!.cancelOrders(context, widget.order.id!);

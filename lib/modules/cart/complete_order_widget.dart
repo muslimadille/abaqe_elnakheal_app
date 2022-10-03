@@ -57,8 +57,8 @@ CartProvider? cartProvider;
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _image(),
-              Center(child: Text("استكمال البيانات",style: S.h1(color: C.GREY_1),),),
-              Center(child: Text("برجاء استكمال البيانات الاتية لاتمام تنفيذ الطلب",style: S.h3(color: C.GREY_3),),),
+              Center(child: Text(tr("complete_data"),style: S.h1(color: C.GREY_1),),),
+              Center(child: Text(tr("Please_complete_info"),style: S.h3(color: C.GREY_3),),),
               SizedBox(height: D.default_20,),
               _loginForm(),
 

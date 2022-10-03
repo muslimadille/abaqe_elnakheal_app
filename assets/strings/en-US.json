@@ -140,7 +140,13 @@
   "add_valid_num": "Enter a valid national ID",
   "Save_on_your_order":"Save on your order",
   "copon_num": "coupon number",
-  "coupon_adding": "add coupon"
+  "coupon_adding": "add coupon",
+  "complete_data": "Completing data",
+  "Please_complete_info": "Please complete the following information to complete the application",
+  "order_rate": "Order rate",
+  "add_u_rate": "Add your comment",
+  "select_rate": "Please Select a rate for each product"
+
 
 
 

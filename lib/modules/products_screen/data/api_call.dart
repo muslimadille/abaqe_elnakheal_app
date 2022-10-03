@@ -31,4 +31,15 @@ class SearchApi{
       return MyResponse<ProductRatesModel>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+  Future<MyResponse<dynamic>> rateOrder(Map<String,dynamic>body) async {
+    final url =Apis.RATE_ORDER;
+
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<dynamic>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
 }

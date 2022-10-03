@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../dio/models/home_model.dart';
 import '../dio/models/produc_rates_model.dart';
 import '../dio/my_responce.dart';
-import '../modules/home/data/home_api_helper.dart';
 import '../modules/products_screen/data/api_call.dart';
-import '../modules/search/search_model.dart';
 import '../utils/apis.dart';
 
 class RatesProvider with ChangeNotifier{
@@ -31,6 +28,26 @@ class RatesProvider with ChangeNotifier{
       print("getRates error: ${response.msg}");
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
+  setOrderRates(Map<String,dynamic>body,BuildContext context) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await searchApi.rateOrder(body);
+    if (response.status == Apis.CODE_SUCCESS) {
+      await Fluttertoast.showToast(msg: "${response.msg}");
+      setIsLoading(false);
+      if(Apis.CODE_SHOW_MESSAGE.contains("successfully")){
+        Navigator.pop(context);
+      }
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+      if(Apis.CODE_SHOW_MESSAGE.contains("successfully")){
+        Navigator.pop(context);
+      }
     }
     notifyListeners();
 
