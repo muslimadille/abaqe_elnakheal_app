@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:285258979765:android:8249c2e779b3d2d6faa1fc",
         "android_client_info": {
-          "package_name": "com.muslimadel.abaqe_elnakheal_app"
+          "package_name": "com.example.abaqe_elnakheal_app"
         }
       },
       "oauth_client": [
@@ -17,16 +17,61 @@
           "client_id": "285258979765-10gprq75eeol49o8n8bvaj444hcugjoj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.muslimadel.abaqe_elnakheal_app",
+            "package_name": "com.example.abaqe_elnakheal_app",
             "certificate_hash": "b7b9ede8f938b7c5c33d80ee1ec09e38c43859f5"
+          }
+        },
+        {
+          "client_id": "285258979765-1md3vs6scqgi65r18jaanod8pgfcrehe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.abaqe_elnakheal_app",
+            "certificate_hash": "53902c8328088eccbea422c8632e6aaa00bc79b5"
           }
         },
         {
           "client_id": "285258979765-a026f997hku99u409rhcucs1hs13ghh8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.muslimadel.abaqe_elnakheal_app",
+            "package_name": "com.example.abaqe_elnakheal_app",
             "certificate_hash": "eba47f85563510e5fb199bdacd88d995e3dfbe15"
+          }
+        },
+        {
+          "client_id": "285258979765-7v9g33b0795rqsb7rkm26gka3dc48ke1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-9lgE2zdSrzu5YpPuaQyz2T4bkrVjSYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285258979765-7v9g33b0795rqsb7rkm26gka3dc48ke1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285258979765:android:1659c4edee70e136faa1fc",
+        "android_client_info": {
+          "package_name": "com.muslimadel.abaqe_elnakheal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285258979765-jig1icgil1qhb958859j140n693c4ohp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muslimadel.abaqe_elnakheal_app",
+            "certificate_hash": "53902c8328088eccbea422c8632e6aaa00bc79b5"
           }
         },
         {
