@@ -215,7 +215,7 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
   }
   Widget _productsList(){
     return Container(
-      height: D.default_80*3,
+      height: (D.default_90*widget.order.cartItems!.length)+D.default_50 ,
       width: double.infinity,
       color: Colors.white,
       margin: EdgeInsets.only(bottom: D.default_10,),
@@ -275,9 +275,9 @@ class _OrderTrakingScreenState extends State<OrderTrakingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _trackItem(isDone: widget.order.status==1||widget.order.status!>7||widget.order.status==2, title: statusNames[0]),
-          _trackItem(isDone: widget.order.status==3||widget.order.status==4, title: statusNames[1]),
-          _trackItem(isDone: widget.order.status==6, title: statusNames[2]),
+          _trackItem(isDone: widget.order.status!>=1||widget.order.status!>1||widget.order.status!>=2, title: statusNames[0]),
+          _trackItem(isDone: widget.order.status!>=3||widget.order.status!>=4, title: statusNames[1]),
+          _trackItem(isDone: widget.order.status!>=6, title: statusNames[2]),
           _trackItem(isDone: widget.order.status==7, title: statusNames[3],showDots: false),
         ],),);
   }

@@ -5,13 +5,16 @@ import 'package:abaqe_elnakheal_app/utils/myUtils.dart';
 import 'package:abaqe_elnakheal_app/utils/res.dart';
 import 'package:abaqe_elnakheal_app/utils/widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../providers/login_provider.dart';
 import '../../providers/regions_provider.dart';
 import '../../providers/utils_provider.dart';
+import '../../utils/base_text_style.dart';
 import '../../utils/constants.dart';
+import '../../utils/my_colors.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -46,14 +49,21 @@ class _SplashScreenState extends State<SplashScreen> {
     return BaseScreen(body: Stack(
       alignment:AlignmentDirectional.center,
       children: [
-        TransitionImage(Res.SPLASH_BG,fit: BoxFit.cover,
-          width: double.infinity,height: double.infinity,),
-        TransitionImage(
+        /*TransitionImage(Res.SPLASH_BG,fit: BoxFit.cover,
+          width: double.infinity,height: double.infinity,),*/
+        Center(child: TransitionImage(
           Res.SPLASH_LOGO,
           fit: BoxFit.fitWidth,
-          width: D.default_100,
-          height: D.default_100,
-        )
+          width: D.default_300,
+          height: D.default_300,
+        ),),
+        Container(
+          margin: EdgeInsets.only(top: D.default_300),
+          child: SpinKitCircle(
+          color: C.BLUE_1,
+          size: D.default_50,
+        ),),
+        Positioned(child: Text("V 0.0.1",style: S.h4(color: C.GREY_3),),bottom: D.default_20,)
 
 
       ],

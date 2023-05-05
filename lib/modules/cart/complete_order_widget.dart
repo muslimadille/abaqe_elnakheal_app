@@ -72,7 +72,7 @@ CartProvider? cartProvider;
   }
   Widget _image(){
     return Center(child: Lottie.asset(
-        "assets/lottie/upload-files_img.json",
+        "assets/lottie/lotti-mobile-payment.json",
         width: D.default_160,
         height:D.default_160,
         alignment: Alignment.center

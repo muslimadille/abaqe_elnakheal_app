@@ -26,6 +26,10 @@ class _AdsWidgetState extends State<AdsWidget> {
     _autoSlid();
 
   }
+  @override
+  void dispose() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,16 +160,18 @@ class _AdsWidgetState extends State<AdsWidget> {
       ),
     );
   }
-
+late Future<dynamic> timer;
   void _autoSlid() {
-    Future.delayed(Duration(milliseconds: 8000)).then((value) {
+    timer=Future.delayed(Duration(milliseconds: 8000)).then((value) {
       if (currentIndex < widget.sliders.length - 1) {
         setState(() {
           currentIndex = currentIndex + 1;
+          _autoSlid();
         });
       } else {
         setState(() {
           currentIndex = 0;
+          _autoSlid();
         });
       }
     });

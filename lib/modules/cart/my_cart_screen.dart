@@ -175,17 +175,17 @@ class _MyCartScreenState extends State<MyCartScreen> {
   Widget _coastPart(){
     return Container(
       width: double.infinity,
-      height: D.default_300*1.05,
+      height: D.default_300*1.07,
         color: Colors.white,
-      padding: EdgeInsets.only(top:D.default_20,left:D.default_20,right: D.default_20),
+      padding: EdgeInsets.only(top:D.default_15,left:D.default_20,right: D.default_20),
       child: Column(
         children: [
           Container(color: C.GREY_5,height: D.default_5,width: D.default_150,),
-          SizedBox(height: D.default_15,),
+          SizedBox(height: D.default_10,),
           Container(
             width: double.infinity,
             child: Text(tr("order_details"),style: S.h3(color: C.GREY_1),textAlign: TextAlign.start,),),
-          SizedBox(height: D.default_15,),
+          SizedBox(height: D.default_10,),
           Expanded(child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

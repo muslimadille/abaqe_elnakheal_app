@@ -3,6 +3,7 @@
 
 import 'dart:io';
 
+import 'package:abaqe_elnakheal_app/utils/baseDimentions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -160,30 +161,45 @@ class _TransitionImageState extends State<TransitionImage> {
           fit: widget.fit ?? BoxFit.contain,
           progressIndicatorBuilder:
               (context, url, progress) {
-            return Container();
+            return Center(
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[400]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[400]!,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            );
           },
           /*placeholder: (context, url) {
-                                      return widget.placeHolderImage != null
-                                          ? Image.asset(
-                                              widget.placeHolderImage!,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Icon(
-                                              widget.placeHolder == null
-                                                  ? Icons.image
-                                                  : widget.placeHolder,
-                                              color: widget.placeHolderColor,
-                                              size: BaseD.default_30);
-                                    },*/
+            return Center(
+              child: Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.grey[100]!,
+                child: Container(
+                  width: 200.0,
+                  height: 200.0,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            );
+          },*/
           errorWidget: (context, url, error) {
             print("TransitionImage : Error : $error");
             if(widget.onErrorLoading != null) widget.onErrorLoading!(error != null ? error.toString() : "");
 
-            return Container(
-                child: widget.placeWidget == null
-                    ? Icon(widget.placeHolder ??
-                    Icons.image)
-                    : widget.placeWidget);
+            return Image.asset(
+              widget.placeHolderImage??"assets/images/placeholder.png",
+              fit: BoxFit.cover,
+            );
           }),
       width: widget.width,
       height: widget.height,
